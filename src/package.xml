@@ -6,6 +6,15 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>Doc_Field__c.AssetCompactLayout</members>
+        <members>Doc_Field__c.BlueprintCompactLayout</members>
+        <members>Doc_RecordType__c.AssetCompactLayout</members>
+        <members>Doc_RecordType__c.BlueprintCompactLayout</members>
+        <members>Doc_SObject__c.AssetCompactLayout</members>
+        <members>Doc_SObject__c.BlueprintCompactLayout</members>
+        <name>CompactLayout</name>
+    </types>
+    <types>
         <members>Doc_Field__c</members>
         <members>Doc_RecordType__c</members>
         <members>Doc_SObject__c</members>
@@ -16,6 +25,10 @@
         <members>Doc_RecordType__c</members>
         <members>Doc_SObject__c</members>
         <name>CustomTab</name>
+    </types>
+    <types>
+        <members>Doc_SObject_Primary_Process</members>
+        <name>FlowDefinition</name>
     </types>
     <types>
         <members>MetadataStatus</members>
@@ -30,5 +43,24 @@
         <members>Doc_SObject__c-Blueprint</members>
         <name>Layout</name>
     </types>
-    <version>42.0</version>
+    <types>
+        <members>Admin</members>
+        <name>Profile</name>
+    </types>
+    <types>
+        <members>Doc_Field__c.BuildAsset</members>
+        <members>Doc_RecordType__c.BuildAsset</members>
+        <members>Doc_SObject__c.BuildAsset</members>
+        <name>QuickAction</name>
+    </types>
+    <types>
+        <members>Doc_Field__c.Asset</members>
+        <members>Doc_Field__c.Blueprint</members>
+        <members>Doc_RecordType__c.Asset</members>
+        <members>Doc_RecordType__c.Blueprint</members>
+        <members>Doc_SObject__c.Asset</members>
+        <members>Doc_SObject__c.Blueprint</members>
+        <name>RecordType</name>
+    </types>
+    <version>45.0</version>
 </Package>
