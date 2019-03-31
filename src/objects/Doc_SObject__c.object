@@ -38,12 +38,34 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>MetadataObjectRecordPage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>AssetCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>AssetSummary__c</fields>
+        <fields>Label__c</fields>
+        <fields>Status__c</fields>
+        <fields>InScopeSummary__c</fields>
+        <label>Asset Compact Layout</label>
+    </compactLayouts>
+    <compactLayouts>
+        <fullName>BlueprintCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <fields>InScopeSummary__c</fields>
+        <label>Blueprint Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -53,25 +75,138 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>ExtId__c</fullName>
+        <fullName>AssetSummary__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>/* TODO this is ugly */
+IF(
+    IsManaged__c,
+    &apos;Managed &apos;,
+    &apos;&apos;
+)
++
+IF(
+    IsChangeEvent__c, &apos;Change Event&apos;,
+    IF(IsPlatformEvent__c, &apos;Platform Event&apos;,  
+    IF(IsChatterFeedObject__c, &apos;Chatter Feed&apos;,
+    IF(IsHistoryObject__c, &apos;Field History Tracking&apos;,
+    IF(IsShareObject__c, &apos;Sharing Rules&apos;,
+    IF(IsCustom__c, &apos;Custom Object&apos;,
+    &apos;Standard Object&apos;
+)))))
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Asset Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>DesignNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Design Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DeveloperName__c</fullName>
         <caseSensitive>false</caseSensitive>
         <description>System generated</description>
         <externalId>true</externalId>
         <inlineHelpText>System generated</inlineHelpText>
-        <label>ExtId</label>
+        <label>Developer Name</label>
         <length>255</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>InScopeSummary__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    InScope__c == false,
+    &apos;Object Out of Scope&apos;,
+    &apos;Record Types: &apos; + TEXT(TotalInScopeRecordTypes__c) + &apos; out of &apos; + TEXT(TotalRecordTypes__c) + &apos; in scope&apos;
+        + &apos; (&apos; + TEXT(TotalOpenRecordTypes__c) + &apos; open)&apos;
+        + BR()
+        + &apos;Fields: &apos; + TEXT(TotalInScopeFields__c) + &apos; out of &apos; + TEXT(TotalFields__c) + &apos; in scope&apos;
+        + &apos; (&apos; + TEXT(TotalOpenFields__c) + &apos; open)&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>In Scope Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>InScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Approved&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>In Scope</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsChangeEvent__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>RIGHT(DeveloperName__c, 11) == &apos;ChangeEvent&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Change Event</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsChatterFeedObject__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>RIGHT(DeveloperName__c, 4) == &apos;Feed&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Chatter Feed Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsClosed__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>OR(
+    TEXT(Status__c) == &apos;Not Used&apos;,
+    TEXT(Status__c) == &apos;Approved&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Closed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>IsCustomMetadata__c</fullName>
         <description>System generated</description>
         <externalId>false</externalId>
-        <formula>RIGHT(Name, 5) == &apos;__mdt&apos;</formula>
+        <formula>RIGHT(DeveloperName__c, 5) == &apos;__mdt&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom Metadata</label>
@@ -93,12 +228,36 @@
     </fields>
     <fields>
         <fullName>IsCustom__c</fullName>
-        <defaultValue>false</defaultValue>
+        <defaultValue>true</defaultValue>
         <description>System generated</description>
         <externalId>false</externalId>
         <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom</label>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsHistoryObject__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>RIGHT(DeveloperName__c, 7) == &apos;History&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is History Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsManaged__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Namespace__c) != null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Managed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -107,13 +266,103 @@
         <fullName>IsPlatformEvent__c</fullName>
         <description>System generated</description>
         <externalId>false</externalId>
-        <formula>RIGHT(Name, 3) == &apos;__e&apos;</formula>
+        <formula>RIGHT(DeveloperName__c, 3) == &apos;__e&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated</inlineHelpText>
         <label>Is Platform Event</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsPlatformFeatureObject__c</fullName>
+        <description>System generated</description>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsChangeEvent__c,    
+    IsChatterFeedObject__c,
+    IsHistoryObject__c,
+    IsShareObject__c
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated</inlineHelpText>
+        <label>Is Platform Feature Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsShareObject__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>RIGHT(DeveloperName__c, 5) == &apos;Share&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Share Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>LabelLanguage__c</fullName>
+        <description>System generated</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated</inlineHelpText>
+        <label>Label Language</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>en_US</fullName>
+                    <default>true</default>
+                    <label>en_US</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>LabelPlural__c</fullName>
+        <description>System generated</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated</inlineHelpText>
+        <label>Label Plural</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Label__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Label</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastMetadataChangeDate__c</fullName>
+        <defaultValue>NOW()</defaultValue>
+        <externalId>false</externalId>
+        <label>Last Metadata Change Date</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
     </fields>
     <fields>
         <fullName>Namespace__c</fullName>
@@ -130,12 +379,27 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Example</fullName>
+                    <fullName>VIPForm</fullName>
                     <default>false</default>
-                    <label>Example</label>
+                    <label>VIPForm</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>ParentSObject__c</fullName>
+        <deleteConstraint>SetNull</deleteConstraint>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Parent SObject</label>
+        <referenceTo>Doc_SObject__c</referenceTo>
+        <relationshipName>PlatformFeatureObjects</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
@@ -152,6 +416,21 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>SystemHashCode__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>System Hash Code</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>TotalFields__c</fullName>
         <description>System generated</description>
         <externalId>false</externalId>
@@ -163,36 +442,245 @@
         <trackTrending>false</trackTrending>
         <type>Summary</type>
     </fields>
-    <gender>Feminine</gender>
-    <label>Doc SObject</label>
+    <fields>
+        <fullName>TotalInScopeFields__c</fullName>
+        <externalId>false</externalId>
+        <label>Total In Scope Fields</label>
+        <summaryFilterItems>
+            <field>Doc_Field__c.InScope__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Doc_Field__c.Doc_SObject__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalInScopeRecordTypes__c</fullName>
+        <externalId>false</externalId>
+        <label>Total In Scope Record Types</label>
+        <summaryFilterItems>
+            <field>Doc_RecordType__c.InScope__c</field>
+            <operation>equals</operation>
+            <value>True</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalOpenFields__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Open Fields</label>
+        <summaryFilterItems>
+            <field>Doc_Field__c.IsClosed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Doc_Field__c.Doc_SObject__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalOpenRecordTypes__c</fullName>
+        <externalId>false</externalId>
+        <label>Total Open Record Types</label>
+        <summaryFilterItems>
+            <field>Doc_RecordType__c.IsClosed__c</field>
+            <operation>equals</operation>
+            <value>False</value>
+        </summaryFilterItems>
+        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>TotalRecordTypes__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Total Record Types</label>
+        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryOperation>count</summaryOperation>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Summary</type>
+    </fields>
+    <label>Object</label>
     <listViews>
-        <fullName>All</fullName>
+        <fullName>All1</fullName>
         <columns>NAME</columns>
-        <columns>Namespace__c</columns>
-        <columns>IsCustom__c</columns>
-        <columns>IsCustomSetting__c</columns>
-        <columns>IsCustomMetadata__c</columns>
-        <columns>IsPlatformEvent__c</columns>
+        <columns>RECORDTYPE</columns>
         <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
     <listViews>
-        <fullName>AllApproved</fullName>
+        <fullName>AllAssets</fullName>
         <columns>NAME</columns>
-        <columns>Namespace__c</columns>
-        <columns>IsCustom__c</columns>
-        <columns>IsCustomSetting__c</columns>
-        <columns>IsCustomMetadata__c</columns>
-        <columns>IsPlatformEvent__c</columns>
+        <columns>Label__c</columns>
         <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LastMetadataChangeDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Doc_SObject__c.Asset</value>
+        </filters>
+        <label>All Assets</label>
+    </listViews>
+    <listViews>
+        <fullName>AllBlueprints</fullName>
+        <columns>NAME</columns>
+        <columns>DesignNotes__c</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Doc_SObject__c.Blueprint</value>
+        </filters>
+        <label>All Blueprints</label>
+    </listViews>
+    <listViews>
+        <fullName>AllClosed</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LastMetadataChangeDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsClosed__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>All Closed</label>
+    </listViews>
+    <listViews>
+        <fullName>AllCustomObjects</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LastMetadataChangeDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsCustom__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Doc_SObject__c.Asset</value>
+        </filters>
+        <label>All Custom Objects</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScope</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>TotalInScopeRecordTypes__c</columns>
+        <columns>TotalInScopeFields__c</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>InScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope</label>
+    </listViews>
+    <listViews>
+        <fullName>AllOpen</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LastMetadataChangeDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsClosed__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>All Open</label>
+    </listViews>
+    <listViews>
+        <fullName>AllStandardObjects</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LastMetadataChangeDate__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsCustom__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>Doc_SObject__c.Asset</value>
+        </filters>
+        <label>All Standard Objects</label>
+    </listViews>
+    <listViews>
+        <fullName>PackageVIPFormTool</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>IsCustom__c</columns>
+        <columns>IsCustomMetadata__c</columns>
+        <columns>IsCustomSetting__c</columns>
+        <columns>IsPlatformEvent__c</columns>
+        <columns>CREATED_DATE</columns>
+        <columns>LAST_UPDATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>Namespace__c</field>
+            <operation>equals</operation>
+            <value>VIPForm</value>
+        </filters>
+        <label>Package: VIP Form Tool</label>
+    </listViews>
+    <listViews>
+        <fullName>UnusedObjects</fullName>
+        <columns>NAME</columns>
+        <columns>Status__c</columns>
+        <columns>TotalRecordTypes__c</columns>
+        <columns>TotalFields__c</columns>
+        <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>Status__c</field>
             <operation>equals</operation>
-            <value>Approved</value>
+            <value>Not Used</value>
         </filters>
-        <label>All Approved</label>
+        <label>Unused Objects</label>
     </listViews>
     <nameField>
         <label>SObject Name</label>
@@ -200,8 +688,131 @@
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Doc SObjects</pluralLabel>
-    <searchLayouts/>
+    <pluralLabel>Objects</pluralLabel>
+    <recordTypeTrackFeedHistory>true</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Asset</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
+        <description>Design &amp; config have been started</description>
+        <label>Object Asset</label>
+        <picklistValues>
+            <picklist>LabelLanguage__c</picklist>
+            <values>
+                <fullName>en_US</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>VIPForm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Blueprint</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
+        <description>I have an idea with some or all details</description>
+        <label>Object Blueprint</label>
+        <picklistValues>
+            <picklist>LabelLanguage__c</picklist>
+            <values>
+                <fullName>en_US</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>VIPForm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TotalRecordTypes__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>TotalFields__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TotalRecordTypes__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>TotalFields__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>TotalRecordTypes__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>TotalFields__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>TotalRecordTypes__c</searchFilterFields>
+        <searchFilterFields>TotalFields__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TotalRecordTypes__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>TotalFields__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

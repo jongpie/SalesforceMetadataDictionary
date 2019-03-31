@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
     <types>
-        <members>Doc_SObject</members>
         <members>Doc_SObjectBatch</members>
         <members>Doc_SObjectScheduler</members>
         <name>ApexClass</name>
@@ -13,6 +12,8 @@
         <name>CustomObject</name>
     </types>
     <types>
+        <members>Doc_Field__c</members>
+        <members>Doc_RecordType__c</members>
         <members>Doc_SObject__c</members>
         <name>CustomTab</name>
     </types>
@@ -21,9 +22,12 @@
         <name>GlobalValueSet</name>
     </types>
     <types>
-        <members>Doc_Field__c-Doc Field Layout</members>
-        <members>Doc_RecordType__c-Doc Record Type Layout</members>
-        <members>Doc_SObject__c-Doc SObject Layout</members>
+        <members>Doc_Field__c-Asset</members>
+        <members>Doc_Field__c-Blueprint</members>
+        <members>Doc_RecordType__c-Asset</members>
+        <members>Doc_RecordType__c-Blueprint</members>
+        <members>Doc_SObject__c-Asset</members>
+        <members>Doc_SObject__c-Blueprint</members>
         <name>Layout</name>
     </types>
     <version>42.0</version>

@@ -42,8 +42,28 @@
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>AssetCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>Doc_SObject__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <fields>AssetSummary__c</fields>
+        <fields>DeveloperName__c</fields>
+        <fields>Label__c</fields>
+        <label>Asset Compact Layout</label>
+    </compactLayouts>
+    <compactLayouts>
+        <fullName>BlueprintCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>Doc_SObject__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <fields>Type__c</fields>
+        <label>Blueprint Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
-    <enableActivities>true</enableActivities>
+    <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
     <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
@@ -53,36 +73,155 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
-        <fullName>Doc_SObject__c</fullName>
-        <description>System generated</description>
+        <fullName>AssetSummary__c</fullName>
         <externalId>false</externalId>
+        <formula>IF(
+    IsManaged__c,
+    &apos;Managed &apos;,
+    &apos;&apos;
+)
++
+IF(
+    IsCustom__c,
+    &apos;Custom Field: &apos;,
+    &apos;Standard Field: &apos;
+)
++
+IF(
+     IsNillable__c,
+     &apos;&apos;,
+     &apos;Required &apos;
+)
++
+CASE(
+    TEXT(Type__c),
+    &apos;Double&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Precision__c) + &apos;, &apos; + TEXT(Scale__c) + &apos;)&apos;,
+    &apos;Integer&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Digits__c) + &apos;)&apos;,
+    &apos;String&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Length__c) + &apos;)&apos;,
+    TEXT(Type__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Asset Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>CalculatedFormula__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Calculated Formula</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>10</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DefaultValueFormula__c</fullName>
+        <description>System generated. Returns the default value specified for this field if a formula is not used.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns the default value specified for this field if a formula is not used.</inlineHelpText>
+        <label>Default Value Formula</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DefaultValue__c</fullName>
+        <description>System generated. Returns the default value for this field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns the default value for this field.</inlineHelpText>
+        <label>Default Value</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>DesignNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Design Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>DeveloperName__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>System generated</description>
+        <externalId>true</externalId>
         <inlineHelpText>System generated</inlineHelpText>
-        <label>Doc SObject</label>
+        <label>Developer Name</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Digits__c</fullName>
+        <description>System generated. Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.</inlineHelpText>
+        <label>Digits</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Doc_SObject__c</fullName>
+        <externalId>false</externalId>
+        <label>SObject</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>Doc_SObject__c.InScope__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>true</isOptional>
+        </lookupFilter>
         <referenceTo>Doc_SObject__c</referenceTo>
-        <relationshipLabel>Doc Fields</relationshipLabel>
         <relationshipName>Doc_Fields</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
-        <fullName>ExtId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>System generated</description>
-        <externalId>true</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
-        <label>ExtId</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
+        <fullName>InScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Approved&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>In Scope</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
+        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>InlineHelpText__c</fullName>
@@ -97,8 +236,23 @@
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>IsClosed__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>OR(
+    TEXT(Status__c) == &apos;Not Used&apos;,
+    TEXT(Status__c) == &apos;Approved&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Closed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>IsCustom__c</fullName>
-        <defaultValue>false</defaultValue>
+        <defaultValue>true</defaultValue>
         <description>System generated</description>
         <externalId>false</externalId>
         <inlineHelpText>System generated</inlineHelpText>
@@ -107,6 +261,114 @@
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsManaged__c</fullName>
+        <description>System generated.</description>
+        <externalId>false</externalId>
+        <formula>TEXT(Namespace__c) != null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <inlineHelpText>System generated.</inlineHelpText>
+        <label>Is Managed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsNillable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</inlineHelpText>
+        <label>Is Nillable</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsPermissionable__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if field permissions can be specified for the field, false otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if field permissions can be specified for the field, false otherwise.</inlineHelpText>
+        <label>Is Permissionable</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRestrictedDelete__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</inlineHelpText>
+        <label>Is Restricted Delete</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsRestrictedPicklist__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if the field is a restricted picklist, false otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if the field is a restricted picklist, false otherwise.</inlineHelpText>
+        <label>Is Restricted Picklist</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsUnique__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if the value for the field must be unique, false otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if the value for the field must be unique, false otherwise.</inlineHelpText>
+        <label>Is Unique</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsWriteRequiresMasterRead__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>System generated. Returns true if writing to the detail object requires read sharing instead of read/write sharing of the parent.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns true if writing to the detail object requires read sharing instead of read/write sharing of the parent.</inlineHelpText>
+        <label>Is Write Requires Master Read</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Label__c</fullName>
+        <description>System generated. Returns the text label that is displayed next to the field in the Salesforce user interface. This label can be localized.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns the text label that is displayed next to the field in the Salesforce user interface. This label can be localized.</inlineHelpText>
+        <label>Label</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>LastMetadataChangeDate__c</fullName>
+        <externalId>false</externalId>
+        <label>Last Metadata Change Date</label>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>DateTime</type>
     </fields>
     <fields>
         <fullName>Length__c</fullName>
@@ -124,27 +386,23 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>My_Picklist__c</fullName>
+        <fullName>Namespace__c</fullName>
+        <description>System generated</description>
         <externalId>false</externalId>
-        <label>My Picklist</label>
+        <inlineHelpText>System generated</inlineHelpText>
+        <label>Namespace</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>004</fullName>
+                    <fullName>VIPForm</fullName>
                     <default>false</default>
-                    <label>Example 1</label>
-                </value>
-                <value>
-                    <fullName>123</fullName>
-                    <default>false</default>
-                    <label>Example 2</label>
+                    <label>VIPForm</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -157,10 +415,65 @@
         <label>Picklist Values</label>
         <length>131072</length>
         <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>Precision__c</fullName>
+        <description>System generated. For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</inlineHelpText>
+        <label>Precision</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ReferenceTo__c</fullName>
+        <description>System generated. Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</inlineHelpText>
+        <label>Reference To</label>
+        <length>32768</length>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>RelationshipName__c</fullName>
+        <description>System generated. Returns the name of the relationship.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. Returns the name of the relationship.</inlineHelpText>
+        <label>Relationship Name</label>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>TextArea</type>
+    </fields>
+    <fields>
+        <fullName>Scale__c</fullName>
+        <description>System generated. For fields of type Double, returns the number of digits to the right of the decimal point. Any extra digits to the right of the decimal point are truncated.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>System generated. For fields of type Double, returns the number of digits to the right of the decimal point. Any extra digits to the right of the decimal point are truncated.</inlineHelpText>
+        <label>Scale</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Status__c</fullName>
@@ -168,7 +481,7 @@
         <label>Status</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
@@ -184,11 +497,10 @@
         <label>Type</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>false</trackHistory>
+        <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
-            <restricted>true</restricted>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
@@ -215,6 +527,11 @@
                     <fullName>Combobox</fullName>
                     <default>false</default>
                     <label>Combobox</label>
+                </value>
+                <value>
+                    <fullName>ComplexValue</fullName>
+                    <default>false</default>
+                    <label>ComplexValue</label>
                 </value>
                 <value>
                     <fullName>Currency</fullName>
@@ -260,6 +577,11 @@
                     <fullName>Integer</fullName>
                     <default>false</default>
                     <label>Integer</label>
+                </value>
+                <value>
+                    <fullName>Location</fullName>
+                    <default>false</default>
+                    <label>Location</label>
                 </value>
                 <value>
                     <fullName>Long</fullName>
@@ -314,16 +636,326 @@
             </valueSetDefinition>
         </valueSet>
     </fields>
-    <gender>Feminine</gender>
-    <label>Doc Field</label>
+    <label>Field</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>Doc_SObject__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>DeveloperName__c</columns>
+        <columns>Type__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScope</fullName>
+        <columns>NAME</columns>
+        <columns>Doc_SObject__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>DeveloperName__c</columns>
+        <columns>Type__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>InScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope</label>
+    </listViews>
+    <listViews>
+        <fullName>AllOpen</fullName>
+        <columns>NAME</columns>
+        <columns>Doc_SObject__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>DeveloperName__c</columns>
+        <columns>AssetSummary__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsClosed__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <filters>
+            <field>Type__c</field>
+            <operation>equals</operation>
+            <value>Integer</value>
+        </filters>
+        <label>All Open</label>
+    </listViews>
     <nameField>
-        <label>Doc Field Name</label>
+        <label>Field Name</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Doc Fields</pluralLabel>
-    <searchLayouts/>
+    <pluralLabel>Fields</pluralLabel>
+    <recordTypeTrackFeedHistory>true</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>true</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>Asset</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
+        <description>Design &amp; config have been started</description>
+        <label>Field Asset</label>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>VIPForm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Boolean</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Combobox</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Currency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DataCategoryGroupReference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Date</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DateTime</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Double</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EncryptedString</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>ID</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Integer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Long</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MultiPicklist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Percent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Picklist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>String</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TextArea</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>URL</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>address</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>anytype</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>base64</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>Blueprint</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
+        <description>I have an idea with some or all details</description>
+        <label>Field Blueprint</label>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>VIPForm</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Approved</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Type__c</picklist>
+            <values>
+                <fullName>Boolean</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Currency</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Date</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>DateTime</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Double</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Email</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>EncryptedString</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Integer</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Location</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>MultiPicklist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Percent</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Phone</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Picklist</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Reference</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>String</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>TextArea</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>URL</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <searchResultsAdditionalFields>Label__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Doc_SObject__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
