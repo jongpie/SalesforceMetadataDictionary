@@ -203,10 +203,9 @@
         <fields>Status__c</fields>
         <fields>InScope__c</fields>
         <fields>DeveloperName__c</fields>
+        <fields>AssetSummary__c</fields>
         <fields>CREATED_DATE</fields>
         <relatedList>Doc_RecordType__c.Doc_SObject__c</relatedList>
-        <sortField>CREATED_DATE</sortField>
-        <sortOrder>Desc</sortOrder>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -214,7 +213,8 @@
         <fields>Status__c</fields>
         <fields>InScope__c</fields>
         <fields>DeveloperName__c</fields>
-        <fields>Type__c</fields>
+        <fields>AssetSummary__c</fields>
+        <fields>CREATED_DATE</fields>
         <relatedList>Doc_Field__c.Doc_SObject__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>

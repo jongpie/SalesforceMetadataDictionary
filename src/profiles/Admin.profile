@@ -25,6 +25,16 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.DataCleanupRequired__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.DataMigrationNotes__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
         <editable>false</editable>
         <field>Doc_Field__c.DefaultValueFormula__c</field>
         <readable>true</readable>
@@ -147,6 +157,26 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>Doc_Field__c.Scale__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.SourceFieldDescription__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.SourceField__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.SourceSystem__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>Doc_Field__c.SourceTable__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
