@@ -6,6 +6,11 @@
         <label>New</label>
     </customValue>
     <customValue>
+        <fullName>Not Used</fullName>
+        <default>false</default>
+        <label>Not Used</label>
+    </customValue>
+    <customValue>
         <fullName>On Hold</fullName>
         <default>false</default>
         <label>On Hold</label>
@@ -21,14 +26,27 @@
         <label>In Review</label>
     </customValue>
     <customValue>
-        <fullName>Not Used</fullName>
+        <fullName>Done</fullName>
         <default>false</default>
-        <label>Not Used</label>
+        <label>Done</label>
+    </customValue>
+    <customValue>
+        <fullName>Removed</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Removed</label>
     </customValue>
     <customValue>
         <fullName>Approved</fullName>
         <default>false</default>
+        <isActive>false</isActive>
         <label>Approved</label>
+    </customValue>
+    <customValue>
+        <fullName>Ignored</fullName>
+        <default>false</default>
+        <isActive>false</isActive>
+        <label>Ignored</label>
     </customValue>
     <masterLabel>Metadata Status</masterLabel>
     <sorted>false</sorted>
