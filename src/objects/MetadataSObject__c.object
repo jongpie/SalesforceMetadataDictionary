@@ -39,7 +39,7 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>MetadataObjectRecordPage</content>
+        <content>MetadataSObjectRecordPage</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -134,7 +134,7 @@ IF(
         <fullName>InScopeSummary__c</fullName>
         <externalId>false</externalId>
         <formula>IF(
-    InScope__c == false,
+    IsInScope__c == false,
     &apos;Object Out of Scope&apos;,
     &apos;Record Types: &apos; + TEXT(TotalInScopeRecordTypes__c) + &apos; out of &apos; + TEXT(TotalRecordTypes__c) + &apos; in scope&apos;
         + &apos; (&apos; + TEXT(TotalOpenRecordTypes__c) + &apos; open)&apos;
@@ -149,19 +149,6 @@ IF(
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>InScope__c</fullName>
-        <externalId>false</externalId>
-        <formula>OR(
-    IsClosed__c = false,
-    TEXT(Status__c) = &apos;Approved&apos;
-)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>In Scope</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>IsChangeEvent__c</fullName>
@@ -193,7 +180,7 @@ IF(
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Approved&apos;
+    TEXT(Status__c) == &apos;Closed&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
@@ -246,6 +233,19 @@ IF(
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
         <label>Is History Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Done&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In Scope</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -393,7 +393,7 @@ IF(
         <externalId>false</externalId>
         <inlineHelpText>System generated.</inlineHelpText>
         <label>Parent SObject</label>
-        <referenceTo>Doc_SObject__c</referenceTo>
+        <referenceTo>MetadataSObject__c</referenceTo>
         <relationshipName>PlatformFeatureObjects</relationshipName>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
@@ -436,7 +436,7 @@ IF(
         <externalId>false</externalId>
         <inlineHelpText>System generated</inlineHelpText>
         <label>Total Fields</label>
-        <summaryForeignKey>Doc_Field__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataField__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -447,11 +447,11 @@ IF(
         <externalId>false</externalId>
         <label>Total In Scope Fields</label>
         <summaryFilterItems>
-            <field>Doc_Field__c.InScope__c</field>
+            <field>MetadataField__c.IsInScope__c</field>
             <operation>equals</operation>
             <value>True</value>
         </summaryFilterItems>
-        <summaryForeignKey>Doc_Field__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataField__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -462,11 +462,11 @@ IF(
         <externalId>false</externalId>
         <label>Total In Scope Record Types</label>
         <summaryFilterItems>
-            <field>Doc_RecordType__c.InScope__c</field>
+            <field>MetadataRecordType__c.IsInScope__c</field>
             <operation>equals</operation>
             <value>True</value>
         </summaryFilterItems>
-        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataRecordType__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -477,11 +477,11 @@ IF(
         <externalId>false</externalId>
         <label>Total Open Fields</label>
         <summaryFilterItems>
-            <field>Doc_Field__c.IsClosed__c</field>
+            <field>MetadataField__c.IsClosed__c</field>
             <operation>equals</operation>
             <value>False</value>
         </summaryFilterItems>
-        <summaryForeignKey>Doc_Field__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataField__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -492,11 +492,11 @@ IF(
         <externalId>false</externalId>
         <label>Total Open Record Types</label>
         <summaryFilterItems>
-            <field>Doc_RecordType__c.IsClosed__c</field>
+            <field>MetadataRecordType__c.IsClosed__c</field>
             <operation>equals</operation>
             <value>False</value>
         </summaryFilterItems>
-        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataRecordType__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -508,11 +508,26 @@ IF(
         <externalId>false</externalId>
         <inlineHelpText>System generated.</inlineHelpText>
         <label>Total Record Types</label>
-        <summaryForeignKey>Doc_RecordType__c.Doc_SObject__c</summaryForeignKey>
+        <summaryForeignKey>MetadataRecordType__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Summary</type>
+    </fields>
+    <fields>
+        <fullName>UploadId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
+        <label>Upload ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
     </fields>
     <label>Object</label>
     <listViews>
@@ -538,7 +553,7 @@ IF(
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Doc_SObject__c.Asset</value>
+            <value>MetadataSObject__c.Asset</value>
         </filters>
         <label>All Assets</label>
     </listViews>
@@ -554,7 +569,7 @@ IF(
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Doc_SObject__c.Blueprint</value>
+            <value>MetadataSObject__c.Blueprint</value>
         </filters>
         <label>All Blueprints</label>
     </listViews>
@@ -591,7 +606,7 @@ IF(
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Doc_SObject__c.Asset</value>
+            <value>MetadataSObject__c.Asset</value>
         </filters>
         <label>All Custom Objects</label>
     </listViews>
@@ -605,7 +620,7 @@ IF(
         <columns>LAST_UPDATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>InScope__c</field>
+            <field>IsInScope__c</field>
             <operation>equals</operation>
             <value>1</value>
         </filters>
@@ -644,28 +659,9 @@ IF(
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
-            <value>Doc_SObject__c.Asset</value>
+            <value>MetadataSObject__c.Asset</value>
         </filters>
         <label>All Standard Objects</label>
-    </listViews>
-    <listViews>
-        <fullName>PackageVIPFormTool</fullName>
-        <columns>NAME</columns>
-        <columns>Status__c</columns>
-        <columns>TotalFields__c</columns>
-        <columns>IsCustom__c</columns>
-        <columns>IsCustomMetadata__c</columns>
-        <columns>IsCustomSetting__c</columns>
-        <columns>IsPlatformEvent__c</columns>
-        <columns>CREATED_DATE</columns>
-        <columns>LAST_UPDATE</columns>
-        <filterScope>Everything</filterScope>
-        <filters>
-            <field>Namespace__c</field>
-            <operation>equals</operation>
-            <value>VIPForm</value>
-        </filters>
-        <label>Package: VIP Form Tool</label>
     </listViews>
     <listViews>
         <fullName>UnusedObjects</fullName>
@@ -683,7 +679,7 @@ IF(
         <label>Unused Objects</label>
     </listViews>
     <nameField>
-        <label>SObject Name</label>
+        <label>SObject</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
@@ -714,7 +710,7 @@ IF(
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Approved</fullName>
+                <fullName>Done</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -762,7 +758,7 @@ IF(
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Approved</fullName>
+                <fullName>Done</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -793,8 +789,8 @@ IF(
         <customTabListAdditionalFields>TotalFields__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
         <excludedStandardButtons>OpenListInQuip</excludedStandardButtons>
-        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
         <excludedStandardButtons>ChangeOwner</excludedStandardButtons>
+        <excludedStandardButtons>MassChangeOwner</excludedStandardButtons>
         <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>TotalRecordTypes__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>TotalFields__c</lookupDialogsAdditionalFields>
