@@ -1,66 +1,246 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <Package xmlns="http://soap.sforce.com/2006/04/metadata">
+    <fullName>Metadata Dictionary</fullName>
+    <description>Open source Metadata Dictionary project</description>
     <types>
-        <members>Doc_SObjectBatch</members>
-        <members>Doc_SObjectScheduler</members>
+        <members>MetadataSObjectAnalysisScheduler</members>
+        <members>MetadataSObjectAnalyzer</members>
         <name>ApexClass</name>
     </types>
     <types>
-        <members>Doc_Field__c.AssetCompactLayout</members>
-        <members>Doc_Field__c.BlueprintCompactLayout</members>
-        <members>Doc_RecordType__c.AssetCompactLayout</members>
-        <members>Doc_RecordType__c.BlueprintCompactLayout</members>
-        <members>Doc_SObject__c.AssetCompactLayout</members>
-        <members>Doc_SObject__c.BlueprintCompactLayout</members>
+        <members>MetadataExternalSystemField__c.DataMigrationFieldCompactLayout</members>
+        <members>MetadataExternalSystemField__c.InterfaceFieldCompactLayout</members>
+        <members>MetadataExternalSystem__c.ExternalSystemCompactLayout</members>
+        <members>MetadataField__c.AssetCompactLayout</members>
+        <members>MetadataField__c.BlueprintCompactLayout</members>
+        <members>MetadataRecordType__c.AssetCompactLayout</members>
+        <members>MetadataRecordType__c.BlueprintCompactLayout</members>
+        <members>MetadataSObject__c.AssetCompactLayout</members>
+        <members>MetadataSObject__c.BlueprintCompactLayout</members>
         <name>CompactLayout</name>
     </types>
     <types>
-        <members>Doc_Field__c</members>
-        <members>Doc_RecordType__c</members>
-        <members>Doc_SObject__c</members>
+        <members>MetadataDictionary</members>
+        <name>CustomApplication</name>
+    </types>
+    <types>
+        <members>MetadataExternalSystemField__c.DataCleanupRequired__c</members>
+        <members>MetadataExternalSystemField__c.DataMigrationNotes__c</members>
+        <members>MetadataExternalSystemField__c.DataType__c</members>
+        <members>MetadataExternalSystemField__c.ExternalSystem__c</members>
+        <members>MetadataExternalSystemField__c.InterfaceNotes__c</members>
+        <members>MetadataExternalSystemField__c.Interface__c</members>
+        <members>MetadataExternalSystemField__c.IsClosed__c</members>
+        <members>MetadataExternalSystemField__c.IsInScope__c</members>
+        <members>MetadataExternalSystemField__c.IsMappedToField__c</members>
+        <members>MetadataExternalSystemField__c.IsMappedToSObject__c</members>
+        <members>MetadataExternalSystemField__c.Length__c</members>
+        <members>MetadataExternalSystemField__c.MappedField__c</members>
+        <members>MetadataExternalSystemField__c.MappedSObject__c</members>
+        <members>MetadataExternalSystemField__c.MappingNotes__c</members>
+        <members>MetadataExternalSystemField__c.RequiredForMigration__c</members>
+        <members>MetadataExternalSystemField__c.SourceEntity__c</members>
+        <members>MetadataExternalSystemField__c.SourceField__c</members>
+        <members>MetadataExternalSystemField__c.SourceLibrary__c</members>
+        <members>MetadataExternalSystemField__c.Source__c</members>
+        <members>MetadataExternalSystemField__c.Status__c</members>
+        <members>MetadataExternalSystemField__c.UploadId__c</members>
+        <members>MetadataExternalSystemInterface__c.EstimatedNumberOfRecords__c</members>
+        <members>MetadataExternalSystemInterface__c.ExternalSystem__c</members>
+        <members>MetadataExternalSystemInterface__c.Frequency__c</members>
+        <members>MetadataExternalSystemInterface__c.Status__c</members>
+        <members>MetadataExternalSystem__c.ExternalSystemNotes__c</members>
+        <members>MetadataExternalSystem__c.IsClosed__c</members>
+        <members>MetadataExternalSystem__c.IsInScope__c</members>
+        <members>MetadataExternalSystem__c.IsLegacy__c</members>
+        <members>MetadataExternalSystem__c.Status__c</members>
+        <members>MetadataExternalSystem__c.ThirdPartyTool__c</members>
+        <members>MetadataExternalSystem__c.UploadId__c</members>
+        <members>MetadataField__c.AssetSummary__c</members>
+        <members>MetadataField__c.CalculatedFormula__c</members>
+        <members>MetadataField__c.DefaultValueFormula__c</members>
+        <members>MetadataField__c.DefaultValue__c</members>
+        <members>MetadataField__c.DesignNotes__c</members>
+        <members>MetadataField__c.DeveloperName__c</members>
+        <members>MetadataField__c.Digits__c</members>
+        <members>MetadataField__c.InlineHelpText__c</members>
+        <members>MetadataField__c.IsCalculated__c</members>
+        <members>MetadataField__c.IsClosed__c</members>
+        <members>MetadataField__c.IsCustom__c</members>
+        <members>MetadataField__c.IsExternalId__c</members>
+        <members>MetadataField__c.IsInScope__c</members>
+        <members>MetadataField__c.IsManaged__c</members>
+        <members>MetadataField__c.IsNillable__c</members>
+        <members>MetadataField__c.IsPermissionable__c</members>
+        <members>MetadataField__c.IsRestrictedDelete__c</members>
+        <members>MetadataField__c.IsRestrictedPicklist__c</members>
+        <members>MetadataField__c.IsUnique__c</members>
+        <members>MetadataField__c.IsWriteRequiresMasterRead__c</members>
+        <members>MetadataField__c.Label__c</members>
+        <members>MetadataField__c.LastMetadataChangeDate__c</members>
+        <members>MetadataField__c.Length__c</members>
+        <members>MetadataField__c.MetadataSObject__c</members>
+        <members>MetadataField__c.Namespace__c</members>
+        <members>MetadataField__c.PicklistValues__c</members>
+        <members>MetadataField__c.Precision__c</members>
+        <members>MetadataField__c.ReferenceTo__c</members>
+        <members>MetadataField__c.RelationshipName__c</members>
+        <members>MetadataField__c.Scale__c</members>
+        <members>MetadataField__c.Status__c</members>
+        <members>MetadataField__c.Type__c</members>
+        <members>MetadataField__c.UploadId__c</members>
+        <members>MetadataField__c.WasCreatedThisWeek__c</members>
+        <members>MetadataRecordType__c.AssetSummary__c</members>
+        <members>MetadataRecordType__c.DesignNotes__c</members>
+        <members>MetadataRecordType__c.DeveloperName__c</members>
+        <members>MetadataRecordType__c.IsActive__c</members>
+        <members>MetadataRecordType__c.IsClosed__c</members>
+        <members>MetadataRecordType__c.IsCustom__c</members>
+        <members>MetadataRecordType__c.IsInScope__c</members>
+        <members>MetadataRecordType__c.IsManaged__c</members>
+        <members>MetadataRecordType__c.IsMaster__c</members>
+        <members>MetadataRecordType__c.MetadataSObject__c</members>
+        <members>MetadataRecordType__c.Namespace__c</members>
+        <members>MetadataRecordType__c.Status__c</members>
+        <members>MetadataRecordType__c.UploadId__c</members>
+        <members>MetadataSObject__c.AssetSummary__c</members>
+        <members>MetadataSObject__c.DesignNotes__c</members>
+        <members>MetadataSObject__c.DeveloperName__c</members>
+        <members>MetadataSObject__c.InScopeSummary__c</members>
+        <members>MetadataSObject__c.IsChangeEvent__c</members>
+        <members>MetadataSObject__c.IsChatterFeedObject__c</members>
+        <members>MetadataSObject__c.IsClosed__c</members>
+        <members>MetadataSObject__c.IsCustomMetadata__c</members>
+        <members>MetadataSObject__c.IsCustomSetting__c</members>
+        <members>MetadataSObject__c.IsCustom__c</members>
+        <members>MetadataSObject__c.IsHistoryObject__c</members>
+        <members>MetadataSObject__c.IsInScope__c</members>
+        <members>MetadataSObject__c.IsManaged__c</members>
+        <members>MetadataSObject__c.IsPlatformEvent__c</members>
+        <members>MetadataSObject__c.IsPlatformFeatureObject__c</members>
+        <members>MetadataSObject__c.IsShareObject__c</members>
+        <members>MetadataSObject__c.LabelLanguage__c</members>
+        <members>MetadataSObject__c.LabelPlural__c</members>
+        <members>MetadataSObject__c.Label__c</members>
+        <members>MetadataSObject__c.LastMetadataChangeDate__c</members>
+        <members>MetadataSObject__c.Namespace__c</members>
+        <members>MetadataSObject__c.ParentSObject__c</members>
+        <members>MetadataSObject__c.Status__c</members>
+        <members>MetadataSObject__c.SystemHashCode__c</members>
+        <members>MetadataSObject__c.TotalFields__c</members>
+        <members>MetadataSObject__c.TotalInScopeFields__c</members>
+        <members>MetadataSObject__c.TotalInScopeRecordTypes__c</members>
+        <members>MetadataSObject__c.TotalOpenFields__c</members>
+        <members>MetadataSObject__c.TotalOpenRecordTypes__c</members>
+        <members>MetadataSObject__c.TotalRecordTypes__c</members>
+        <members>MetadataSObject__c.UploadId__c</members>
+        <name>CustomField</name>
+    </types>
+    <types>
+        <members>MetadataExternalSystemField__c</members>
+        <members>MetadataExternalSystemInterface__c</members>
+        <members>MetadataExternalSystem__c</members>
+        <members>MetadataField__c</members>
+        <members>MetadataRecordType__c</members>
+        <members>MetadataSObject__c</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <members>Doc_Field__c</members>
-        <members>Doc_RecordType__c</members>
-        <members>Doc_SObject__c</members>
+        <members>MetadataExternalSystemField__c</members>
+        <members>MetadataExternalSystemInterface__c</members>
+        <members>MetadataExternalSystem__c</members>
+        <members>MetadataField__c</members>
+        <members>MetadataRecordType__c</members>
+        <members>MetadataSObject__c</members>
         <name>CustomTab</name>
     </types>
     <types>
-        <members>Doc_SObject_Primary_Process</members>
-        <name>FlowDefinition</name>
+        <members>ExternalSystemInterfaceRecordPage</members>
+        <members>MetadataExternalSystemFieldRecordPage</members>
+        <members>MetadataExternalSystemRecordPage</members>
+        <members>MetadataFieldRecordPage</members>
+        <members>MetadataRecordTypeRecordPage</members>
+        <members>MetadataSObjectRecordPage</members>
+        <members>Metadata_Dictionary_UtilityBar</members>
+        <name>FlexiPage</name>
+    </types>
+    <types>
+        <members>MetadataExternalSystemFieldProcessor</members>
+        <members>MetadataSObjectProcessor</members>
+        <name>Flow</name>
     </types>
     <types>
         <members>MetadataStatus</members>
         <name>GlobalValueSet</name>
     </types>
     <types>
-        <members>Doc_Field__c-Asset</members>
-        <members>Doc_Field__c-Blueprint</members>
-        <members>Doc_RecordType__c-Asset</members>
-        <members>Doc_RecordType__c-Blueprint</members>
-        <members>Doc_SObject__c-Asset</members>
-        <members>Doc_SObject__c-Blueprint</members>
+        <members>MetadataExternalSystemField__c-Data Migration Field Layout</members>
+        <members>MetadataExternalSystemField__c-Interface Field Layout</members>
+        <members>MetadataExternalSystemInterface__c-Inbound Interface Layout</members>
+        <members>MetadataExternalSystemInterface__c-Outbound Interface Layout</members>
+        <members>MetadataExternalSystem__c-External System Layout</members>
+        <members>MetadataField__c-Asset</members>
+        <members>MetadataField__c-Blueprint</members>
+        <members>MetadataRecordType__c-Asset</members>
+        <members>MetadataRecordType__c-Blueprint</members>
+        <members>MetadataSObject__c-Asset</members>
+        <members>MetadataSObject__c-Blueprint</members>
         <name>Layout</name>
     </types>
     <types>
-        <members>Admin</members>
-        <name>Profile</name>
+        <members>MetadataExternalSystemField__c.All</members>
+        <members>MetadataExternalSystemField__c.AllDataMigrationFields</members>
+        <members>MetadataExternalSystemField__c.AllInScope</members>
+        <members>MetadataExternalSystemField__c.AllInScopeDataMigrationFields</members>
+        <members>MetadataExternalSystemField__c.AllInScopeIntegrationFields</members>
+        <members>MetadataExternalSystemField__c.AllIntegrationFields</members>
+        <members>MetadataExternalSystemField__c.AllMapped</members>
+        <members>MetadataExternalSystemField__c.AllOpen</members>
+        <members>MetadataExternalSystemInterface__c.All</members>
+        <members>MetadataExternalSystem__c.All</members>
+        <members>MetadataExternalSystem__c.AllInScope</members>
+        <members>MetadataField__c.All</members>
+        <members>MetadataField__c.AllInScope</members>
+        <members>MetadataField__c.AllOpen</members>
+        <members>MetadataField__c.CreatedThisWeek</members>
+        <members>MetadataRecordType__c.All</members>
+        <members>MetadataRecordType__c.AllInScope</members>
+        <members>MetadataRecordType__c.AllOpen</members>
+        <members>MetadataSObject__c.All1</members>
+        <members>MetadataSObject__c.AllAssets</members>
+        <members>MetadataSObject__c.AllBlueprints</members>
+        <members>MetadataSObject__c.AllClosed</members>
+        <members>MetadataSObject__c.AllCustomObjects</members>
+        <members>MetadataSObject__c.AllInScope</members>
+        <members>MetadataSObject__c.AllOpen</members>
+        <members>MetadataSObject__c.AllStandardObjects</members>
+        <members>MetadataSObject__c.UnusedObjects</members>
+        <name>ListView</name>
     </types>
     <types>
-        <members>Doc_Field__c.BuildAsset</members>
-        <members>Doc_RecordType__c.BuildAsset</members>
-        <members>Doc_SObject__c.BuildAsset</members>
+        <members>MetadataField__c.BuildAsset</members>
+        <members>MetadataRecordType__c.BuildAsset</members>
+        <members>MetadataSObject__c.BuildAsset</members>
         <name>QuickAction</name>
     </types>
     <types>
-        <members>Doc_Field__c.Asset</members>
-        <members>Doc_Field__c.Blueprint</members>
-        <members>Doc_RecordType__c.Asset</members>
-        <members>Doc_RecordType__c.Blueprint</members>
-        <members>Doc_SObject__c.Asset</members>
-        <members>Doc_SObject__c.Blueprint</members>
+        <members>MetadataExternalSystemField__c.DataMigrationField</members>
+        <members>MetadataExternalSystemField__c.InterfaceField</members>
+        <members>MetadataExternalSystemInterface__c.Inbound</members>
+        <members>MetadataExternalSystemInterface__c.Outbound</members>
+        <members>MetadataField__c.Asset</members>
+        <members>MetadataField__c.Blueprint</members>
+        <members>MetadataRecordType__c.Asset</members>
+        <members>MetadataRecordType__c.Blueprint</members>
+        <members>MetadataSObject__c.Asset</members>
+        <members>MetadataSObject__c.Blueprint</members>
         <name>RecordType</name>
+    </types>
+    <types>
+        <members>MetadataExternalSystemField__c.MappedFieldNotDone</members>
+        <members>MetadataExternalSystemField__c.MappedFieldRequiredWhenDone</members>
+        <members>MetadataExternalSystemField__c.MappedSObjectRequiredWhenInReview</members>
+        <name>ValidationRule</name>
     </types>
     <version>45.0</version>
 </Package>
