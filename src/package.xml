@@ -218,6 +218,11 @@
         <name>ListView</name>
     </types>
     <types>
+        <members>MetadataDictionaryAdmin</members>
+        <members>MetadataDictionaryExternalSystemManager</members>
+        <name>PermissionSet</name>
+    </types>
+    <types>
         <members>MetadataField__c.BuildAsset</members>
         <members>MetadataRecordType__c.BuildAsset</members>
         <members>MetadataSObject__c.BuildAsset</members>
