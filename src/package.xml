@@ -167,7 +167,7 @@
     <types>
         <members>MetadataExternalSystemFieldProcessor</members>
         <members>MetadataSObjectProcessor</members>
-        <name>Flow</name>
+        <name>FlowDefinition</name>
     </types>
     <types>
         <members>MetadataStatus</members>
