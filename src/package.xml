@@ -8,9 +8,9 @@
         <name>ApexClass</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c.DataMigrationFieldCompactLayout</members>
-        <members>MetadataExternalSystemField__c.InterfaceFieldCompactLayout</members>
-        <members>MetadataExternalSystem__c.ExternalSystemCompactLayout</members>
+        <members>ExternalSystemField__c.DataMigrationFieldCompactLayout</members>
+        <members>ExternalSystemField__c.InterfaceFieldCompactLayout</members>
+        <members>ExternalSystem__c.ExternalSystemCompactLayout</members>
         <members>MetadataField__c.AssetCompactLayout</members>
         <members>MetadataField__c.BlueprintCompactLayout</members>
         <members>MetadataRecordType__c.AssetCompactLayout</members>
@@ -24,38 +24,38 @@
         <name>CustomApplication</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c.DataCleanupRequired__c</members>
-        <members>MetadataExternalSystemField__c.DataMigrationNotes__c</members>
-        <members>MetadataExternalSystemField__c.DataType__c</members>
-        <members>MetadataExternalSystemField__c.ExternalSystem__c</members>
-        <members>MetadataExternalSystemField__c.InterfaceNotes__c</members>
-        <members>MetadataExternalSystemField__c.Interface__c</members>
-        <members>MetadataExternalSystemField__c.IsClosed__c</members>
-        <members>MetadataExternalSystemField__c.IsInScope__c</members>
-        <members>MetadataExternalSystemField__c.IsMappedToField__c</members>
-        <members>MetadataExternalSystemField__c.IsMappedToSObject__c</members>
-        <members>MetadataExternalSystemField__c.Length__c</members>
-        <members>MetadataExternalSystemField__c.MappedField__c</members>
-        <members>MetadataExternalSystemField__c.MappedSObject__c</members>
-        <members>MetadataExternalSystemField__c.MappingNotes__c</members>
-        <members>MetadataExternalSystemField__c.RequiredForMigration__c</members>
-        <members>MetadataExternalSystemField__c.SourceEntity__c</members>
-        <members>MetadataExternalSystemField__c.SourceField__c</members>
-        <members>MetadataExternalSystemField__c.SourceLibrary__c</members>
-        <members>MetadataExternalSystemField__c.Source__c</members>
-        <members>MetadataExternalSystemField__c.Status__c</members>
-        <members>MetadataExternalSystemField__c.UploadId__c</members>
-        <members>MetadataExternalSystemInterface__c.EstimatedNumberOfRecords__c</members>
-        <members>MetadataExternalSystemInterface__c.ExternalSystem__c</members>
-        <members>MetadataExternalSystemInterface__c.Frequency__c</members>
-        <members>MetadataExternalSystemInterface__c.Status__c</members>
-        <members>MetadataExternalSystem__c.ExternalSystemNotes__c</members>
-        <members>MetadataExternalSystem__c.IsClosed__c</members>
-        <members>MetadataExternalSystem__c.IsInScope__c</members>
-        <members>MetadataExternalSystem__c.IsLegacy__c</members>
-        <members>MetadataExternalSystem__c.Status__c</members>
-        <members>MetadataExternalSystem__c.ThirdPartyTool__c</members>
-        <members>MetadataExternalSystem__c.UploadId__c</members>
+        <members>ExternalSystemField__c.DataCleanupRequired__c</members>
+        <members>ExternalSystemField__c.DataMigrationNotes__c</members>
+        <members>ExternalSystemField__c.DataType__c</members>
+        <members>ExternalSystemField__c.ExternalSystem__c</members>
+        <members>ExternalSystemField__c.InterfaceNotes__c</members>
+        <members>ExternalSystemField__c.Interface__c</members>
+        <members>ExternalSystemField__c.IsClosed__c</members>
+        <members>ExternalSystemField__c.IsInScope__c</members>
+        <members>ExternalSystemField__c.IsMappedToField__c</members>
+        <members>ExternalSystemField__c.IsMappedToSObject__c</members>
+        <members>ExternalSystemField__c.Length__c</members>
+        <members>ExternalSystemField__c.MappedField__c</members>
+        <members>ExternalSystemField__c.MappedSObject__c</members>
+        <members>ExternalSystemField__c.MappingNotes__c</members>
+        <members>ExternalSystemField__c.RequiredForMigration__c</members>
+        <members>ExternalSystemField__c.SourceEntity__c</members>
+        <members>ExternalSystemField__c.SourceField__c</members>
+        <members>ExternalSystemField__c.SourceLibrary__c</members>
+        <members>ExternalSystemField__c.Source__c</members>
+        <members>ExternalSystemField__c.Status__c</members>
+        <members>ExternalSystemField__c.UploadId__c</members>
+        <members>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</members>
+        <members>ExternalSystemInterface__c.ExternalSystem__c</members>
+        <members>ExternalSystemInterface__c.Frequency__c</members>
+        <members>ExternalSystemInterface__c.Status__c</members>
+        <members>ExternalSystem__c.ExternalSystemNotes__c</members>
+        <members>ExternalSystem__c.IsClosed__c</members>
+        <members>ExternalSystem__c.IsInScope__c</members>
+        <members>ExternalSystem__c.IsLegacy__c</members>
+        <members>ExternalSystem__c.Status__c</members>
+        <members>ExternalSystem__c.ThirdPartyTool__c</members>
+        <members>ExternalSystem__c.UploadId__c</members>
         <members>MetadataField__c.AssetSummary__c</members>
         <members>MetadataField__c.CalculatedFormula__c</members>
         <members>MetadataField__c.DefaultValueFormula__c</members>
@@ -137,18 +137,18 @@
         <name>CustomField</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c</members>
-        <members>MetadataExternalSystemInterface__c</members>
-        <members>MetadataExternalSystem__c</members>
+        <members>ExternalSystemField__c</members>
+        <members>ExternalSystemInterface__c</members>
+        <members>ExternalSystem__c</members>
         <members>MetadataField__c</members>
         <members>MetadataRecordType__c</members>
         <members>MetadataSObject__c</members>
         <name>CustomObject</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c</members>
-        <members>MetadataExternalSystemInterface__c</members>
-        <members>MetadataExternalSystem__c</members>
+        <members>ExternalSystemField__c</members>
+        <members>ExternalSystemInterface__c</members>
+        <members>ExternalSystem__c</members>
         <members>MetadataField__c</members>
         <members>MetadataRecordType__c</members>
         <members>MetadataSObject__c</members>
@@ -174,11 +174,11 @@
         <name>GlobalValueSet</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c-Data Migration Field Layout</members>
-        <members>MetadataExternalSystemField__c-Interface Field Layout</members>
-        <members>MetadataExternalSystemInterface__c-Inbound Interface Layout</members>
-        <members>MetadataExternalSystemInterface__c-Outbound Interface Layout</members>
-        <members>MetadataExternalSystem__c-External System Layout</members>
+        <members>ExternalSystemField__c-Data Migration Field Layout</members>
+        <members>ExternalSystemField__c-Interface Field Layout</members>
+        <members>ExternalSystemInterface__c-Inbound Interface Layout</members>
+        <members>ExternalSystemInterface__c-Outbound Interface Layout</members>
+        <members>ExternalSystem__c-External System Layout</members>
         <members>MetadataField__c-Asset</members>
         <members>MetadataField__c-Blueprint</members>
         <members>MetadataRecordType__c-Asset</members>
@@ -188,17 +188,17 @@
         <name>Layout</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c.All</members>
-        <members>MetadataExternalSystemField__c.AllDataMigrationFields</members>
-        <members>MetadataExternalSystemField__c.AllInScope</members>
-        <members>MetadataExternalSystemField__c.AllInScopeDataMigrationFields</members>
-        <members>MetadataExternalSystemField__c.AllInScopeIntegrationFields</members>
-        <members>MetadataExternalSystemField__c.AllIntegrationFields</members>
-        <members>MetadataExternalSystemField__c.AllMapped</members>
-        <members>MetadataExternalSystemField__c.AllOpen</members>
-        <members>MetadataExternalSystemInterface__c.All</members>
-        <members>MetadataExternalSystem__c.All</members>
-        <members>MetadataExternalSystem__c.AllInScope</members>
+        <members>ExternalSystemField__c.All</members>
+        <members>ExternalSystemField__c.AllDataMigrationFields</members>
+        <members>ExternalSystemField__c.AllInScope</members>
+        <members>ExternalSystemField__c.AllInScopeDataMigrationFields</members>
+        <members>ExternalSystemField__c.AllInScopeIntegrationFields</members>
+        <members>ExternalSystemField__c.AllIntegrationFields</members>
+        <members>ExternalSystemField__c.AllMapped</members>
+        <members>ExternalSystemField__c.AllOpen</members>
+        <members>ExternalSystemInterface__c.All</members>
+        <members>ExternalSystem__c.All</members>
+        <members>ExternalSystem__c.AllInScope</members>
         <members>MetadataField__c.All</members>
         <members>MetadataField__c.AllInScope</members>
         <members>MetadataField__c.AllOpen</members>
@@ -218,6 +218,20 @@
         <name>ListView</name>
     </types>
     <types>
+        <members>ExternalSystem</members>
+        <members>ExternalSystemDataMigrationField</members>
+        <members>ExternalSystemInferfaceInbound</members>
+        <members>ExternalSystemInferfaceOutbound</members>
+        <members>ExternalSystemInterfaceField</members>
+        <members>MetadataFieldAsset</members>
+        <members>MetadataFieldBlueprint</members>
+        <members>MetadataRecordTypeAsset</members>
+        <members>MetadataRecordTypeBlueprint</members>
+        <members>MetadataSObjectAsset</members>
+        <members>MetadataSObjectBlueprint</members>
+        <name>PathAssistant</name>
+    </types>
+    <types>
         <members>MetadataDictionaryAdmin</members>
         <members>MetadataDictionaryExternalSystemManager</members>
         <name>PermissionSet</name>
@@ -229,10 +243,10 @@
         <name>QuickAction</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c.DataMigrationField</members>
-        <members>MetadataExternalSystemField__c.InterfaceField</members>
-        <members>MetadataExternalSystemInterface__c.Inbound</members>
-        <members>MetadataExternalSystemInterface__c.Outbound</members>
+        <members>ExternalSystemField__c.DataMigrationField</members>
+        <members>ExternalSystemField__c.InterfaceField</members>
+        <members>ExternalSystemInterface__c.Inbound</members>
+        <members>ExternalSystemInterface__c.Outbound</members>
         <members>MetadataField__c.Asset</members>
         <members>MetadataField__c.Blueprint</members>
         <members>MetadataRecordType__c.Asset</members>
@@ -242,9 +256,9 @@
         <name>RecordType</name>
     </types>
     <types>
-        <members>MetadataExternalSystemField__c.MappedFieldNotDone</members>
-        <members>MetadataExternalSystemField__c.MappedFieldRequiredWhenDone</members>
-        <members>MetadataExternalSystemField__c.MappedSObjectRequiredWhenInReview</members>
+        <members>ExternalSystemField__c.MappedFieldNotDone</members>
+        <members>ExternalSystemField__c.MappedFieldRequiredWhenDone</members>
+        <members>ExternalSystemField__c.MappedSObjectRequiredWhenInReview</members>
         <name>ValidationRule</name>
     </types>
     <version>45.0</version>

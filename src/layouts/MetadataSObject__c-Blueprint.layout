@@ -114,7 +114,7 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>MetadataSObject__c.BuildAsset</actionName>
+            <actionName>Nebula__MetadataSObject__c.BuildAsset</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>0</sortOrder>
         </platformActionListItems>
@@ -152,7 +152,7 @@
         <fields>DataType__c</fields>
         <fields>MappedField__c</fields>
         <fields>Status__c</fields>
-        <relatedList>MetadataExternalSystemField__c.MappedSObject__c</relatedList>
+        <relatedList>ExternalSystemField__c.MappedSObject__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>true</showHighlightsPanel>

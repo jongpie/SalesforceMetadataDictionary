@@ -197,7 +197,7 @@
         <fields>InterfaceNotes__c</fields>
         <fields>DataMigrationNotes__c</fields>
         <fields>MappingNotes__c</fields>
-        <relatedList>MetadataExternalSystemField__c.MappedField__c</relatedList>
+        <relatedList>ExternalSystemField__c.MappedField__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>true</showHighlightsPanel>

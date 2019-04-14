@@ -4,10 +4,10 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
 
     private static final Set<Schema.SObjectType> IGNORED_SOBJECT_TYPES = new Set<Schema.SObjectType>{
         // Custom objects used by this app
-        Schema.MetadataExternalSystem__c.SObjectType, Schema.MetadataExternalSystem__ChangeEvent.SObjectType,
-        Schema.MetadataExternalSystem__Feed.SObjectType, Schema.MetadataExternalSystem__History.SObjectType,
-        Schema.MetadataExternalSystemField__c.SObjectType, Schema.MetadataExternalSystemField__ChangeEvent.SObjectType,
-        Schema.MetadataExternalSystemField__Feed.SObjectType, Schema.MetadataExternalSystemField__History.SObjectType,
+        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType,
+        Schema.ExternalSystem__Feed.SObjectType, Schema.ExternalSystem__History.SObjectType,
+        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType,
+        Schema.ExternalSystemField__Feed.SObjectType, Schema.ExternalSystemField__History.SObjectType,
         Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType,
         Schema.MetadataField__Feed.SObjectType, Schema.MetadataField__History.SObjectType,
         Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType,

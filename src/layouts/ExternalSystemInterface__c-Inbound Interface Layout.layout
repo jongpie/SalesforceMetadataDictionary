@@ -86,7 +86,7 @@
         <fields>DataType__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
-        <relatedList>MetadataExternalSystemField__c.Interface__c</relatedList>
+        <relatedList>ExternalSystemField__c.Interface__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

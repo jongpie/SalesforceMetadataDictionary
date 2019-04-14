@@ -98,7 +98,7 @@
         <fields>Status__c</fields>
         <fields>EstimatedNumberOfRecords__c</fields>
         <fields>Frequency__c</fields>
-        <relatedList>MetadataExternalSystemInterface__c.ExternalSystem__c</relatedList>
+        <relatedList>ExternalSystemInterface__c.ExternalSystem__c</relatedList>
     </relatedLists>
     <relatedLists>
         <fields>NAME</fields>
@@ -109,7 +109,7 @@
         <fields>Status__c</fields>
         <fields>CREATEDBY_USER</fields>
         <fields>CREATED_DATE</fields>
-        <relatedList>MetadataExternalSystemField__c.ExternalSystem__c</relatedList>
+        <relatedList>ExternalSystemField__c.ExternalSystem__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

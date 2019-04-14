@@ -12,9 +12,9 @@
     <tabs>MetadataSObject__c</tabs>
     <tabs>MetadataRecordType__c</tabs>
     <tabs>MetadataField__c</tabs>
-    <tabs>MetadataExternalSystem__c</tabs>
-    <tabs>MetadataExternalSystemInterface__c</tabs>
-    <tabs>MetadataExternalSystemField__c</tabs>
+    <tabs>ExternalSystem__c</tabs>
+    <tabs>ExternalSystemInterface__c</tabs>
+    <tabs>ExternalSystemField__c</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>standard-report</tabs>
     <uiType>Lightning</uiType>
