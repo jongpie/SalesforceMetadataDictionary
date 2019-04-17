@@ -1,5 +1,17 @@
 public without sharing class MetadataSObjectAnalysisBackup implements Database.Batchable<SObject>, Database.AllowsCallouts {
 
+
+/*
+
+For later importing...
+
+StaticResource sr = [select id, body from StaticResource where name like 'MetadataDictionary001%'];
+String statResBody = sr.body.toString();
+System.debug(statResBody);
+List<MetadataSObject__c> records = (List<MetadataSObject__c>)Json.deserialize(statResBody, List<MetadataSObject__c>.class);
+System.debug(records);
+
+*/
     private static final String STATIC_RESOURCE_PREFIX   = 'MetadataDictionary';
     private static final String STATIC_RESOURCE_ENDPOINT = System.Url.getSalesforceBaseUrl().toExternalForm() + '/services/data/v45.0/sobjects/StaticResource';
 
@@ -41,7 +53,10 @@ public without sharing class MetadataSObjectAnalysisBackup implements Database.B
                 cleanedFields.add(cleanedField);
             }
             //cleanedSObject.MetadataFields__r = cleanedFields;
-            cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, cleanedFields);
+            //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, cleanedFields);
+            //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, null);
+            Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
+            fields.put('records', cleanedFields);
 
             List<MetadataRecordType__c> cleanedRecordTypes = new List<MetadataRecordType__c>();
             for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
@@ -50,7 +65,8 @@ public without sharing class MetadataSObjectAnalysisBackup implements Database.B
                 cleanedRecordTypes.add(cleanedRecordType);
             }
             //cleanedSObject.MetadataRecordTypes__r = cleanedRecordTypes;
-            cleanedSObjectDto.put(RECORD_TYPES_CHILD_RELATIONSHIP_NAME, cleanedRecordTypes);
+            Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
+            recordTypes.put('records', cleanedRecordTypes);
 
             cleanedSObjects.add(cleanedSObject);
             cleanedSObjectDtos.add(cleanedSObjectDto);
@@ -59,7 +75,7 @@ public without sharing class MetadataSObjectAnalysisBackup implements Database.B
         }
         // TODO
         //Blob requestBlob = Blob.valueOf(Json.serializePretty(cleanedSObjects));
-        Blob requestBlob = Blob.valueOf(Json.serializePretty(cleanedSObjectDtos));
+        Blob requestBlob = Blob.valueOf(Json.serialize(cleanedSObjectDtos));
         //Blob requestBlob = Blob.valueOf(Json.serializePretty(scope));
 String finReq = EncodingUtil.base64Encode(requestBlob);
         
