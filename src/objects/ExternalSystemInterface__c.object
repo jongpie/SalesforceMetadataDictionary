@@ -141,7 +141,6 @@
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
     </fields>
-    <gender>Feminine</gender>
     <label>External System Interface</label>
     <listViews>
         <fullName>All</fullName>

@@ -435,9 +435,9 @@ CASE(
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>VIPForm</fullName>
+                    <fullName>Example</fullName>
                     <default>false</default>
-                    <label>VIPForm</label>
+                    <label>Example</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -902,7 +902,7 @@ CASE(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -1046,7 +1046,7 @@ CASE(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

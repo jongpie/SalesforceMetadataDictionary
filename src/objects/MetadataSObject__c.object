@@ -379,9 +379,9 @@ IF(
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>VIPForm</fullName>
+                    <fullName>Example</fullName>
                     <default>false</default>
-                    <label>VIPForm</label>
+                    <label>Example</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -529,7 +529,7 @@ IF(
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <label>Object</label>
+    <label>SObject</label>
     <listViews>
         <fullName>All1</fullName>
         <columns>NAME</columns>
@@ -684,7 +684,7 @@ IF(
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>Objects</pluralLabel>
+    <pluralLabel>SObjects</pluralLabel>
     <recordTypeTrackFeedHistory>true</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
@@ -703,7 +703,7 @@ IF(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -751,7 +751,7 @@ IF(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
