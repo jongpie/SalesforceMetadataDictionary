@@ -155,9 +155,9 @@
         <name>CustomTab</name>
     </types>
     <types>
+        <members>ExternalSystemFieldRecordPage</members>
         <members>ExternalSystemInterfaceRecordPage</members>
-        <members>MetadataExternalSystemFieldRecordPage</members>
-        <members>MetadataExternalSystemRecordPage</members>
+        <members>ExternalSystemRecordPage</members>
         <members>MetadataFieldRecordPage</members>
         <members>MetadataRecordTypeRecordPage</members>
         <members>MetadataSObjectRecordPage</members>

@@ -63,7 +63,7 @@
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Metadata External System Field Record Page</masterLabel>
+    <masterLabel>External System Field Record Page</masterLabel>
     <sobjectType>ExternalSystemField__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSingleColTemplateDesktop</name>

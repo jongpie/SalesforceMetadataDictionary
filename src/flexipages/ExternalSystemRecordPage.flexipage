@@ -85,7 +85,7 @@
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>Metadata External System Record Page</masterLabel>
+    <masterLabel>External System Record Page</masterLabel>
     <sobjectType>ExternalSystem__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSingleColTemplateDesktop</name>
