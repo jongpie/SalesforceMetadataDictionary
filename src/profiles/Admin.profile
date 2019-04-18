@@ -6,426 +6,591 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>Doc_SObjectBatch</apexClass>
+        <apexClass>MetadataSObjectAnalysisScheduler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>Doc_SObjectScheduler</apexClass>
+        <apexClass>MetadataSObjectAnalyzer</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.AssetSummary__c</field>
+        <field>ExternalSystemField__c.DataCleanupRequired__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.DataType__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.ExternalSystemFieldNotes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemField__c.ExternalSystemInterface__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.CalculatedFormula__c</field>
+        <field>ExternalSystemField__c.IsClosed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsInScope__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsMappedToField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsMappedToSObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.Length__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappedField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappedSObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappingNotes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.RequiredForMigration__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceEntity__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceLibrary__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.Source__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.UploadId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Doc_Field__c.DataCleanupRequired__c</field>
+        <field>ExternalSystemInterface__c.ExternalSystemInterfaceNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Doc_Field__c.DataMigrationNotes__c</field>
+        <field>ExternalSystemInterface__c.Frequency__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.DefaultValueFormula__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.ExternalSystemNotes__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.DefaultValue__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_Field__c.DesignNotes__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.IsClosed__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.DeveloperName__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.IsInScope__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.Digits__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.IsLegacy__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.InScope__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.InlineHelpText__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.ThirdPartyTool__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsClosed__c</field>
-        <readable>true</readable>
+        <field>ExternalSystem__c.UploadId__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsCustom__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.AssetSummary__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsManaged__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.CalculatedFormula__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsNillable__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.DefaultValueFormula__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsPermissionable__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.DefaultValue__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsRestrictedDelete__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.DesignNotes__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsRestrictedPicklist__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.DeveloperName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsUnique__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Digits__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.IsWriteRequiresMasterRead__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.InlineHelpText__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.Label__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsCalculated__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.LastMetadataChangeDate__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsClosed__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.Length__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.Namespace__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.PicklistValues__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.Precision__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.ReferenceTo__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.RelationshipName__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>Doc_Field__c.Scale__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsCustom__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>Doc_Field__c.SourceFieldDescription__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_Field__c.SourceField__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_Field__c.SourceSystem__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_Field__c.SourceTable__c</field>
+        <field>MetadataField__c.IsExternalId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.Status__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsInScope__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_Field__c.Type__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsManaged__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.AssetSummary__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_RecordType__c.DesignNotes__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsNillable__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.DeveloperName__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsPermissionable__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.InScope__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsRestrictedDelete__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.IsActive__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsRestrictedPicklist__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.IsClosed__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsUnique__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.IsCustom__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.IsWriteRequiresMasterRead__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.IsManaged__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Label__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.IsMaster__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.LastMetadataChangeDate__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.Namespace__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Length__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_RecordType__c.Status__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Namespace__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.AssetSummary__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>Doc_SObject__c.DesignNotes__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.PicklistValues__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.DeveloperName__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Precision__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.InScopeSummary__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.ReferenceTo__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.InScope__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.RelationshipName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsChangeEvent__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Scale__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsChatterFeedObject__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsClosed__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.Type__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsCustomMetadata__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.UploadId__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsCustomSetting__c</field>
-        <readable>true</readable>
+        <field>MetadataField__c.WasCreatedThisWeek__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsCustom__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.AssetSummary__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsHistoryObject__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.DesignNotes__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsManaged__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.DeveloperName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsPlatformEvent__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsActive__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsPlatformFeatureObject__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsClosed__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.IsShareObject__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsCustom__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.LabelLanguage__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsInScope__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.LabelPlural__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsManaged__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.Label__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.IsMaster__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.LastMetadataChangeDate__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.Namespace__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.Namespace__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.Status__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.ParentSObject__c</field>
-        <readable>true</readable>
+        <field>MetadataRecordType__c.UploadId__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.Status__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.AssetSummary__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.SystemHashCode__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.DesignNotes__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalFields__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.DeveloperName__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalInScopeFields__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.InScopeSummary__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalInScopeRecordTypes__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.IsChangeEvent__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalOpenFields__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.IsChatterFeedObject__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalOpenRecordTypes__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.IsClosed__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>Doc_SObject__c.TotalRecordTypes__c</field>
-        <readable>true</readable>
+        <field>MetadataSObject__c.IsCustomMetadata__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsCustomSetting__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsCustom__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsHistoryObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsInScope__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsManaged__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsPlatformEvent__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsPlatformFeatureObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.IsShareObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.LabelLanguage__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.LabelPlural__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.Label__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.LastMetadataChangeDate__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.Namespace__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.ParentSObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.Status__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.SystemHashCode__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalFields__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalInScopeFields__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalInScopeRecordTypes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalOpenFields__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalOpenRecordTypes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.TotalRecordTypes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.UploadId__c</field>
+        <readable>false</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>Doc_Field__c-Asset</layout>
+        <layout>ExternalSystemField__c-Data Migration Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_Field__c-Asset</layout>
-        <recordType>Doc_Field__c.Asset</recordType>
+        <layout>ExternalSystemField__c-Data Migration Field Layout</layout>
+        <recordType>ExternalSystemField__c.DataMigrationField</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_Field__c-Blueprint</layout>
-        <recordType>Doc_Field__c.Blueprint</recordType>
+        <layout>ExternalSystemField__c-Interface Field Layout</layout>
+        <recordType>ExternalSystemField__c.InterfaceField</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_RecordType__c-Asset</layout>
+        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_RecordType__c-Asset</layout>
-        <recordType>Doc_RecordType__c.Asset</recordType>
+        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
+        <recordType>ExternalSystemInterface__c.Inbound</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_RecordType__c-Blueprint</layout>
-        <recordType>Doc_RecordType__c.Blueprint</recordType>
+        <layout>ExternalSystemInterface__c-Outbound Interface Layout</layout>
+        <recordType>ExternalSystemInterface__c.Outbound</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_SObject__c-Asset</layout>
+        <layout>ExternalSystem__c-External System Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_SObject__c-Asset</layout>
-        <recordType>Doc_SObject__c.Asset</recordType>
+        <layout>MetadataField__c-Asset</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>Doc_SObject__c-Blueprint</layout>
-        <recordType>Doc_SObject__c.Blueprint</recordType>
+        <layout>MetadataField__c-Asset</layout>
+        <recordType>MetadataField__c.Asset</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataField__c-Blueprint</layout>
+        <recordType>MetadataField__c.Blueprint</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataRecordType__c-Asset</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataRecordType__c-Asset</layout>
+        <recordType>MetadataRecordType__c.Asset</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataRecordType__c-Asset</layout>
+        <recordType>MetadataRecordType__c.Blueprint</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataSObject__c-Asset</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataSObject__c-Asset</layout>
+        <recordType>MetadataSObject__c.Asset</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataSObject__c-Blueprint</layout>
+        <recordType>MetadataSObject__c.Blueprint</recordType>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
@@ -433,7 +598,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Doc_Field__c</object>
+        <object>ExternalSystemField__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -442,7 +607,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Doc_RecordType__c</object>
+        <object>ExternalSystemInterface__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -451,52 +616,109 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>Doc_SObject__c</object>
+        <object>ExternalSystem__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>MetadataField__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>MetadataRecordType__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>MetadataSObject__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>Doc_Field__c.Asset</recordType>
+        <recordType>ExternalSystemField__c.DataMigrationField</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>ExternalSystemField__c.InterfaceField</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
-        <recordType>Doc_Field__c.Blueprint</recordType>
+        <recordType>ExternalSystemInterface__c.Inbound</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>Doc_RecordType__c.Asset</recordType>
-        <visible>false</visible>
-    </recordTypeVisibilities>
-    <recordTypeVisibilities>
-        <default>true</default>
-        <personAccountDefault>true</personAccountDefault>
-        <recordType>Doc_RecordType__c.Blueprint</recordType>
+        <recordType>ExternalSystemInterface__c.Outbound</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>Doc_SObject__c.Asset</recordType>
+        <recordType>MetadataField__c.Asset</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
-        <default>true</default>
-        <recordType>Doc_SObject__c.Blueprint</recordType>
-        <visible>true</visible>
+        <default>false</default>
+        <recordType>MetadataField__c.Blueprint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>MetadataRecordType__c.Asset</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>MetadataRecordType__c.Blueprint</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>MetadataSObject__c.Asset</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>MetadataSObject__c.Blueprint</recordType>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
-        <tab>Doc_Field__c</tab>
+        <tab>ExternalSystemField__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>ExternalSystemInterface__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Doc_RecordType__c</tab>
-        <visibility>DefaultOn</visibility>
+        <tab>ExternalSystem__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>Doc_SObject__c</tab>
-        <visibility>DefaultOn</visibility>
+        <tab>MetadataField__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>MetadataRecordType__c</tab>
+        <visibility>Hidden</visibility>
+    </tabVisibilities>
+    <tabVisibilities>
+        <tab>MetadataSObject__c</tab>
+        <visibility>Hidden</visibility>
     </tabVisibilities>
     <userLicense>Salesforce</userLicense>
     <userPermissions>
@@ -533,10 +755,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>ApproveContract</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>AssignPermissionSets</name>
     </userPermissions>
     <userPermissions>
@@ -562,10 +780,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>CanVerifyComment</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ChangeDashboardColors</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -641,10 +855,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>CreateWorkBadgeDefinition</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>CreateWorkspaces</name>
     </userPermissions>
     <userPermissions>
@@ -674,6 +884,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>EditActivatedOrders</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>EditBillingInfo</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -741,6 +955,10 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
+        <name>EnableCommunityAppLauncher</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
         <name>EnableNotifications</name>
     </userPermissions>
     <userPermissions>
@@ -762,10 +980,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ImportPersonal</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>InboundMigrationToolsUser</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -853,10 +1067,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>ManageEntitlements</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>ManageExchangeConfig</name>
     </userPermissions>
     <userPermissions>
@@ -905,10 +1115,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>ManagePartners</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>ManagePasswordPolicies</name>
     </userPermissions>
     <userPermissions>
@@ -922,10 +1128,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManagePvtRptsAndDashbds</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ManageQuotas</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -958,6 +1160,10 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ManageSynonyms</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>ManageTranslation</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -997,14 +1203,6 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>OutboundMigrationToolsUser</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>OverrideForecasts</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>Packaging2</name>
     </userPermissions>
     <userPermissions>
@@ -1025,15 +1223,7 @@
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
-        <name>RetainFieldHistory</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
         <name>RunReports</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ScheduleJob</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -1054,10 +1244,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ShowCompanyNameAsUserBadge</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>SocialInsightsLogoAdmin</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -1086,10 +1272,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>SubscribeReportsRunAsUser</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>SubscribeToLightningDashboards</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -1122,10 +1304,6 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewAllData</name>
-    </userPermissions>
-    <userPermissions>
-        <enabled>true</enabled>
-        <name>ViewAllForecasts</name>
     </userPermissions>
     <userPermissions>
         <enabled>true</enabled>
@@ -1170,5 +1348,9 @@
     <userPermissions>
         <enabled>true</enabled>
         <name>ViewSetup</name>
+    </userPermissions>
+    <userPermissions>
+        <enabled>true</enabled>
+        <name>WorkCalibrationUser</name>
     </userPermissions>
 </Profile>

@@ -38,14 +38,18 @@
     </actionOverrides>
     <actionOverrides>
         <actionName>View</actionName>
-        <type>Default</type>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>MetadataFieldRecordPage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
     </actionOverrides>
     <allowInChatterGroups>true</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <compactLayouts>
         <fullName>AssetCompactLayout</fullName>
         <fields>Name</fields>
-        <fields>Doc_SObject__c</fields>
+        <fields>MetadataSObject__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
         <fields>AssetSummary__c</fields>
@@ -56,7 +60,7 @@
     <compactLayouts>
         <fullName>BlueprintCompactLayout</fullName>
         <fields>Name</fields>
-        <fields>Doc_SObject__c</fields>
+        <fields>MetadataSObject__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
         <fields>Type__c</fields>
@@ -93,6 +97,12 @@ IF(
      &apos;Required &apos;
 )
 +
+IF(
+     IsCalculated__c,
+     &apos;&apos;,
+     &apos;Formula &apos;
+)
++
 CASE(
     TEXT(Type__c),
     &apos;Double&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Precision__c) + &apos;, &apos; + TEXT(Scale__c) + &apos;)&apos;,
@@ -120,28 +130,6 @@ CASE(
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>10</visibleLines>
-    </fields>
-    <fields>
-        <fullName>DataCleanupRequired__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <inlineHelpText>Indicates that data in the source system will need to be cleaned or transformed before migrating</inlineHelpText>
-        <label>Data Cleanup Required</label>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
-        <fullName>DataMigrationNotes__c</fullName>
-        <externalId>false</externalId>
-        <label>Data Migration Notes</label>
-        <length>131072</length>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>5</visibleLines>
     </fields>
     <fields>
         <fullName>DefaultValueFormula__c</fullName>
@@ -210,42 +198,6 @@ CASE(
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>Doc_SObject__c</fullName>
-        <externalId>false</externalId>
-        <label>SObject</label>
-        <lookupFilter>
-            <active>true</active>
-            <filterItems>
-                <field>Doc_SObject__c.InScope__c</field>
-                <operation>equals</operation>
-                <value>True</value>
-            </filterItems>
-            <isOptional>true</isOptional>
-        </lookupFilter>
-        <referenceTo>Doc_SObject__c</referenceTo>
-        <relationshipName>Doc_Fields</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>false</writeRequiresMasterRead>
-    </fields>
-    <fields>
-        <fullName>InScope__c</fullName>
-        <externalId>false</externalId>
-        <formula>OR(
-    IsClosed__c = false,
-    TEXT(Status__c) = &apos;Approved&apos;
-)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>In Scope</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
-    </fields>
-    <fields>
         <fullName>InlineHelpText__c</fullName>
         <description>System generated</description>
         <externalId>false</externalId>
@@ -258,12 +210,24 @@ CASE(
         <type>TextArea</type>
     </fields>
     <fields>
+        <fullName>IsCalculated__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Indicates if this is a formula field.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Indicates if this is a formula field.</inlineHelpText>
+        <label>Is Formula Field</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>IsClosed__c</fullName>
         <description>System generated.</description>
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Approved&apos;
+    TEXT(Status__c) == &apos;Closed&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
@@ -280,6 +244,31 @@ CASE(
         <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom</label>
         <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsExternalId__c</fullName>
+        <defaultValue>false</defaultValue>
+        <description>Returns true if the field is used as an external ID, false otherwise.</description>
+        <externalId>false</externalId>
+        <inlineHelpText>Returns true if the field is used as an external ID, false otherwise.</inlineHelpText>
+        <label>Is External ID</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Approved&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In Scope</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -408,6 +397,30 @@ CASE(
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>MetadataSObject__c</fullName>
+        <externalId>false</externalId>
+        <label>SObject</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>MetadataSObject__c.IsInScope__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>true</isOptional>
+        </lookupFilter>
+        <referenceTo>MetadataSObject__c</referenceTo>
+        <relationshipLabel>Fields</relationshipLabel>
+        <relationshipName>MetadataFields</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
         <fullName>Namespace__c</fullName>
         <description>System generated</description>
         <externalId>false</externalId>
@@ -422,9 +435,9 @@ CASE(
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>VIPForm</fullName>
+                    <fullName>Example</fullName>
                     <default>false</default>
-                    <label>VIPForm</label>
+                    <label>Example</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -463,7 +476,7 @@ CASE(
         <externalId>false</externalId>
         <inlineHelpText>System generated. Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</inlineHelpText>
         <label>Reference To</label>
-        <length>32768</length>
+        <length>131072</length>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -498,52 +511,6 @@ CASE(
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>SourceFieldDescription__c</fullName>
-        <externalId>false</externalId>
-        <label>Source Field Description</label>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>TextArea</type>
-    </fields>
-    <fields>
-        <fullName>SourceField__c</fullName>
-        <externalId>false</externalId>
-        <label>Source Field</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>SourceSystem__c</fullName>
-        <externalId>false</externalId>
-        <label>Source System</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
-        <fullName>SourceTable__c</fullName>
-        <externalId>false</externalId>
-        <label>Source Table</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
-    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -569,6 +536,7 @@ CASE(
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
+            <controllingField>IsCalculated__c</controllingField>
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
@@ -702,13 +670,151 @@ CASE(
                     <label>URL</label>
                 </value>
             </valueSetDefinition>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>address</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>anytype</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>base64</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Boolean</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Combobox</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>ComplexValue</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Currency</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>DataCategoryGroupReference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Date</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>DateTime</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Double</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Email</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>EncryptedString</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>ID</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Integer</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Location</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Long</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>MultiPicklist</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Percent</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Phone</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Picklist</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>Reference</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>String</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>TextArea</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <controllingFieldValue>checked</controllingFieldValue>
+                <valueName>Time</valueName>
+            </valueSettings>
+            <valueSettings>
+                <controllingFieldValue>unchecked</controllingFieldValue>
+                <valueName>URL</valueName>
+            </valueSettings>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>UploadId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
+        <label>Upload ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>WasCreatedThisWeek__c</fullName>
+        <externalId>false</externalId>
+        <formula>DATEVALUE(CreatedDate) &gt;= (TODAY()  - 7)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Was Created This Week</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
     </fields>
     <label>Field</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
-        <columns>Doc_SObject__c</columns>
+        <columns>MetadataSObject__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>DeveloperName__c</columns>
         <columns>Type__c</columns>
@@ -720,7 +826,7 @@ CASE(
     <listViews>
         <fullName>AllInScope</fullName>
         <columns>NAME</columns>
-        <columns>Doc_SObject__c</columns>
+        <columns>MetadataSObject__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>DeveloperName__c</columns>
         <columns>Type__c</columns>
@@ -728,7 +834,7 @@ CASE(
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>InScope__c</field>
+            <field>IsInScope__c</field>
             <operation>equals</operation>
             <value>1</value>
         </filters>
@@ -737,7 +843,7 @@ CASE(
     <listViews>
         <fullName>AllOpen</fullName>
         <columns>NAME</columns>
-        <columns>Doc_SObject__c</columns>
+        <columns>MetadataSObject__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>DeveloperName__c</columns>
         <columns>AssetSummary__c</columns>
@@ -755,6 +861,28 @@ CASE(
             <value>Integer</value>
         </filters>
         <label>All Open</label>
+    </listViews>
+    <listViews>
+        <fullName>CreatedThisWeek</fullName>
+        <columns>NAME</columns>
+        <columns>MetadataSObject__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>DeveloperName__c</columns>
+        <columns>Type__c</columns>
+        <columns>Status__c</columns>
+        <columns>CREATED_DATE</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>WasCreatedThisWeek__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>Created This Week</label>
     </listViews>
     <nameField>
         <label>Field Name</label>
@@ -774,14 +902,14 @@ CASE(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Approved</fullName>
+                <fullName>Done</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -918,14 +1046,18 @@ CASE(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>VIPForm</fullName>
+                <fullName>Example</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
         <picklistValues>
             <picklist>Status__c</picklist>
             <values>
-                <fullName>Approved</fullName>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -935,6 +1067,10 @@ CASE(
             <values>
                 <fullName>New</fullName>
                 <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
             </values>
             <values>
                 <fullName>On Hold</fullName>
@@ -1018,11 +1154,14 @@ CASE(
         </picklistValues>
     </recordTypes>
     <searchLayouts>
-        <searchResultsAdditionalFields>Label__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Doc_SObject__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Type__c</searchResultsAdditionalFields>
+        <lookupDialogsAdditionalFields>MetadataSObject__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>IsInScope__c</lookupDialogsAdditionalFields>
+        <searchResultsAdditionalFields>MetadataSObject__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>CREATED_DATE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsInScope__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>

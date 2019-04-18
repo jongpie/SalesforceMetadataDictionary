@@ -1,6 +1,20 @@
-public class Doc_SObjectBatch implements Database.Batchable<Schema.SObjectType> {
+public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjectType> {
+
+    private static final String ASSET_DEVELOPER_NAME = 'Asset';
 
     private static final Set<Schema.SObjectType> IGNORED_SOBJECT_TYPES = new Set<Schema.SObjectType>{
+        // Custom objects used by this app
+        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType,
+        Schema.ExternalSystem__Feed.SObjectType, Schema.ExternalSystem__History.SObjectType,
+        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType,
+        Schema.ExternalSystemField__Feed.SObjectType, Schema.ExternalSystemField__History.SObjectType,
+        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType,
+        Schema.MetadataField__Feed.SObjectType, Schema.MetadataField__History.SObjectType,
+        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType,
+        Schema.MetadataRecordType__Feed.SObjectType, Schema.MetadataRecordType__History.SObjectType,
+        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType,
+        Schema.MetadataSObject__Feed.SObjectType, Schema.MetadataSObject__History.SObjectType,
+        // Standard objects that aren't currently helpful to document
         Schema.ApexClass.SObjectType, Schema.ApexComponent.SObjectType, Schema.ApexEmailNotification.SObjectType,
         Schema.ApexLog.SObjectType, Schema.ApexPage.SObjectType, Schema.ApexPageInfo.SObjectType,
         Schema.ApexTestQueueItem.SObjectType, Schema.ApexTestResult.SObjectType, Schema.ApexTestResultLimits.SObjectType,
@@ -20,35 +34,35 @@ public class Doc_SObjectBatch implements Database.Batchable<Schema.SObjectType> 
     }
 
     public void execute(Database.BatchableContext batchableContext, List<Schema.SObjectType> scope) {
-        Map<String, Doc_SObject__c> existingSObjectTypesByApiName = this.getExistingSObjectTypesByApiName();
+        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = this.getExistingSObjectTypesByApiName();
 
         this.analyze(scope, existingSObjectTypesByApiName);
     }
 
     public void finish(Database.BatchableContext batchableContext) {}
 
-    private Map<String, Doc_SObject__c> getExistingSObjectTypesByApiName() {
-        Map<String, Doc_SObject__c> existingSObjectTypesByApiName = new Map<String, Doc_SObject__c>();
-        for(Doc_SObject__c docSObject : [SELECT Id, Name, DeveloperName__c, SystemHashCode__c, InScope__c FROM Doc_SObject__c]) {
-            existingSObjectTypesByApiName.put(docSObject.DeveloperName__c, docSObject);
+    private Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName() {
+        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = new Map<String, MetadataSObject__c>();
+        for(MetadataSObject__c metadataSObject : [SELECT Id, Name, DeveloperName__c, SystemHashCode__c, IsInScope__c FROM MetadataSObject__c]) {
+            existingSObjectTypesByApiName.put(metadataSObject.DeveloperName__c, metadataSObject);
         }
         return existingSObjectTypesByApiName;
     }
 
-    private void analyze(List<Schema.SObjectType> sobjectTypes, Map<String, Doc_SObject__c> getExistingSObjectTypesByApiName) {
-        List<Doc_SObject__c> doc_SObjects       = new List<Doc_SObject__c>();
-        List<Doc_Field__c> doc_Fields           = new List<Doc_Field__c>();
-        List<Doc_RecordType__c> doc_RecordTypes = new List<Doc_RecordType__c>();
+    private void analyze(List<Schema.SObjectType> sobjectTypes, Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName) {
+        List<MetadataSObject__c> metadataSObjects       = new List<MetadataSObject__c>();
+        List<MetadataField__c> metadataFields           = new List<MetadataField__c>();
+        List<MetadataRecordType__c> metadataRecordTypes = new List<MetadataRecordType__c>();
 
         for(SObjectType sobjectType : sobjectTypes) {
             Schema.DescribeSObjectResult sobjectDescribe = sobjectType.getDescribe();
 
-            Doc_SObject__c existingDocSObject = getExistingSObjectTypesByApiName.get(sobjectDescribe.getName());
+            MetadataSObject__c existingMetadataSObject = getExistingSObjectTypesByApiName.get(sobjectDescribe.getName());
 
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
-            if(existingDocSObject != null && existingDocSObject.InScope__c == false) continue;
+            if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
 
-            Doc_SObject__c docSObject = new Doc_SObject__c(
+            MetadataSObject__c metadataSObject = new MetadataSObject__c(
                 DeveloperName__c   = sobjectDescribe.getName(),
                 IsCustom__c        = sobjectDescribe.isCustom(),
                 IsCustomSetting__c = sobjectDescribe.isCustomSetting(),
@@ -57,34 +71,36 @@ public class Doc_SObjectBatch implements Database.Batchable<Schema.SObjectType> 
                 LabelLanguage__c   = UserInfo.getLanguage(),
                 Name               = sobjectDescribe.getName(),
                 Namespace__c       = this.getNamespace(sobjectDescribe),
-                RecordTypeId       = this.getAssetRecordTypeId(Schema.Doc_SObject__c.SObjectType)
+                RecordTypeId       = this.getAssetRecordTypeId(Schema.MetadataSObject__c.SObjectType)
             );
 
             // Link to parent object -- TODO, improve this/move to private method
-            docSObject.recalculateFormulas();
+            metadataSObject.recalculateFormulas();
             List<String> testFeatureObjects = new List<String>{'AccountFeed', 'AccountHistory'};
-            if(docSObject.IsPlatformFeatureObject__c && testFeatureObjects.contains(docSObject.Name)) {
-                docSObject.ParentSObject__r = new Doc_SObject__c(DeveloperName__c = 'Account');
+            if(metadataSObject.IsPlatformFeatureObject__c && testFeatureObjects.contains(metadataSObject.Name)) {
+                metadataSObject.ParentSObject__r = new MetadataSObject__c(DeveloperName__c = 'Account');
             }
 
             // TODO move to private method
-            docSObject.SystemHashCode__c = System.hashCode(docSObject);
-            if(existingDocSObject != null && existingDocSObject.SystemHashCode__c != docSObject.SystemHashCode__c) {
-                docSObject.LastMetadataChangeDate__c = System.now();
+            metadataSObject.SystemHashCode__c = System.hashCode(metadataSObject);
+            if(existingMetadataSObject != null && existingMetadataSObject.SystemHashCode__c != metadataSObject.SystemHashCode__c) {
+                metadataSObject.LastMetadataChangeDate__c = System.now();
             }
 
-            doc_SObjects.add(docSObject);
+            metadataSObjects.add(metadataSObject);
 
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
                 Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
 
-                doc_Fields.add(new Doc_Field__c(
+                metadataFields.add(new MetadataField__c(
                     DefaultValue__c         = String.valueOf(fieldDescribe.getDefaultValue()),
                     Digits__c               = fieldDescribe.getDigits(),
-                    Doc_SObject__r          = new Doc_SObject__c(DeveloperName__c = sobjectDescribe.getName()),
+                    MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
                     DeveloperName__c        = sobjectDescribe.getName() + '.' + fieldDescribe.getName(),
                     InlineHelpText__c       = fieldDescribe.getInlineHelpText(),
+                    IsCalculated__c         = fieldDescribe.isCalculated(),
                     IsCustom__c             = fieldDescribe.isCustom(),
+                    IsExternalId__c         = fieldDescribe.IsExternalId(),
                     IsNillable__c           = fieldDescribe.isNillable(),
                     IsPermissionable__c     = fieldDescribe.isPermissionable(),
                     IsRestrictedDelete__c   = fieldDescribe.isRestrictedDelete(),
@@ -96,7 +112,7 @@ public class Doc_SObjectBatch implements Database.Batchable<Schema.SObjectType> 
                     Namespace__c            = this.getNamespace(fieldDescribe),
                     PicklistValues__c       = this.getPicklistValueString(field),
                     Precision__c            = fieldDescribe.getPrecision(),
-                    RecordTypeId            = this.getAssetRecordTypeId(Schema.Doc_Field__c.SObjectType),
+                    RecordTypeId            = this.getAssetRecordTypeId(Schema.MetadataField__c.SObjectType),
                     ReferenceTo__c          = this.getReferenceToValueString(fieldDescribe),
                     RelationshipName__c     = fieldDescribe.getRelationshipName(),
                     Scale__c                = fieldDescribe.getScale(),
@@ -107,24 +123,24 @@ public class Doc_SObjectBatch implements Database.Batchable<Schema.SObjectType> 
             for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
                 if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
 
-                doc_RecordTypes.add(new Doc_RecordType__c(
-                    Doc_SObject__r   = new Doc_SObject__c(DeveloperName__c = sobjectType.getDescribe().getName()),
-                    DeveloperName__c = sobjectType.getDescribe().getName() + '.' + recordTypeInfo.getDeveloperName(),
-                    IsActive__c      = recordTypeInfo.isActive(),
-                    IsMaster__c      = recordTypeInfo.isMaster(),
-                    Name             = recordTypeInfo.getDeveloperName(),
-                    Namespace__c     = this.getNamespace(recordTypeInfo),
-                    RecordTypeId     = this.getAssetRecordTypeId(Schema.Doc_RecordType__c.SObjectType)
+                metadataRecordTypes.add(new MetadataRecordType__c(
+                    MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectType.getDescribe().getName()),
+                    DeveloperName__c   = sobjectType.getDescribe().getName() + '.' + recordTypeInfo.getDeveloperName(),
+                    IsActive__c        = recordTypeInfo.isActive(),
+                    IsMaster__c        = recordTypeInfo.isMaster(),
+                    Name               = recordTypeInfo.getDeveloperName(),
+                    Namespace__c       = this.getNamespace(recordTypeInfo),
+                    RecordTypeId       = this.getAssetRecordTypeId(Schema.MetadataRecordType__c.SObjectType)
                 ));
             }
         }
-        upsert doc_SObjects DeveloperName__c;
-        upsert doc_Fields DeveloperName__c;
-        upsert doc_RecordTypes DeveloperName__c;
+        upsert metadataSObjects DeveloperName__c;
+        upsert metadataFields DeveloperName__c;
+        upsert metadataRecordTypes DeveloperName__c;
     }
 
     private Id getAssetRecordTypeId(Schema.SObjectType sobjectType) {
-        return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get('Asset').getRecordTypeId();
+        return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get(ASSET_DEVELOPER_NAME).getRecordTypeId();
     }
 
     private String getNamespace(Schema.DescribeSObjectResult sobjectDescribe) {
