@@ -1,0 +1,606 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+    <actionOverrides>
+        <actionName>Accept</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>CancelEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Clone</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Delete</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Edit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>List</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>New</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>SaveEdit</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>Tab</actionName>
+        <type>Default</type>
+    </actionOverrides>
+    <actionOverrides>
+        <actionName>View</actionName>
+        <comment>Action override created by Lightning App Builder during activation.</comment>
+        <content>ExternalSystemFieldRecordPage</content>
+        <formFactor>Large</formFactor>
+        <skipRecordTypeSelect>false</skipRecordTypeSelect>
+        <type>Flexipage</type>
+    </actionOverrides>
+    <allowInChatterGroups>false</allowInChatterGroups>
+    <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>DataMigrationFieldCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>ExternalSystem__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <fields>DataCleanupRequired__c</fields>
+        <label>Data Migration Field Compact Layout</label>
+    </compactLayouts>
+    <compactLayouts>
+        <fullName>InterfaceFieldCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>ExternalSystem__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>ExternalSystemInterface__c</fields>
+        <fields>Status__c</fields>
+        <fields>Source__c</fields>
+        <label>Interface Field Compact Layout</label>
+    </compactLayouts>
+    <deploymentStatus>Deployed</deploymentStatus>
+    <enableActivities>false</enableActivities>
+    <enableBulkApi>true</enableBulkApi>
+    <enableFeeds>true</enableFeeds>
+    <enableHistory>true</enableHistory>
+    <enableLicensing>false</enableLicensing>
+    <enableReports>true</enableReports>
+    <enableSearch>true</enableSearch>
+    <enableSharing>true</enableSharing>
+    <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>DataCleanupRequired__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Data Cleanup Required</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>DataType__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Type</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemFieldNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>External System Field Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemInterface__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Interface</label>
+        <referenceTo>ExternalSystemInterface__c</referenceTo>
+        <relationshipLabel>External System Fields</relationshipLabel>
+        <relationshipName>ExternalSystemFields</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>ExternalSystem__c</fullName>
+        <externalId>false</externalId>
+        <label>External System</label>
+        <referenceTo>ExternalSystem__c</referenceTo>
+        <relationshipName>FieldDependencies</relationshipName>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>IsClosed__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    TEXT(Status__c) == &apos;Not Used&apos;,
+    TEXT(Status__c) == &apos;Closed&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Closed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Done&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In Scope</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsMappedToField__c</fullName>
+        <externalId>false</externalId>
+        <formula>MappedField__c != null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Mapped To Field</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsMappedToSObject__c</fullName>
+        <externalId>false</externalId>
+        <formula>MappedSObject__c != null</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Mapped To Object</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>Length__c</fullName>
+        <externalId>false</externalId>
+        <label>Length</label>
+        <precision>18</precision>
+        <required>false</required>
+        <scale>0</scale>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Number</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>MappedField__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Mapped Field</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>MetadataField__c.MetadataSObject__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.MappedSObject__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>MetadataField__c</referenceTo>
+        <relationshipLabel>External System Fields</relationshipLabel>
+        <relationshipName>ExternalSystemDependencies</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MappedSObject__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Mapped Object</label>
+        <referenceTo>MetadataSObject__c</referenceTo>
+        <relationshipLabel>External System Fields</relationshipLabel>
+        <relationshipName>ExternalSystemFields</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
+    </fields>
+    <fields>
+        <fullName>MappingNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>Mapping Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>RequiredForMigration__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Required For Migration</label>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>SourceEntity__c</fullName>
+        <externalId>false</externalId>
+        <label>Source Entity</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SourceField__c</fullName>
+        <externalId>false</externalId>
+        <label>Source Field</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>SourceLibrary__c</fullName>
+        <externalId>false</externalId>
+        <label>Source Library</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Source__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    SourceLibrary__c != null,
+    SourceLibrary__c + &apos;.&apos;,
+    &apos;&apos;
+)
++
+IF(
+    SourceEntity__c != null,
+    SourceEntity__c + &apos;.&apos;,
+    &apos;&apos;
+)
++
+SourceField__c</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Source</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>Status__c</fullName>
+        <externalId>false</externalId>
+        <label>Status</label>
+        <required>true</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetName>MetadataStatus</valueSetName>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>UploadId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
+        <label>Upload ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <label>External System Field</label>
+    <listViews>
+        <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>UploadId__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllDataMigrationFields</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>DataType__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemField__c.DataMigrationField</value>
+        </filters>
+        <label>All Data Migration Fields</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScope</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Source__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>UploadId__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeDataMigrationFields</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>DataType__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemField__c.DataMigrationField</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope Data Migration Fields</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeIntegrationFields</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>DataType__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemField__c.InterfaceField</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <filters>
+            <field>ExternalSystem__c</field>
+            <operation>equals</operation>
+            <value>DBI</value>
+        </filters>
+        <label>All In Scope Integration Fields</label>
+    </listViews>
+    <listViews>
+        <fullName>AllIntegrationFields</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>UploadId__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemField__c.InterfaceField</value>
+        </filters>
+        <label>All Integration Fields</label>
+    </listViews>
+    <listViews>
+        <fullName>AllMapped</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>UploadId__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsMappedToField__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All Mapped</label>
+    </listViews>
+    <listViews>
+        <fullName>AllOpen</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>Source__c</columns>
+        <columns>MappedField__c</columns>
+        <columns>UploadId__c</columns>
+        <columns>Status__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsClosed__c</field>
+            <operation>equals</operation>
+            <value>0</value>
+        </filters>
+        <label>All Open</label>
+    </listViews>
+    <nameField>
+        <displayFormat>ExtField-{00000}</displayFormat>
+        <label>External Field Number</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <type>AutoNumber</type>
+    </nameField>
+    <pluralLabel>External System Fields</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
+    <recordTypeTrackHistory>false</recordTypeTrackHistory>
+    <recordTypes>
+        <fullName>DataMigrationField</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>DataMigrationFieldCompactLayout</compactLayoutAssignment>
+        <label>Data Migration Field</label>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>InterfaceField</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>InterfaceFieldCompactLayout</compactLayoutAssignment>
+        <label>Interface Field</label>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <searchLayouts>
+        <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Source__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields xsi:nil="true"/>
+        <searchResultsAdditionalFields>MappedSObject__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>MappedField__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+    </searchLayouts>
+    <sharingModel>ControlledByParent</sharingModel>
+    <validationRules>
+        <fullName>MappedFieldNotDone</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Status__c, &apos;Done&apos;),
+    MappedField__c != null,
+    NOT(ISPICKVAL(MappedField__r.Status__c, &apos;Done&apos;))
+)</errorConditionFormula>
+        <errorDisplayField>MappedField__c</errorDisplayField>
+        <errorMessage>External System Field cannot be marked as done until the mapped field is marked as done</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MappedFieldRequiredWhenDone</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Status__c, &apos;Done&apos;),
+    MappedField__c = null
+)</errorConditionFormula>
+        <errorDisplayField>MappedField__c</errorDisplayField>
+        <errorMessage>Mapped field is required to mark this as done</errorMessage>
+    </validationRules>
+    <validationRules>
+        <fullName>MappedSObjectRequiredWhenInReview</fullName>
+        <active>true</active>
+        <errorConditionFormula>AND(
+    ISPICKVAL(Status__c, &apos;In Review&apos;),
+    MappedSObject__c = null
+)</errorConditionFormula>
+        <errorDisplayField>MappedSObject__c</errorDisplayField>
+        <errorMessage>Mapped Object is required for status = &apos;In Review&apos;</errorMessage>
+    </validationRules>
+    <visibility>Public</visibility>
+</CustomObject>
