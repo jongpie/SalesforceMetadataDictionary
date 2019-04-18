@@ -70,6 +70,16 @@
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>ExternalSystemInterfaceNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>External System Interface Notes</label>
+        <length>131072</length>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>ExternalSystem__c</fullName>
         <externalId>false</externalId>
         <label>External System</label>

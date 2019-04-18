@@ -21,22 +21,17 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ExternalSystemField__c.DataMigrationNotes__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>ExternalSystemField__c.DataType__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>ExternalSystemField__c.InterfaceNotes__c</field>
+        <field>ExternalSystemField__c.ExternalSystemFieldNotes__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemField__c.Interface__c</field>
+        <field>ExternalSystemField__c.ExternalSystemInterface__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -112,6 +107,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemInterface__c.ExternalSystemInterfaceNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

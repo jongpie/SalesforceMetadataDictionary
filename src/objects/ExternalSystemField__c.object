@@ -60,7 +60,7 @@
         <fields>Name</fields>
         <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
-        <fields>Interface__c</fields>
+        <fields>ExternalSystemInterface__c</fields>
         <fields>Status__c</fields>
         <fields>Source__c</fields>
         <label>Interface Field Compact Layout</label>
@@ -86,17 +86,6 @@
         <type>Checkbox</type>
     </fields>
     <fields>
-        <fullName>DataMigrationNotes__c</fullName>
-        <externalId>false</externalId>
-        <label>Data Migration Notes</label>
-        <length>131072</length>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>5</visibleLines>
-    </fields>
-    <fields>
         <fullName>DataType__c</fullName>
         <externalId>false</externalId>
         <label>Data Type</label>
@@ -107,6 +96,31 @@
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemFieldNotes__c</fullName>
+        <externalId>false</externalId>
+        <label>External System Field Notes</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemInterface__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
+        <externalId>false</externalId>
+        <label>Interface</label>
+        <referenceTo>ExternalSystemInterface__c</referenceTo>
+        <relationshipLabel>External System Fields</relationshipLabel>
+        <relationshipName>ExternalSystemFields</relationshipName>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>ExternalSystem__c</fullName>
@@ -121,31 +135,6 @@
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>true</writeRequiresMasterRead>
-    </fields>
-    <fields>
-        <fullName>InterfaceNotes__c</fullName>
-        <externalId>false</externalId>
-        <label>Interface Notes</label>
-        <length>131072</length>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>5</visibleLines>
-    </fields>
-    <fields>
-        <fullName>Interface__c</fullName>
-        <deleteConstraint>Restrict</deleteConstraint>
-        <externalId>false</externalId>
-        <label>Interface</label>
-        <referenceTo>ExternalSystemInterface__c</referenceTo>
-        <relationshipLabel>External System Fields</relationshipLabel>
-        <relationshipName>ExternalSystemFields</relationshipName>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>
@@ -498,7 +487,7 @@ SourceField__c</formula>
         <label>All Open</label>
     </listViews>
     <nameField>
-        <displayFormat>EFN-{00000}</displayFormat>
+        <displayFormat>ExtField-{00000}</displayFormat>
         <label>External Field Number</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>

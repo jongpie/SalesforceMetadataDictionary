@@ -23,11 +23,11 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>IsExternalId__c</field>
+                <field>Type__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>Type__c</field>
+                <field>IsExternalId__c</field>
             </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
@@ -57,14 +57,6 @@
                 <field>DesignNotes__c</field>
             </layoutItems>
         </layoutColumns>
-        <style>OneColumn</style>
-    </layoutSections>
-    <layoutSections>
-        <customLabel>true</customLabel>
-        <detailHeading>false</detailHeading>
-        <editHeading>false</editHeading>
-        <label>Data Migration Notes</label>
-        <layoutColumns/>
         <style>OneColumn</style>
     </layoutSections>
     <layoutSections>
@@ -194,8 +186,7 @@
         <fields>ExternalSystem__c</fields>
         <fields>RECORDTYPE</fields>
         <fields>Source__c</fields>
-        <fields>InterfaceNotes__c</fields>
-        <fields>DataMigrationNotes__c</fields>
+        <fields>ExternalSystemFieldNotes__c</fields>
         <fields>MappingNotes__c</fields>
         <relatedList>ExternalSystemField__c.MappedField__c</relatedList>
     </relatedLists>

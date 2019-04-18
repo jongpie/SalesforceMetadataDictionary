@@ -71,7 +71,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>DataMigrationNotes__c</field>
+                <field>ExternalSystemFieldNotes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
