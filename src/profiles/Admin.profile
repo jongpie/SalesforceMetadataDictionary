@@ -16,142 +16,142 @@
     <custom>false</custom>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystemField__c.DataCleanupRequired__c</field>
+        <field>ExternalSystemField__c.DataCleanupRequired__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystemField__c.DataMigrationNotes__c</field>
+        <field>ExternalSystemField__c.DataMigrationNotes__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystemField__c.DataType__c</field>
+        <field>ExternalSystemField__c.DataType__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystemField__c.InterfaceNotes__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataExternalSystemField__c.Interface__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.IsClosed__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.IsInScope__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.IsMappedToField__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.IsMappedToSObject__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.Length__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.MappedField__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.MappedSObject__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.MappingNotes__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.RequiredForMigration__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.SourceEntity__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.SourceField__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.SourceLibrary__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.Source__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataExternalSystemField__c.UploadId__c</field>
+        <field>ExternalSystemField__c.InterfaceNotes__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
+        <field>ExternalSystemField__c.Interface__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsClosed__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsInScope__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsMappedToField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.IsMappedToSObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.Length__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappedField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappedSObject__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.MappingNotes__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.RequiredForMigration__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceEntity__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceField__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.SourceLibrary__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.Source__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemField__c.UploadId__c</field>
+        <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataExternalSystemInterface__c.Frequency__c</field>
+        <field>ExternalSystemInterface__c.Frequency__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.ExternalSystemNotes__c</field>
+        <field>ExternalSystem__c.ExternalSystemNotes__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.IsClosed__c</field>
+        <field>ExternalSystem__c.IsClosed__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.IsInScope__c</field>
+        <field>ExternalSystem__c.IsInScope__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.IsLegacy__c</field>
+        <field>ExternalSystem__c.IsLegacy__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.Status__c</field>
+        <field>ExternalSystem__c.Status__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.ThirdPartyTool__c</field>
+        <field>ExternalSystem__c.ThirdPartyTool__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataExternalSystem__c.UploadId__c</field>
+        <field>ExternalSystem__c.UploadId__c</field>
         <readable>false</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -535,29 +535,29 @@
         <readable>false</readable>
     </fieldPermissions>
     <layoutAssignments>
-        <layout>MetadataExternalSystemField__c-Data Migration Field Layout</layout>
+        <layout>ExternalSystemField__c-Data Migration Field Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystemField__c-Data Migration Field Layout</layout>
-        <recordType>MetadataExternalSystemField__c.DataMigrationField</recordType>
+        <layout>ExternalSystemField__c-Data Migration Field Layout</layout>
+        <recordType>ExternalSystemField__c.DataMigrationField</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystemField__c-Interface Field Layout</layout>
-        <recordType>MetadataExternalSystemField__c.InterfaceField</recordType>
+        <layout>ExternalSystemField__c-Interface Field Layout</layout>
+        <recordType>ExternalSystemField__c.InterfaceField</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystemInterface__c-Inbound Interface Layout</layout>
+        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystemInterface__c-Inbound Interface Layout</layout>
-        <recordType>MetadataExternalSystemInterface__c.Inbound</recordType>
+        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
+        <recordType>ExternalSystemInterface__c.Inbound</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystemInterface__c-Outbound Interface Layout</layout>
-        <recordType>MetadataExternalSystemInterface__c.Outbound</recordType>
+        <layout>ExternalSystemInterface__c-Outbound Interface Layout</layout>
+        <recordType>ExternalSystemInterface__c.Outbound</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataExternalSystem__c-External System Layout</layout>
+        <layout>ExternalSystem__c-External System Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
         <layout>MetadataField__c-Asset</layout>
@@ -567,7 +567,7 @@
         <recordType>MetadataField__c.Asset</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataField__c-Asset</layout>
+        <layout>MetadataField__c-Blueprint</layout>
         <recordType>MetadataField__c.Blueprint</recordType>
     </layoutAssignments>
     <layoutAssignments>
@@ -589,7 +589,7 @@
         <recordType>MetadataSObject__c.Asset</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>MetadataSObject__c-Asset</layout>
+        <layout>MetadataSObject__c-Blueprint</layout>
         <recordType>MetadataSObject__c.Blueprint</recordType>
     </layoutAssignments>
     <objectPermissions>
@@ -598,7 +598,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>MetadataExternalSystemField__c</object>
+        <object>ExternalSystemField__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -607,7 +607,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>MetadataExternalSystemInterface__c</object>
+        <object>ExternalSystemInterface__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -616,7 +616,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>MetadataExternalSystem__c</object>
+        <object>ExternalSystem__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -648,22 +648,22 @@
     </objectPermissions>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>MetadataExternalSystemField__c.DataMigrationField</recordType>
+        <recordType>ExternalSystemField__c.DataMigrationField</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>MetadataExternalSystemField__c.InterfaceField</recordType>
+        <recordType>ExternalSystemField__c.InterfaceField</recordType>
         <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
-        <recordType>MetadataExternalSystemInterface__c.Inbound</recordType>
+        <recordType>ExternalSystemInterface__c.Inbound</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>MetadataExternalSystemInterface__c.Outbound</recordType>
+        <recordType>ExternalSystemInterface__c.Outbound</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -697,15 +697,15 @@
         <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
-        <tab>MetadataExternalSystemField__c</tab>
+        <tab>ExternalSystemField__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>MetadataExternalSystemInterface__c</tab>
+        <tab>ExternalSystemInterface__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>MetadataExternalSystem__c</tab>
+        <tab>ExternalSystem__c</tab>
         <visibility>Hidden</visibility>
     </tabVisibilities>
     <tabVisibilities>
