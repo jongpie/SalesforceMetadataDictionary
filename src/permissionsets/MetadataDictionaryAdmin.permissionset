@@ -596,7 +596,15 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
+        <recordType>MetadataSObject__c.Asset</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
         <recordType>MetadataSObject__c.Blueprint</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>MetadataSObject__c.PlatformFeatureAsset</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
