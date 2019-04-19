@@ -114,7 +114,7 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>Nebula__MetadataSObject__c.BuildAsset</actionName>
+            <actionName>MetadataSObject__c.BuildAsset</actionName>
             <actionType>QuickAction</actionType>
             <sortOrder>0</sortOrder>
         </platformActionListItems>
