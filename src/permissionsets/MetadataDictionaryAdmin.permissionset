@@ -484,7 +484,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataSObject__c.ParentSObject__c</field>
+        <field>MetadataSObject__c.PrimaryMetadataSObject__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -596,7 +596,15 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
+        <recordType>MetadataSObject__c.Asset</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
         <recordType>MetadataSObject__c.Blueprint</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>MetadataSObject__c.PlatformFeatureAsset</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <tabSettings>
