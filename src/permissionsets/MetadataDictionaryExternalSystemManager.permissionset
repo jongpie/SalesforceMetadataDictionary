@@ -484,7 +484,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataSObject__c.ParentSObject__c</field>
+        <field>MetadataSObject__c.PrimaryMetadataSObject__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

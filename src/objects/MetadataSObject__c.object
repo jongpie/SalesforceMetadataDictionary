@@ -387,14 +387,15 @@ IF(
         </valueSet>
     </fields>
     <fields>
-        <fullName>ParentSObject__c</fullName>
+        <fullName>PrimaryMetadataSObject__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>System generated.</description>
         <externalId>false</externalId>
         <inlineHelpText>System generated.</inlineHelpText>
-        <label>Parent SObject</label>
+        <label>Primary SObject</label>
         <referenceTo>MetadataSObject__c</referenceTo>
-        <relationshipName>PlatformFeatureObjects</relationshipName>
+        <relationshipLabel>Platform Feature SObjects</relationshipLabel>
+        <relationshipName>PlatformFeatureSObjects</relationshipName>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -741,6 +742,52 @@ IF(
         <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
         <description>I have an idea with some or all details</description>
         <label>Object Blueprint</label>
+        <picklistValues>
+            <picklist>LabelLanguage__c</picklist>
+            <values>
+                <fullName>en_US</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>Example</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PlatformFeatureAsset</fullName>
+        <active>true</active>
+        <label>Platform Feature Asset</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
