@@ -801,6 +801,19 @@ CASE(
         <unique>true</unique>
     </fields>
     <fields>
+        <fullName>Uuid__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>36</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>WasCreatedThisWeek__c</fullName>
         <externalId>false</externalId>
         <formula>DATEVALUE(CreatedDate) &gt;= (TODAY()  - 7)</formula>
