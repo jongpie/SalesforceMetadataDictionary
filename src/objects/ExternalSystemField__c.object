@@ -434,14 +434,15 @@ SourceField__c</formula>
         <label>All In Scope Data Migration Fields</label>
     </listViews>
     <listViews>
-        <fullName>AllInScopeIntegrationFields</fullName>
+        <fullName>AllInScopeInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
+        <columns>ExternalSystemInterface__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
+        <columns>Status__c</columns>
         <columns>MappedSObject__c</columns>
         <columns>MappedField__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -453,28 +454,27 @@ SourceField__c</formula>
             <operation>equals</operation>
             <value>1</value>
         </filters>
-        <filters>
-            <field>ExternalSystem__c</field>
-            <operation>equals</operation>
-            <value>DBI</value>
-        </filters>
-        <label>All In Scope Integration Fields</label>
+        <label>All In Scope Interface Fields</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
-        <fullName>AllIntegrationFields</fullName>
+        <fullName>AllInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
+        <columns>ExternalSystemInterface__c</columns>
         <columns>Source__c</columns>
-        <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
+        <columns>DataType__c</columns>
         <columns>Status__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>ExternalSystemField__c.InterfaceField</value>
         </filters>
-        <label>All Integration Fields</label>
+        <label>All Interface Fields</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllMapped</fullName>
