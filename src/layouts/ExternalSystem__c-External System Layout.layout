@@ -17,7 +17,7 @@
             </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ThirdPartyTool__c</field>
+                <field>IsThirdPartyTool__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>

@@ -139,12 +139,12 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystem__c.Status__c</field>
+        <field>ExternalSystem__c.IsThirdPartyTool__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystem__c.ThirdPartyTool__c</field>
+        <field>ExternalSystem__c.Status__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

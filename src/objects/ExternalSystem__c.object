@@ -51,7 +51,7 @@
         <fields>Name</fields>
         <fields>Status__c</fields>
         <fields>IsLegacy__c</fields>
-        <fields>ThirdPartyTool__c</fields>
+        <fields>IsThirdPartyTool__c</fields>
         <label>External System Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -112,6 +112,16 @@
         <type>Checkbox</type>
     </fields>
     <fields>
+        <fullName>IsThirdPartyTool__c</fullName>
+        <defaultValue>false</defaultValue>
+        <externalId>false</externalId>
+        <label>Third Party Tool</label>
+        <trackFeedHistory>true</trackFeedHistory>
+        <trackHistory>true</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -124,16 +134,6 @@
             <restricted>true</restricted>
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
-    </fields>
-    <fields>
-        <fullName>ThirdPartyTool__c</fullName>
-        <defaultValue>false</defaultValue>
-        <externalId>false</externalId>
-        <label>Third Party Tool</label>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
     </fields>
     <fields>
         <fullName>UploadId__c</fullName>
@@ -176,7 +176,7 @@
         <fullName>AllInScope</fullName>
         <columns>NAME</columns>
         <columns>IsLegacy__c</columns>
-        <columns>ThirdPartyTool__c</columns>
+        <columns>IsThirdPartyTool__c</columns>
         <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
