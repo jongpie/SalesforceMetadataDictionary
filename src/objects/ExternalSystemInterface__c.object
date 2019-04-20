@@ -65,6 +65,35 @@
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
+        <fullName>DataFormat__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Format</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Flat File</fullName>
+                    <default>false</default>
+                    <label>Flat File</label>
+                </value>
+                <value>
+                    <fullName>JSON</fullName>
+                    <default>false</default>
+                    <label>JSON</label>
+                </value>
+                <value>
+                    <fullName>XML</fullName>
+                    <default>false</default>
+                    <label>XML</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>EstimatedNumberOfRecords__c</fullName>
         <externalId>false</externalId>
         <inlineHelpText>The estimated number of records expected each time the interface is executed. This number is multiplied by the frequency to help forecast expected data &amp; API usage.</inlineHelpText>
@@ -152,6 +181,31 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>Protocol__c</fullName>
+        <externalId>false</externalId>
+        <label>Protocol</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>REST API</fullName>
+                    <default>false</default>
+                    <label>REST API</label>
+                </value>
+                <value>
+                    <fullName>SOAP API</fullName>
+                    <default>false</default>
+                    <label>SOAP API</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -219,6 +273,21 @@
         <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Inbound</label>
         <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Frequency__c</picklist>
             <values>
                 <fullName>Daily</fullName>
@@ -246,6 +315,17 @@
             </values>
             <values>
                 <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -283,6 +363,21 @@
         <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Outbound</label>
         <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Frequency__c</picklist>
             <values>
                 <fullName>Daily</fullName>
@@ -314,6 +409,17 @@
             </values>
         </picklistValues>
         <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
@@ -341,7 +447,34 @@
             </values>
         </picklistValues>
     </recordTypes>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>ExternalSystem__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Frequency__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EstimatedNumberOfRecords__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalSystem__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Frequency__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>EstimatedNumberOfRecords__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalSystem__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Frequency__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>EstimatedNumberOfRecords__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>ExternalSystem__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>Frequency__c</searchFilterFields>
+        <searchFilterFields>EstimatedNumberOfRecords__c</searchFilterFields>
+        <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Frequency__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EstimatedNumberOfRecords__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>
