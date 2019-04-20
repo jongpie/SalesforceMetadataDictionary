@@ -25,6 +25,14 @@
         <apexClass>MetadataSObjectAnalyzer</apexClass>
         <enabled>true</enabled>
     </classAccesses>
+    <classAccesses>
+        <apexClass>Uuid</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>Uuid_Tests</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
     <custom>false</custom>
     <fieldPermissions>
         <editable>false</editable>
@@ -328,6 +336,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>MetadataField__c.Uuid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>MetadataField__c.WasCreatedThisWeek__c</field>
         <readable>false</readable>
     </fieldPermissions>
@@ -390,6 +403,11 @@
         <editable>false</editable>
         <field>MetadataRecordType__c.UploadId__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataRecordType__c.Uuid__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -546,6 +564,11 @@
         <field>MetadataSObject__c.UploadId__c</field>
         <readable>false</readable>
     </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataSObject__c.Uuid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
     <layoutAssignments>
         <layout>ExternalSystemField__c-Data Migration Field Layout</layout>
     </layoutAssignments>
@@ -603,6 +626,10 @@
     <layoutAssignments>
         <layout>MetadataSObject__c-Blueprint</layout>
         <recordType>MetadataSObject__c.Blueprint</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataSObject__c-Platform Feature Asset</layout>
+        <recordType>MetadataSObject__c.PlatformFeatureAsset</recordType>
     </layoutAssignments>
     <objectPermissions>
         <allowCreate>true</allowCreate>
