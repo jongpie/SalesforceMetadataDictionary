@@ -562,7 +562,6 @@ IF(
         <columns>Status__c</columns>
         <columns>TotalRecordTypes__c</columns>
         <columns>TotalFields__c</columns>
-        <columns>LastMetadataChangeDate__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -570,6 +569,7 @@ IF(
             <value>MetadataSObject__c.Asset</value>
         </filters>
         <label>All Assets</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllBlueprints</fullName>
@@ -655,6 +655,23 @@ IF(
             <value>0</value>
         </filters>
         <label>All Open</label>
+    </listViews>
+    <listViews>
+        <fullName>AllPlatformFeatureAssets</fullName>
+        <columns>NAME</columns>
+        <columns>PrimaryMetadataSObject__c</columns>
+        <columns>AssetSummary__c</columns>
+        <columns>Label__c</columns>
+        <columns>Status__c</columns>
+        <columns>TotalFields__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>MetadataSObject__c.PlatformFeatureAsset</value>
+        </filters>
+        <label>All Platform Feature Assets</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllStandardObjects</fullName>
