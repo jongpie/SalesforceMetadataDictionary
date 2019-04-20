@@ -131,6 +131,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ExternalSystemInterface__c.DataFormat__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -142,6 +147,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ExternalSystemInterface__c.Frequency__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemInterface__c.Protocol__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
