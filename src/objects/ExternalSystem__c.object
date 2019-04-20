@@ -194,7 +194,28 @@
         <type>Text</type>
     </nameField>
     <pluralLabel>External Systems</pluralLabel>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>IsThirdPartyTool__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>IsLegacy__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>ExternalSystemNotes__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>IsThirdPartyTool__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>IsLegacy__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalSystemNotes__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>IsThirdPartyTool__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>IsLegacy__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalSystemNotes__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>IsThirdPartyTool__c</searchFilterFields>
+        <searchFilterFields>IsLegacy__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchResultsAdditionalFields>IsThirdPartyTool__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>IsLegacy__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>ExternalSystemNotes__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ReadWrite</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

@@ -585,12 +585,37 @@ SourceField__c</formula>
         </picklistValues>
     </recordTypes>
     <searchLayouts>
+        <customTabListAdditionalFields>ExternalSystem__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Source__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MappedSObject__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MappedField__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalSystem__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Source__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>MappedSObject__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>MappedField__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalSystem__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Source__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>MappedSObject__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>MappedField__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>ExternalSystem__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>Source__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>MappedSObject__c</searchFilterFields>
+        <searchFilterFields>MappedField__c</searchFilterFields>
         <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Source__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields xsi:nil="true"/>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>MappedSObject__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>MappedField__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
