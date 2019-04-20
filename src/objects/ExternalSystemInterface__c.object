@@ -46,6 +46,14 @@
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>ExternalSystemInterfaceCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>ExternalSystem__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <label>External System Interface Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -184,6 +192,7 @@
     <recordTypes>
         <fullName>Inbound</fullName>
         <active>true</active>
+        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Inbound</label>
         <picklistValues>
             <picklist>Frequency__c</picklist>
@@ -247,6 +256,7 @@
     <recordTypes>
         <fullName>Outbound</fullName>
         <active>true</active>
+        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Outbound</label>
         <picklistValues>
             <picklist>Frequency__c</picklist>
