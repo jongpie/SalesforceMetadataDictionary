@@ -231,9 +231,9 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Example</fullName>
-                    <default>false</default>
-                    <label>Example</label>
+                    <fullName>None</fullName>
+                    <default>true</default>
+                    <label>None</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -341,7 +341,7 @@
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -382,7 +382,7 @@
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
