@@ -126,6 +126,11 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ExternalSystemField__c.Uuid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -137,6 +142,11 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ExternalSystemInterface__c.Frequency__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemInterface__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -173,6 +183,11 @@
         <editable>false</editable>
         <field>ExternalSystem__c.UploadId__c</field>
         <readable>false</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystem__c.Uuid__c</field>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

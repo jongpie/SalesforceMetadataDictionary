@@ -8,6 +8,9 @@
         <name>ApexClass</name>
     </types>
     <types>
+        <members>ExternalSystem</members>
+        <members>ExternalSystemField</members>
+        <members>ExternalSystemInterface</members>
         <members>MetadataField</members>
         <members>MetadataRecordType</members>
         <members>MetadataSObject</members>
