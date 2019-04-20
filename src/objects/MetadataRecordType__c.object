@@ -337,7 +337,7 @@
         <active>true</active>
         <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
         <description>Design &amp; config have been started</description>
-        <label>Record Type Asset</label>
+        <label>Asset</label>
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
@@ -378,7 +378,7 @@
         <active>true</active>
         <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
         <description>I have an idea with some or all details</description>
-        <label>Record Type Blueprint</label>
+        <label>Blueprint</label>
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>

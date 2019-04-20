@@ -706,7 +706,7 @@ IF(
         <active>true</active>
         <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
         <description>Design &amp; config have been started</description>
-        <label>Object Asset</label>
+        <label>Asset</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
@@ -754,7 +754,7 @@ IF(
         <active>true</active>
         <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
         <description>I have an idea with some or all details</description>
-        <label>Object Blueprint</label>
+        <label>Blueprint</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
@@ -800,7 +800,7 @@ IF(
     <recordTypes>
         <fullName>PlatformFeatureAsset</fullName>
         <active>true</active>
-        <label>Platform Feature Asset</label>
+        <label>Platform Feature</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
