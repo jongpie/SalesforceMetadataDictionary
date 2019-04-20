@@ -223,6 +223,15 @@
         <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>Mapped Object</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>MetadataSObject__c.IsInScope__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>true</isOptional>
+        </lookupFilter>
         <referenceTo>MetadataSObject__c</referenceTo>
         <relationshipLabel>External System Fields</relationshipLabel>
         <relationshipName>ExternalSystemFields</relationshipName>
