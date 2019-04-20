@@ -3,7 +3,15 @@
     <types>
         <members>MetadataSObjectAnalysisScheduler</members>
         <members>MetadataSObjectAnalyzer</members>
+        <members>Uuid</members>
+        <members>Uuid_Tests</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>MetadataField</members>
+        <members>MetadataRecordType</members>
+        <members>MetadataSObject</members>
+        <name>ApexTrigger</name>
     </types>
     <types>
         <members>MetadataDictionary</members>
@@ -58,6 +66,7 @@
         <members>MetadataRecordType__c-Blueprint</members>
         <members>MetadataSObject__c-Asset</members>
         <members>MetadataSObject__c-Blueprint</members>
+        <members>MetadataSObject__c-Platform Feature Asset</members>
         <name>Layout</name>
     </types>
     <types>
