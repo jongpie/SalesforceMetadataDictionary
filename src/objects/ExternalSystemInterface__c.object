@@ -179,8 +179,32 @@
     <label>External System Interface</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
+        <fullName>AllOutbound</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemInterface__c.Outbound</value>
+        </filters>
+        <label>All Outbound</label>
+        <language>en_US</language>
     </listViews>
     <nameField>
         <label>Interface Name</label>
