@@ -85,11 +85,5 @@
         <members>Admin</members>
         <name>Profile</name>
     </types>
-    <types>
-        <members>MetadataField__c.BuildAsset</members>
-        <members>MetadataRecordType__c.BuildAsset</members>
-        <members>MetadataSObject__c.BuildAsset</members>
-        <name>QuickAction</name>
-    </types>
     <version>45.0</version>
 </Package>
