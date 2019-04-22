@@ -1,6 +1,6 @@
 trigger MetadataSObject on MetadataSObject__c(before insert) {
     for(MetadataSObject__c metadataSObject : Trigger.new) {
-        if(metadataSObject.Uuid__c != null) continue;
+        if(Uuid.isValid(metadataSObject.Uuid__c)) continue;
 
         metadataSObject.Uuid__c = new Uuid().getValue();
     }
