@@ -1,3 +1,7 @@
+/*****************************************************************************************************************
+* This file is part of the Metadata Dictionary project for Salesforce, released under the MIT License.           *
+* See LICENSE file or go to https://github.com/jongpie/SalesforceMetadataDictionary for full license details.    *
+*****************************************************************************************************************/
 public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjectType> {
 
     private static final String ASSET_DEVELOPER_NAME                  = 'Asset';
