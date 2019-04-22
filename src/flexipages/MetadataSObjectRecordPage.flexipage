@@ -23,21 +23,6 @@
             </componentInstanceProperties>
             <componentName>runtime_sales_pathassistant:pathAssistant</componentName>
         </componentInstances>
-        <componentInstances>
-            <componentInstanceProperties>
-                <name>numberOfTopicsToDisplay</name>
-                <value>10</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>searchHint</name>
-                <value>Type a topic name and press Enter.</value>
-            </componentInstanceProperties>
-            <componentInstanceProperties>
-                <name>title</name>
-                <value>Topics</value>
-            </componentInstanceProperties>
-            <componentName>forceChatter:topicsOnRecordWrapper</componentName>
-        </componentInstances>
         <name>header</name>
         <type>Region</type>
     </flexiPageRegions>
