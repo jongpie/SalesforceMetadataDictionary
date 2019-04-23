@@ -1,4 +1,4 @@
-public without sharing class MetadataSObjectAnalysisBackup implements Database.Batchable<SObject>, Database.AllowsCallouts {
+public without sharing class MetadataSObjectAnalysisBackupService implements Database.Batchable<SObject>, Database.AllowsCallouts {
 
 
 /*
