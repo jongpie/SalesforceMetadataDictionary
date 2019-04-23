@@ -85,7 +85,7 @@ System.debug(records);
 
             cleanedSObjectDto = this.removeUnusedAttributes(cleanedSObjectDto);
 
-            Blob requestBlob = Blob.valueOf(Json.serialize(cleanedSObjectDto));
+            Blob requestBlob = Blob.valueOf(Json.serializePretty(cleanedSObjectDto));
 
             StaticResourceTemplate staticResource = new StaticResourceTemplate();
             staticResource.Body         = EncodingUtil.base64Encode(requestBlob);//finReq;//Json.serialize(scope);
