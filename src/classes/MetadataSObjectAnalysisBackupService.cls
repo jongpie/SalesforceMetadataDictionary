@@ -53,6 +53,12 @@ System.debug(records);
                 for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
                     MetadataField__c cleanedField = metadataField.clone(false, true, false, false);
                     cleanedField.MetadataSObject__c = null;
+
+                    Map<String, Object> cleanedFieldDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedField));
+                    cleanedFieldDto = this.removeUnusedAttributes(cleanedFieldDto);
+
+                    cleanedField = (Schema.MetadataField__c)Json.deserialize(Json.serialize(cleanedFieldDto), MetadataField__c.class);
+
                     cleanedFields.add(cleanedField);
                 }
                 Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
@@ -65,11 +71,19 @@ System.debug(records);
                 for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
                     MetadataRecordType__c cleanedRecordType = metadataRecordType.clone(false, true, false, false);
                     cleanedRecordType.MetadataSObject__c = null;
+
+                    Map<String, Object> cleanedRecordTypeDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedRecordType));
+                    cleanedRecordTypeDto = this.removeUnusedAttributes(cleanedRecordTypeDto);
+
+                    cleanedRecordType = (Schema.MetadataRecordType__c)Json.deserialize(Json.serialize(cleanedRecordTypeDto), MetadataRecordType__c.class);
+
                     cleanedRecordTypes.add(cleanedRecordType);
                 }
                 Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
                 recordTypes.put('records', cleanedRecordTypes);
             }
+
+            cleanedSObjectDto = this.removeUnusedAttributes(cleanedSObjectDto);
 
             Blob requestBlob = Blob.valueOf(Json.serialize(cleanedSObjectDto));
 
@@ -144,9 +158,23 @@ System.debug(records);
         }*/
         return staticResourceName;
     }
-    private Object removeUnusedAttributes(SObject record) {
+    //private Object removeUnusedAttributes(SObject record) {
+        //Map<String, Object> recordDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(record));
+    private Map<String, Object> removeUnusedAttributes(Map<String, Object> cleanedSObjectDto) {
         // TODO use this to remove extra details from audit fields, record type, etc
-        return null;
+        cleanedSObjectDto.remove('attributes');
+        cleanedSObjectDto.remove('RecordTypeId');
+        
+        if(cleanedSObjectDto.containsKey('RecordType')) {
+            Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
+            recordTypeDto.remove('attributes');
+            recordTypeDto.remove('Id');
+
+            cleanedSObjectDto.put('RecordType', recordTypeDto);
+        }
+
+        //record = (SObject)Json.deserialize(Json.serialize(recordDto), SObject.class);
+        return cleanedSObjectDto;
     }
 
     private HttpResponse createStaticResource(String requestBody) {
