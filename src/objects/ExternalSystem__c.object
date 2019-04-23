@@ -152,6 +152,7 @@
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
+        <columns>IsThirdPartyTool__c</columns>
         <columns>IsLegacy__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>

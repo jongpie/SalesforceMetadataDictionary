@@ -356,8 +356,9 @@ SourceField__c</formula>
         <columns>RECORDTYPE</columns>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
-        <columns>MappedField__c</columns>
         <columns>Status__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>

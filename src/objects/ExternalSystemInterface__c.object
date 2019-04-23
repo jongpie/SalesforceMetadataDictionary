@@ -239,9 +239,10 @@
         <columns>Status__c</columns>
         <columns>Frequency__c</columns>
         <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
-        <language>en_US</language>
     </listViews>
     <nameField>
         <label>Interface Name</label>
