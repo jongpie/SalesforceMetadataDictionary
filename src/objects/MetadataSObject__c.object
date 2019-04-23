@@ -379,22 +379,23 @@ IF(
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Example</fullName>
-                    <default>false</default>
-                    <label>Example</label>
+                    <fullName>None</fullName>
+                    <default>true</default>
+                    <label>None</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
     <fields>
-        <fullName>ParentSObject__c</fullName>
+        <fullName>PrimaryMetadataSObject__c</fullName>
         <deleteConstraint>SetNull</deleteConstraint>
         <description>System generated.</description>
         <externalId>false</externalId>
         <inlineHelpText>System generated.</inlineHelpText>
-        <label>Parent SObject</label>
+        <label>Primary SObject</label>
         <referenceTo>MetadataSObject__c</referenceTo>
-        <relationshipName>PlatformFeatureObjects</relationshipName>
+        <relationshipLabel>Platform Feature SObjects</relationshipLabel>
+        <relationshipName>PlatformFeatureSObjects</relationshipName>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -529,6 +530,19 @@ IF(
         <type>Text</type>
         <unique>true</unique>
     </fields>
+    <fields>
+        <fullName>Uuid__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>36</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
     <label>SObject</label>
     <listViews>
         <fullName>All1</fullName>
@@ -548,7 +562,6 @@ IF(
         <columns>Status__c</columns>
         <columns>TotalRecordTypes__c</columns>
         <columns>TotalFields__c</columns>
-        <columns>LastMetadataChangeDate__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -556,6 +569,7 @@ IF(
             <value>MetadataSObject__c.Asset</value>
         </filters>
         <label>All Assets</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllBlueprints</fullName>
@@ -643,6 +657,23 @@ IF(
         <label>All Open</label>
     </listViews>
     <listViews>
+        <fullName>AllPlatformFeatureAssets</fullName>
+        <columns>NAME</columns>
+        <columns>PrimaryMetadataSObject__c</columns>
+        <columns>AssetSummary__c</columns>
+        <columns>Label__c</columns>
+        <columns>Status__c</columns>
+        <columns>TotalFields__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>MetadataSObject__c.PlatformFeatureAsset</value>
+        </filters>
+        <label>All Platform Feature Assets</label>
+        <language>en_US</language>
+    </listViews>
+    <listViews>
         <fullName>AllStandardObjects</fullName>
         <columns>NAME</columns>
         <columns>RECORDTYPE</columns>
@@ -692,7 +723,7 @@ IF(
         <active>true</active>
         <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
         <description>Design &amp; config have been started</description>
-        <label>Object Asset</label>
+        <label>Asset</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
@@ -703,7 +734,7 @@ IF(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -740,7 +771,7 @@ IF(
         <active>true</active>
         <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
         <description>I have an idea with some or all details</description>
-        <label>Object Blueprint</label>
+        <label>Blueprint</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
             <values>
@@ -751,7 +782,53 @@ IF(
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>PlatformFeatureAsset</fullName>
+        <active>true</active>
+        <label>Platform Feature</label>
+        <picklistValues>
+            <picklist>LabelLanguage__c</picklist>
+            <values>
+                <fullName>en_US</fullName>
+                <default>true</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Namespace__c</picklist>
+            <values>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>

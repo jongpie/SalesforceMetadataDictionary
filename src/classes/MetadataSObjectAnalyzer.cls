@@ -1,19 +1,20 @@
+/*****************************************************************************************************************
+* This file is part of the Metadata Dictionary project for Salesforce, released under the MIT License.           *
+* See LICENSE file or go to https://github.com/jongpie/SalesforceMetadataDictionary for full license details.    *
+*****************************************************************************************************************/
 public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjectType> {
 
-    private static final String ASSET_DEVELOPER_NAME = 'Asset';
+    private static final String ASSET_DEVELOPER_NAME                  = 'Asset';
+    private static final String PLATFORM_FEATURE_ASSET_DEVELOPER_NAME = 'PlatformFeatureAsset';
 
     private static final Set<Schema.SObjectType> IGNORED_SOBJECT_TYPES = new Set<Schema.SObjectType>{
         // Custom objects used by this app
-        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType,
-        Schema.ExternalSystem__Feed.SObjectType, Schema.ExternalSystem__History.SObjectType,
-        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType,
-        Schema.ExternalSystemField__Feed.SObjectType, Schema.ExternalSystemField__History.SObjectType,
-        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType,
-        Schema.MetadataField__Feed.SObjectType, Schema.MetadataField__History.SObjectType,
-        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType,
-        Schema.MetadataRecordType__Feed.SObjectType, Schema.MetadataRecordType__History.SObjectType,
-        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType,
-        Schema.MetadataSObject__Feed.SObjectType, Schema.MetadataSObject__History.SObjectType,
+        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType, Schema.ExternalSystem__History.SObjectType,
+        Schema.ExternalSystemInterface__c.SObjectType, Schema.ExternalSystemInterface__ChangeEvent.SObjectType, Schema.ExternalSystemInterface__History.SObjectType,
+        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType, Schema.ExternalSystemField__History.SObjectType,
+        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType, Schema.MetadataField__History.SObjectType,
+        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType, Schema.MetadataRecordType__History.SObjectType,
+        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType, Schema.MetadataSObject__History.SObjectType,
         // Standard objects that aren't currently helpful to document
         Schema.ApexClass.SObjectType, Schema.ApexComponent.SObjectType, Schema.ApexEmailNotification.SObjectType,
         Schema.ApexLog.SObjectType, Schema.ApexPage.SObjectType, Schema.ApexPageInfo.SObjectType,
@@ -36,28 +37,15 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     public void execute(Database.BatchableContext batchableContext, List<Schema.SObjectType> scope) {
         Map<String, MetadataSObject__c> existingSObjectTypesByApiName = this.getExistingSObjectTypesByApiName();
 
-        this.analyze(scope, existingSObjectTypesByApiName);
-    }
+        List<MetadataSObject__c> metadataSObjects                = new List<MetadataSObject__c>();
+        List<MetadataSObject__c> metadataPlatformFeatureSObjects = new List<MetadataSObject__c>();
+        List<MetadataField__c> metadataFields                    = new List<MetadataField__c>();
+        List<MetadataRecordType__c> metadataRecordTypes          = new List<MetadataRecordType__c>();
 
-    public void finish(Database.BatchableContext batchableContext) {}
-
-    private Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName() {
-        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = new Map<String, MetadataSObject__c>();
-        for(MetadataSObject__c metadataSObject : [SELECT Id, Name, DeveloperName__c, SystemHashCode__c, IsInScope__c FROM MetadataSObject__c]) {
-            existingSObjectTypesByApiName.put(metadataSObject.DeveloperName__c, metadataSObject);
-        }
-        return existingSObjectTypesByApiName;
-    }
-
-    private void analyze(List<Schema.SObjectType> sobjectTypes, Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName) {
-        List<MetadataSObject__c> metadataSObjects       = new List<MetadataSObject__c>();
-        List<MetadataField__c> metadataFields           = new List<MetadataField__c>();
-        List<MetadataRecordType__c> metadataRecordTypes = new List<MetadataRecordType__c>();
-
-        for(SObjectType sobjectType : sobjectTypes) {
+        for(SObjectType sobjectType : scope) {
             Schema.DescribeSObjectResult sobjectDescribe = sobjectType.getDescribe();
 
-            MetadataSObject__c existingMetadataSObject = getExistingSObjectTypesByApiName.get(sobjectDescribe.getName());
+            MetadataSObject__c existingMetadataSObject = existingSObjectTypesByApiName.get(sobjectDescribe.getName());
 
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
             if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
@@ -71,14 +59,20 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
                 LabelLanguage__c   = UserInfo.getLanguage(),
                 Name               = sobjectDescribe.getName(),
                 Namespace__c       = this.getNamespace(sobjectDescribe),
-                RecordTypeId       = this.getAssetRecordTypeId(Schema.MetadataSObject__c.SObjectType)
+                RecordTypeId       = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, ASSET_DEVELOPER_NAME)
             );
 
             // Link to parent object -- TODO, improve this/move to private method
             metadataSObject.recalculateFormulas();
-            List<String> testFeatureObjects = new List<String>{'AccountFeed', 'AccountHistory'};
-            if(metadataSObject.IsPlatformFeatureObject__c && testFeatureObjects.contains(metadataSObject.Name)) {
-                metadataSObject.ParentSObject__r = new MetadataSObject__c(DeveloperName__c = 'Account');
+            //List<String> testFeatureObjects = new List<String>{'AccountFeed', 'AccountHistory'};
+            if(metadataSObject.IsPlatformFeatureObject__c == false) {//} && testFeatureObjects.contains(metadataSObject.Name)) {
+                metadataSObjects.add(metadataSObject);
+            } else {
+                String primarySObjectDeveloperName = this.getPrimarySObjectDeveloperName(metadataSObject, sobjectType);
+
+                metadataSObject.PrimaryMetadataSObject__r = new MetadataSObject__c(DeveloperName__c = primarySObjectDeveloperName);
+                metadataSObject.RecordTypeId              = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, PLATFORM_FEATURE_ASSET_DEVELOPER_NAME);
+                metadataPlatformFeatureSObjects.add(metadataSObject);
             }
 
             // TODO move to private method
@@ -87,7 +81,19 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
                 metadataSObject.LastMetadataChangeDate__c = System.now();
             }
 
-            metadataSObjects.add(metadataSObject);
+            for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
+                if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
+
+                metadataRecordTypes.add(new MetadataRecordType__c(
+                    MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectType.getDescribe().getName()),
+                    DeveloperName__c   = sobjectType.getDescribe().getName() + '.' + recordTypeInfo.getDeveloperName(),
+                    IsActive__c        = recordTypeInfo.isActive(),
+                    IsMaster__c        = recordTypeInfo.isMaster(),
+                    Name               = recordTypeInfo.getDeveloperName(),
+                    Namespace__c       = this.getNamespace(recordTypeInfo),
+                    RecordTypeId       = this.getRecordTypeId(Schema.MetadataRecordType__c.SObjectType, ASSET_DEVELOPER_NAME)
+                ));
+            }
 
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
                 Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
@@ -112,35 +118,32 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
                     Namespace__c            = this.getNamespace(fieldDescribe),
                     PicklistValues__c       = this.getPicklistValueString(field),
                     Precision__c            = fieldDescribe.getPrecision(),
-                    RecordTypeId            = this.getAssetRecordTypeId(Schema.MetadataField__c.SObjectType),
+                    RecordTypeId            = this.getRecordTypeId(Schema.MetadataField__c.SObjectType, ASSET_DEVELOPER_NAME),
                     ReferenceTo__c          = this.getReferenceToValueString(fieldDescribe),
                     RelationshipName__c     = fieldDescribe.getRelationshipName(),
                     Scale__c                = fieldDescribe.getScale(),
                     Type__c                 = fieldDescribe.getType().name()
                 ));
             }
-
-            for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
-                if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
-
-                metadataRecordTypes.add(new MetadataRecordType__c(
-                    MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectType.getDescribe().getName()),
-                    DeveloperName__c   = sobjectType.getDescribe().getName() + '.' + recordTypeInfo.getDeveloperName(),
-                    IsActive__c        = recordTypeInfo.isActive(),
-                    IsMaster__c        = recordTypeInfo.isMaster(),
-                    Name               = recordTypeInfo.getDeveloperName(),
-                    Namespace__c       = this.getNamespace(recordTypeInfo),
-                    RecordTypeId       = this.getAssetRecordTypeId(Schema.MetadataRecordType__c.SObjectType)
-                ));
-            }
         }
         upsert metadataSObjects DeveloperName__c;
-        upsert metadataFields DeveloperName__c;
+        upsert metadataPlatformFeatureSObjects DeveloperName__c;
         upsert metadataRecordTypes DeveloperName__c;
+        upsert metadataFields DeveloperName__c;
     }
 
-    private Id getAssetRecordTypeId(Schema.SObjectType sobjectType) {
-        return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get(ASSET_DEVELOPER_NAME).getRecordTypeId();
+    public void finish(Database.BatchableContext batchableContext) {}
+
+    private Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName() {
+        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = new Map<String, MetadataSObject__c>();
+        for(MetadataSObject__c metadataSObject : [SELECT Id, Name, DeveloperName__c, SystemHashCode__c, IsInScope__c FROM MetadataSObject__c]) {
+            existingSObjectTypesByApiName.put(metadataSObject.DeveloperName__c, metadataSObject);
+        }
+        return existingSObjectTypesByApiName;
+    }
+
+    private Id getRecordTypeId(Schema.SObjectType sobjectType, String recordTypeDeveloperName) {
+        return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get(recordTypeDeveloperName).getRecordTypeId();
     }
 
     private String getNamespace(Schema.DescribeSObjectResult sobjectDescribe) {
@@ -166,6 +169,22 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             .indexOf('__');               // Now we can determine if there is a namespace
 
         return localNameIndex < 0 ? null : fullApiName.substring(0, localNameIndex);
+    }
+
+
+    private String getPrimarySObjectDeveloperName(MetadataSObject__c metadataSObject, Schema.SObjectType sobjectType) {
+        String parentSObjectDeveloperName = sobjectType.getDescribe().getName();
+
+        // TODO make this less awful
+        if(parentSObjectDeveloperName.endsWith('__ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__ChangeEvent', '__c');
+        if(parentSObjectDeveloperName.endsWith('__Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__Feed', '__c');
+        if(parentSObjectDeveloperName.endsWith('__History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__History', '__c');
+
+        if(parentSObjectDeveloperName.endsWith('ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('ChangeEvent', '');
+        if(parentSObjectDeveloperName.endsWith('Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('Feed', '');
+        if(parentSObjectDeveloperName.endsWith('History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('History', '');
+
+        return parentSObjectDeveloperName;
     }
 
     private String getReferenceToValueString(Schema.DescribeFieldResult fieldDescribe) {

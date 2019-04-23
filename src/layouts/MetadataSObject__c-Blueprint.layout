@@ -43,7 +43,12 @@
                 <field>Name</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns/>
+        <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>DeveloperName__c</field>
+            </layoutItems>
+        </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
@@ -114,14 +119,9 @@
     <platformActionList>
         <actionListContext>Record</actionListContext>
         <platformActionListItems>
-            <actionName>Nebula__MetadataSObject__c.BuildAsset</actionName>
-            <actionType>QuickAction</actionType>
-            <sortOrder>0</sortOrder>
-        </platformActionListItems>
-        <platformActionListItems>
             <actionName>Edit</actionName>
             <actionType>StandardButton</actionType>
-            <sortOrder>1</sortOrder>
+            <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
@@ -141,7 +141,6 @@
         <fields>IsInScope__c</fields>
         <fields>DeveloperName__c</fields>
         <fields>AssetSummary__c</fields>
-        <fields>CREATED_DATE</fields>
         <relatedList>MetadataField__c.MetadataSObject__c</relatedList>
     </relatedLists>
     <relatedLists>

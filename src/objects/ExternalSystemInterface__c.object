@@ -46,6 +46,14 @@
     </actionOverrides>
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
+    <compactLayouts>
+        <fullName>ExternalSystemInterfaceCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>ExternalSystem__c</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Status__c</fields>
+        <label>External System Interface Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -56,6 +64,35 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
+    <fields>
+        <fullName>DataFormat__c</fullName>
+        <externalId>false</externalId>
+        <label>Data Format</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>Flat File</fullName>
+                    <default>false</default>
+                    <label>Flat File</label>
+                </value>
+                <value>
+                    <fullName>JSON</fullName>
+                    <default>false</default>
+                    <label>JSON</label>
+                </value>
+                <value>
+                    <fullName>XML</fullName>
+                    <default>false</default>
+                    <label>XML</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
     <fields>
         <fullName>EstimatedNumberOfRecords__c</fullName>
         <externalId>false</externalId>
@@ -135,6 +172,36 @@
                     <default>false</default>
                     <label>Yearly</label>
                 </value>
+                <value>
+                    <fullName>On Demand</fullName>
+                    <default>false</default>
+                    <label>On Demand</label>
+                </value>
+            </valueSetDefinition>
+        </valueSet>
+    </fields>
+    <fields>
+        <fullName>Protocol__c</fullName>
+        <externalId>false</externalId>
+        <label>Protocol</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Picklist</type>
+        <valueSet>
+            <restricted>true</restricted>
+            <valueSetDefinition>
+                <sorted>false</sorted>
+                <value>
+                    <fullName>REST API</fullName>
+                    <default>false</default>
+                    <label>REST API</label>
+                </value>
+                <value>
+                    <fullName>SOAP API</fullName>
+                    <default>false</default>
+                    <label>SOAP API</label>
+                </value>
             </valueSetDefinition>
         </valueSet>
     </fields>
@@ -151,9 +218,29 @@
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
     </fields>
+    <fields>
+        <fullName>Uuid__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>36</length>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
     <label>External System Interface</label>
     <listViews>
         <fullName>All</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -167,7 +254,23 @@
     <recordTypes>
         <fullName>Inbound</fullName>
         <active>true</active>
+        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Inbound</label>
+        <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Frequency__c</picklist>
             <values>
@@ -183,6 +286,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>On Demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Real Time</fullName>
                 <default>false</default>
             </values>
@@ -192,6 +299,17 @@
             </values>
             <values>
                 <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -226,7 +344,23 @@
     <recordTypes>
         <fullName>Outbound</fullName>
         <active>true</active>
+        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
         <label>Outbound</label>
+        <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
         <picklistValues>
             <picklist>Frequency__c</picklist>
             <values>
@@ -242,6 +376,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>On Demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Real Time</fullName>
                 <default>false</default>
             </values>
@@ -251,6 +389,17 @@
             </values>
             <values>
                 <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -282,7 +431,34 @@
             </values>
         </picklistValues>
     </recordTypes>
-    <searchLayouts/>
+    <searchLayouts>
+        <customTabListAdditionalFields>ExternalSystem__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Frequency__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>EstimatedNumberOfRecords__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalSystem__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Frequency__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>EstimatedNumberOfRecords__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalSystem__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Frequency__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>EstimatedNumberOfRecords__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>ExternalSystem__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>Frequency__c</searchFilterFields>
+        <searchFilterFields>EstimatedNumberOfRecords__c</searchFilterFields>
+        <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>Frequency__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>EstimatedNumberOfRecords__c</searchResultsAdditionalFields>
+    </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <visibility>Public</visibility>
 </CustomObject>

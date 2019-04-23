@@ -46,12 +46,7 @@
                 <field>Name</field>
             </layoutItems>
         </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Readonly</behavior>
-                <field>LastMetadataChangeDate__c</field>
-            </layoutItems>
-        </layoutColumns>
+        <layoutColumns/>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>
     <layoutSections>
@@ -180,6 +175,17 @@
         </platformActionListItems>
     </platformActionList>
     <relatedLists>
+        <excludeButtons>MassChangeOwner</excludeButtons>
+        <excludeButtons>New</excludeButtons>
+        <fields>NAME</fields>
+        <fields>AssetSummary__c</fields>
+        <fields>Status__c</fields>
+        <fields>TotalInScopeFields__c</fields>
+        <relatedList>MetadataSObject__c.PrimaryMetadataSObject__c</relatedList>
+        <sortField>NAME</sortField>
+        <sortOrder>Asc</sortOrder>
+    </relatedLists>
+    <relatedLists>
         <fields>NAME</fields>
         <fields>RECORDTYPE</fields>
         <fields>Status__c</fields>
@@ -196,7 +202,6 @@
         <fields>IsInScope__c</fields>
         <fields>DeveloperName__c</fields>
         <fields>AssetSummary__c</fields>
-        <fields>CREATED_DATE</fields>
         <relatedList>MetadataField__c.MetadataSObject__c</relatedList>
     </relatedLists>
     <relatedLists>

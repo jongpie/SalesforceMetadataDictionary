@@ -3,7 +3,18 @@
     <types>
         <members>MetadataSObjectAnalysisScheduler</members>
         <members>MetadataSObjectAnalyzer</members>
+        <members>Uuid</members>
+        <members>Uuid_Tests</members>
         <name>ApexClass</name>
+    </types>
+    <types>
+        <members>ExternalSystem</members>
+        <members>ExternalSystemField</members>
+        <members>ExternalSystemInterface</members>
+        <members>MetadataField</members>
+        <members>MetadataRecordType</members>
+        <members>MetadataSObject</members>
+        <name>ApexTrigger</name>
     </types>
     <types>
         <members>MetadataDictionary</members>
@@ -58,6 +69,7 @@
         <members>MetadataRecordType__c-Blueprint</members>
         <members>MetadataSObject__c-Asset</members>
         <members>MetadataSObject__c-Blueprint</members>
+        <members>MetadataSObject__c-Platform Feature Asset</members>
         <name>Layout</name>
     </types>
     <types>
@@ -72,12 +84,6 @@
     <types>
         <members>Admin</members>
         <name>Profile</name>
-    </types>
-    <types>
-        <members>MetadataField__c.BuildAsset</members>
-        <members>MetadataRecordType__c.BuildAsset</members>
-        <members>MetadataSObject__c.BuildAsset</members>
-        <name>QuickAction</name>
     </types>
     <version>45.0</version>
 </Package>

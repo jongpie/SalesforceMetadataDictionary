@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -223,6 +223,15 @@
         <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>Mapped Object</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>MetadataSObject__c.IsInScope__c</field>
+                <operation>equals</operation>
+                <value>True</value>
+            </filterItems>
+            <isOptional>true</isOptional>
+        </lookupFilter>
         <referenceTo>MetadataSObject__c</referenceTo>
         <relationshipLabel>External System Fields</relationshipLabel>
         <relationshipName>ExternalSystemFields</relationshipName>
@@ -328,13 +337,11 @@ SourceField__c</formula>
         </valueSet>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
+        <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
         <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
+        <label>UUID</label>
+        <length>36</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -349,9 +356,9 @@ SourceField__c</formula>
         <columns>RECORDTYPE</columns>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
-        <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
@@ -381,7 +388,6 @@ SourceField__c</formula>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
         <columns>MappedSObject__c</columns>
-        <columns>UploadId__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>IsInScope__c</field>
@@ -412,14 +418,15 @@ SourceField__c</formula>
         <label>All In Scope Data Migration Fields</label>
     </listViews>
     <listViews>
-        <fullName>AllInScopeIntegrationFields</fullName>
+        <fullName>AllInScopeInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
+        <columns>ExternalSystemInterface__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
+        <columns>Status__c</columns>
         <columns>MappedSObject__c</columns>
         <columns>MappedField__c</columns>
-        <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
@@ -431,28 +438,27 @@ SourceField__c</formula>
             <operation>equals</operation>
             <value>1</value>
         </filters>
-        <filters>
-            <field>ExternalSystem__c</field>
-            <operation>equals</operation>
-            <value>DBI</value>
-        </filters>
-        <label>All In Scope Integration Fields</label>
+        <label>All In Scope Interface Fields</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
-        <fullName>AllIntegrationFields</fullName>
+        <fullName>AllInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
+        <columns>ExternalSystemInterface__c</columns>
         <columns>Source__c</columns>
-        <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
+        <columns>DataType__c</columns>
         <columns>Status__c</columns>
+        <columns>MappedSObject__c</columns>
+        <columns>MappedField__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>RECORDTYPE</field>
             <operation>equals</operation>
             <value>ExternalSystemField__c.InterfaceField</value>
         </filters>
-        <label>All Integration Fields</label>
+        <label>All Interface Fields</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllMapped</fullName>
@@ -460,7 +466,6 @@ SourceField__c</formula>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
@@ -476,7 +481,6 @@ SourceField__c</formula>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
@@ -563,12 +567,37 @@ SourceField__c</formula>
         </picklistValues>
     </recordTypes>
     <searchLayouts>
+        <customTabListAdditionalFields>ExternalSystem__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Source__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MappedSObject__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields>MappedField__c</customTabListAdditionalFields>
+        <lookupDialogsAdditionalFields>ExternalSystem__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Source__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>MappedSObject__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields>MappedField__c</lookupDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>ExternalSystem__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Source__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>MappedSObject__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields>MappedField__c</lookupPhoneDialogsAdditionalFields>
+        <searchFilterFields>NAME</searchFilterFields>
+        <searchFilterFields>ExternalSystem__c</searchFilterFields>
+        <searchFilterFields>RECORDTYPE</searchFilterFields>
+        <searchFilterFields>Source__c</searchFilterFields>
+        <searchFilterFields>Status__c</searchFilterFields>
+        <searchFilterFields>MappedSObject__c</searchFilterFields>
+        <searchFilterFields>MappedField__c</searchFilterFields>
         <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Source__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields xsi:nil="true"/>
+        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>MappedSObject__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>MappedField__c</searchResultsAdditionalFields>
-        <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>
     </searchLayouts>
     <sharingModel>ControlledByParent</sharingModel>
     <validationRules>
