@@ -128,8 +128,12 @@ System.debug(records);
             fields.add(field.getDescribe().getName().toLowerCase());
         }
         fields.addAll(new List<String>{
-            'recordtype.developername'
+            'RecordType.DeveloperName'.toLowerCase()
         });
+
+        if(sobjectType == Schema.MetadataSObject__c.SObjectType) {
+            fields.add('PrimaryMetadataSObject__r.Uuid__c'.toLowerCase());
+        }
 
         return fields;
     }
@@ -159,13 +163,27 @@ System.debug(records);
         }*/
         return staticResourceName;
     }
+
     //private Object removeUnusedAttributes(SObject record) {
         //Map<String, Object> recordDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(record));
+
     private Map<String, Object> removeUnusedAttributes(Map<String, Object> cleanedSObjectDto) {
         // TODO use this to remove extra details from audit fields, record type, etc
         cleanedSObjectDto.remove('attributes');
+        cleanedSObjectDto.remove(Schema.MetadataField__c.MetadataSObject__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.MetadataRecordType__c.MetadataSObject__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.MetadataSObject__c.PrimaryMetadataSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
-        
+
+        String primarySObjectRelationshipName = Schema.MetadataSObject__c.PrimaryMetadataSObject__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(primarySObjectRelationshipName)) {
+            Map<String, Object> primarySObjectDto = (Map<String, Object>)cleanedSObjectDto.get(primarySObjectRelationshipName);
+            primarySObjectDto.remove('attributes');
+            primarySObjectDto.remove('Id');
+
+            cleanedSObjectDto.put(primarySObjectRelationshipName, primarySObjectDto);
+        }
+
         if(cleanedSObjectDto.containsKey('RecordType')) {
             Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
             recordTypeDto.remove('attributes');
