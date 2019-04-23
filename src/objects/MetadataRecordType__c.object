@@ -231,9 +231,9 @@
             <valueSetDefinition>
                 <sorted>false</sorted>
                 <value>
-                    <fullName>Example</fullName>
-                    <default>false</default>
-                    <label>Example</label>
+                    <fullName>None</fullName>
+                    <default>true</default>
+                    <label>None</label>
                 </value>
             </valueSetDefinition>
         </valueSet>
@@ -259,6 +259,19 @@
         <externalId>true</externalId>
         <label>Upload ID</label>
         <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>Uuid__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <externalId>true</externalId>
+        <label>UUID</label>
+        <length>36</length>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -324,11 +337,11 @@
         <active>true</active>
         <compactLayoutAssignment>AssetCompactLayout</compactLayoutAssignment>
         <description>Design &amp; config have been started</description>
-        <label>Record Type Asset</label>
+        <label>Asset</label>
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
@@ -365,11 +378,11 @@
         <active>true</active>
         <compactLayoutAssignment>BlueprintCompactLayout</compactLayoutAssignment>
         <description>I have an idea with some or all details</description>
-        <label>Record Type Blueprint</label>
+        <label>Blueprint</label>
         <picklistValues>
             <picklist>Namespace__c</picklist>
             <values>
-                <fullName>Example</fullName>
+                <fullName>None</fullName>
                 <default>false</default>
             </values>
         </picklistValues>
