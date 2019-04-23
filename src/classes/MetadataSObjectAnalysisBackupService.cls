@@ -1,4 +1,8 @@
-public without sharing class MetadataSObjectAnalysisBackupService implements Database.Batchable<SObject>, Database.AllowsCallouts {
+/*****************************************************************************************************************
+* This file is part of the Metadata Dictionary project for Salesforce, released under the MIT License.           *
+* See LICENSE file or go to https://github.com/jongpie/SalesforceMetadataDictionary for full license details.    *
+*****************************************************************************************************************/
+public without sharing class MetadataSObjectAnalysisBackupService implements Database.AllowsCallouts, Database.Batchable<SObject> {
 
 
 /*
@@ -33,78 +37,58 @@ System.debug(records);
     public void execute(Database.BatchableContext batchableContext, List<MetadataSObject__c> scope) {
         System.debug('scope=' + scope);
 
-        Map<String, Id> existingStaticResourcesByName = new Map<String, Id>();
+        // Get any existing static resources so we can update them
+        Map<String, Id> existingStaticResourceIdsByName = new Map<String, Id>();
         for(StaticResource staticResource : [SELECT Id, Name FROM StaticResource WHERE Name LIKE :STATIC_RESOURCE_PREFIX + '%']) {
-            existingStaticResourcesByName.put(staticResource.Name, StaticResource.Id);
+            existingStaticResourceIdsByName.put(staticResource.Name, StaticResource.Id);
         }
 
-
-        //List<StaticResourceTemplate> staticResourceTemplates = new List<StaticResourceTemplate>();
-        List<MetadataSObject__c> cleanedSObjects = new List<MetadataSObject__c>();
-        List<Map<String, Object>> cleanedSObjectDtos = new List<Map<String, Object>>();
         for(MetadataSObject__c metadataSObject : scope) {
             MetadataSObject__c cleanedSObject = metadataSObject.clone(false, true, false, false);
             Map<String, Object> cleanedSObjectDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedSObject));
 
-            List<MetadataField__c> cleanedFields = new List<MetadataField__c>();
-            for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
-                MetadataField__c cleanedField = metadataField.clone(false, true, false, false);
-                cleanedField.MetadataSObject__c = null;
-                cleanedFields.add(cleanedField);
+            // Cleanup the fields before serialization
+            if(!metadataSObject.MetadataFields__r.isEmpty()) {
+                List<MetadataField__c> cleanedFields = new List<MetadataField__c>();
+                for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
+                    MetadataField__c cleanedField = metadataField.clone(false, true, false, false);
+                    cleanedField.MetadataSObject__c = null;
+                    cleanedFields.add(cleanedField);
+                }
+                Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
+                fields.put('records', cleanedFields);
             }
-            //cleanedSObject.MetadataFields__r = cleanedFields;
-            //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, cleanedFields);
-            //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, null);
-            Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
-            fields.put('records', cleanedFields);
 
-            List<MetadataRecordType__c> cleanedRecordTypes = new List<MetadataRecordType__c>();
-            for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
-                MetadataRecordType__c cleanedRecordType = metadataRecordType.clone(false, true, false, false);
-                cleanedRecordType.MetadataSObject__c = null;
-                cleanedRecordTypes.add(cleanedRecordType);
+            // Cleanup the record types before serialization
+            if(!metadataSObject.MetadataRecordTypes__r.isEmpty()) {
+                List<MetadataRecordType__c> cleanedRecordTypes = new List<MetadataRecordType__c>();
+                for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
+                    MetadataRecordType__c cleanedRecordType = metadataRecordType.clone(false, true, false, false);
+                    cleanedRecordType.MetadataSObject__c = null;
+                    cleanedRecordTypes.add(cleanedRecordType);
+                }
+                Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
+                recordTypes.put('records', cleanedRecordTypes);
             }
-            //cleanedSObject.MetadataRecordTypes__r = cleanedRecordTypes;
-            Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
-            recordTypes.put('records', cleanedRecordTypes);
 
-            cleanedSObjects.add(cleanedSObject);
-            cleanedSObjectDtos.add(cleanedSObjectDto);
-            // TODO make callout to Salesforce endpoint to create static resources. Endpoint only accepts 1 static resource at a time.
-            //staticResourceTemplates.add(staticResource);
+            Blob requestBlob = Blob.valueOf(Json.serialize(cleanedSObjectDto));
+
+            StaticResourceTemplate staticResource = new StaticResourceTemplate();
+            staticResource.Body         = EncodingUtil.base64Encode(requestBlob);//finReq;//Json.serialize(scope);
+            staticResource.CacheControl = 'Private';
+            staticResource.ContentType  = 'application/json';
+            staticResource.Description  = 'Metadata Dictionary contents';
+            staticResource.Name         = this.generateStaticResourceName(metadataSObject);
+
+            Id staticResourceId = existingStaticResourceIdsByName.get(staticResource.Name);
+            this.createStaticResource(Json.serialize(staticResource), staticResourceId);
         }
-        // TODO
-        //Blob requestBlob = Blob.valueOf(Json.serializePretty(cleanedSObjects));
-        Blob requestBlob = Blob.valueOf(Json.serialize(cleanedSObjectDtos));
-        //Blob requestBlob = Blob.valueOf(Json.serializePretty(scope));
-String finReq = EncodingUtil.base64Encode(requestBlob);
-        
-        StaticResourceTemplate staticResource = new StaticResourceTemplate();
-        staticResource.Body         = finReq;//Json.serialize(scope);
-        staticResource.CacheControl = 'Private';
-        staticResource.ContentType  = 'application/json';//'application/json';
-        staticResource.Description  = 'Metadata Dictionary contents';
-        staticResource.Name         = STATIC_RESOURCE_PREFIX + '001';
-        
-        Id staticResourceId = existingStaticResourcesByName.get(staticResource.Name);
-        this.createStaticResource(Json.serialize(staticResource), staticResourceId);
     }
 
     public void finish(Database.BatchableContext batchableContext) {
-        
+
     }
 
-    private static String getChildRelationshipName(Schema.SObjectType parentSObjectType, Schema.SObjectType childSObjectType, Schema.SObjectField lookupField) {
-        String relationshipName;
-        for(Schema.ChildRelationship cr : Schema.MetadataSObject__c.SObjectType.getDescribe().getChildRelationships()) {
-            if(cr.getChildSObject() != childSObjectType) continue;
-            if(cr.getField() != lookupField) continue;
-
-            relationshipName = cr.getRelationshipName();
-        }
-        return relationshipName;
-    }
-    
     private String getQueryString() {
         String query = '';
 
@@ -121,26 +105,48 @@ String finReq = EncodingUtil.base64Encode(requestBlob);
     }
 
     private List<String> getFieldsToQuery(Schema.SObjectType sobjectType) {
-        Set<String> fields = new Set<String>();
-        fields.addAll(sobjectType.getDescribe().fields.getMap().keySet());
-        fields.removeAll(new List<String>{
-            'lastreferenceddate',
-            'lastvieweddate',
-            'nebula__metadatasobject__c',
-            'metadatasobject__c',
-            'ownerid',
-            'recordtypeid',
-            'systemmodstamp'
-        });
-       /* fields.addAll(new List<String>{
-            'createdby.email',
-            'createdby.name',
-            'lastmodifiedby.email',
-            'lastmodifiedby.name',
-            'recordtype.developername'
-        });*/
+        List<String> fields = new List<String>();
+        for(Schema.SObjectField field : sobjectType.getDescribe().fields.getMap().values()) {
+            //Skip any system fields
+            if(!field.getDescribe().isPermissionable() && !field.getDescribe().isNameField()) continue;
 
-        return new List<String>(fields);
+            fields.add(field.getDescribe().getName().toLowerCase());
+        }
+        fields.addAll(new List<String>{
+            'recordtype.developername'
+        });
+
+        return fields;
+    }
+
+    private static String getChildRelationshipName(Schema.SObjectType parentSObjectType, Schema.SObjectType childSObjectType, Schema.SObjectField lookupField) {
+        String relationshipName;
+        for(Schema.ChildRelationship cr : Schema.MetadataSObject__c.SObjectType.getDescribe().getChildRelationships()) {
+            if(cr.getChildSObject() != childSObjectType) continue;
+            if(cr.getField() != lookupField) continue;
+
+            relationshipName = cr.getRelationshipName();
+        }
+        return relationshipName;
+    }
+
+    private String generateStaticResourceName(MetadataSObject__c metadataSObject) {
+        String cleanedSObjectName = metadataSObject.Name
+            .replaceAll('[^a-zA-Z0-9_\\s+]', '')
+            .trim()
+            .replace(' ', '')
+            .replace('__', '_');
+
+        String staticResourceName = STATIC_RESOURCE_PREFIX + '_' + cleanedSObjectName;
+
+        /*if(staticResource.Name.lastIndexOf('_') == (staticResource.Name.length() - 1)) {
+            staticResource.Name = staticResource.Name.left(staticResource.Name.length());
+        }*/
+        return staticResourceName;
+    }
+    private Object removeUnusedAttributes(SObject record) {
+        // TODO use this to remove extra details from audit fields, record type, etc
+        return null;
     }
 
     private HttpResponse createStaticResource(String requestBody) {
@@ -148,33 +154,22 @@ String finReq = EncodingUtil.base64Encode(requestBlob);
     }
 
     private HttpResponse createStaticResource(String requestBody, Id staticResourceId) {
-System.debug('STATIC_RESOURCE_ENDPOINT=' + STATIC_RESOURCE_ENDPOINT);
-System.debug('staticResourceId=' + staticResourceId);
+        String calculatedEndpoint = STATIC_RESOURCE_ENDPOINT;
+        if(staticResourceId != null)  calculatedEndpoint += '/' + staticResourceId + '?_HttpMethod=PATCH';
+        System.debug('calculatedEndpoint=' + calculatedEndpoint);
+        System.debug('requestBody=' + requestBody);
 
-        System.debug('requestBody=');
-        System.debug(requestBody);
-
-Blob requestBlob = Blob.valueOf('test');
-String finReq = EncodingUtil.base64Encode(requestBlob);
         HttpRequest request = new HttpRequest();
+        request.setEndpoint(calculatedEndpoint);
         request.setHeader('Authorization', 'Bearer ' + UserInfo.getSessionId());
         request.setHeader('Content-Type', 'application/json');
-        
-String calculatedEndpoint = STATIC_RESOURCE_ENDPOINT;
-if(staticResourceId != null)  calculatedEndpoint += '/' + staticResourceId + '?_HttpMethod=PATCH';
-System.debug('calculatedEndpoint=' + calculatedEndpoint);
-        request.setEndpoint(calculatedEndpoint);
-        //request.setBody('test');
         request.setBody(requestBody);
-        //request.setBody(finReq);
-        //request.setMethod(staticResourceId == null ? 'POST' : 'PATCH');
         request.setMethod('POST');
-System.debug(request.getBody());
+
+        // Execute the callout & verify the response
         HttpResponse response = new Http().send(request);
-System.debug('response=');
-        System.debug(response);
-        
         System.assert(response.getStatusCode() < 300, 'Status code ' + response.getStatusCode() + ', Error: ' + response.getStatus());
+
         return response;
     }
 
