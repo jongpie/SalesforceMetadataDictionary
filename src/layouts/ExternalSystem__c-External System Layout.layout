@@ -21,10 +21,6 @@
                 <behavior>Edit</behavior>
                 <field>IsLegacy__c</field>
             </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
-                <field>UploadId__c</field>
-            </layoutItems>
         </layoutColumns>
         <style>TwoColumnsTopToBottom</style>
     </layoutSections>

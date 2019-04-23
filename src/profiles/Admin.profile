@@ -109,11 +109,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemField__c.UploadId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>ExternalSystemField__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -175,11 +170,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ExternalSystem__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>ExternalSystem__c.UploadId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

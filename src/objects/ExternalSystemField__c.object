@@ -337,21 +337,6 @@ SourceField__c</formula>
         </valueSet>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
@@ -372,7 +357,6 @@ SourceField__c</formula>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
@@ -403,7 +387,6 @@ SourceField__c</formula>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
         <columns>MappedSObject__c</columns>
-        <columns>UploadId__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
             <field>IsInScope__c</field>
@@ -482,7 +465,6 @@ SourceField__c</formula>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
@@ -498,7 +480,6 @@ SourceField__c</formula>
         <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
-        <columns>UploadId__c</columns>
         <columns>Status__c</columns>
         <filterScope>Everything</filterScope>
         <filters>
