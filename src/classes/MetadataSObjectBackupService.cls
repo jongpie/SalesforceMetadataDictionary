@@ -99,24 +99,27 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
         List<String> recordTypeFieldsToQuery = this.getFieldsToQuery(Schema.MetadataRecordType__c.SObjectType);
 
         query = 'SELECT ' + String.join(sobjectFieldsToQuery, ', ')
-                + ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')' // TODO replace with field token instead of hardcoded string
-                + ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')' // TODO replace with field token instead of hardcoded string
+                + ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
+                + ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
                 + ' FROM ' + Schema.MetadataSObject__c.SObjectType;
         System.debug('query=' + query);
         return query;
     }
 
     private List<String> getFieldsToQuery(Schema.SObjectType sobjectType) {
+        Map<String, Schema.SObjectField> allFieldsByApiName = sobjectType.getDescribe().fields.getMap();
+
         List<String> fields = new List<String>();
-        for(Schema.SObjectField field : sobjectType.getDescribe().fields.getMap().values()) {
+        for(Schema.SObjectField field : allFieldsByApiName.values()) {
             //Skip any system fields
             if(!field.getDescribe().isPermissionable() && !field.getDescribe().isNameField()) continue;
 
             fields.add(field.getDescribe().getName().toLowerCase());
         }
-        fields.addAll(new List<String>{
-            'RecordType.DeveloperName'.toLowerCase()
-        });
+
+        if(allFieldsByApiName.containsKey('recordtypeid')) {
+            fields.add('recordtype.developername');
+        }
 
         if(sobjectType == Schema.MetadataSObject__c.SObjectType) {
             fields.add('PrimaryMetadataSObject__r.Uuid__c'.toLowerCase());
