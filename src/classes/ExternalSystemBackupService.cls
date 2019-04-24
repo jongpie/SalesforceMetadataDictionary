@@ -125,8 +125,9 @@ public without sharing class ExternalSystemBackupService implements Database.All
         });*/
 
         if(sobjectType == Schema.ExternalSystemField__c.SObjectType) {
-            fields.add(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystem__c.Uuid__c);
-            fields.add(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystem__c.Uuid__c);
+            fields.add(Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystemInterface__c.Uuid__c);
+            fields.add(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataField__c.Uuid__c);
+            fields.add(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataSObject__c.Uuid__c);
         }
 
         return fields;
@@ -147,6 +148,9 @@ public without sharing class ExternalSystemBackupService implements Database.All
         // TODO use this to remove extra details from audit fields, record type, etc
         cleanedSObjectDto.remove('attributes');
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystem__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemInterface__c.ExternalSystem__c.getDescribe().getName());
         //cleanedSObjectDto.remove(Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
