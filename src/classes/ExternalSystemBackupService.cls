@@ -94,13 +94,13 @@ public without sharing class ExternalSystemBackupService implements Database.All
     private String getQueryString() {
         String query = '';
 
-        List<String> sobjectFieldsToQuery    = this.getFieldsToQuery(Schema.ExternalSystem__c.SObjectType);
-        List<String> fieldFieldsToQuery      = this.getFieldsToQuery(Schema.ExternalSystemField__c.SObjectType);
-        List<String> recordTypeFieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystemInterface__c.SObjectType);
+        List<String> externalSystemFieldsToQuery    = this.getFieldsToQuery(Schema.ExternalSystem__c.SObjectType);
+        List<String> externalSystemFieldFieldsToQuery      = this.getFieldsToQuery(Schema.ExternalSystemField__c.SObjectType);
+        List<String> externalSystemInterfaceFieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystemInterface__c.SObjectType);
 
-        query = 'SELECT ' + String.join(sobjectFieldsToQuery, ', ')
-                + ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')' // TODO replace with field token instead of hardcoded string
-                + ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')' // TODO replace with field token instead of hardcoded string
+        query = 'SELECT ' + String.join(externalSystemFieldsToQuery, ', ')
+                + ', (SELECT ' + String.join(externalSystemFieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
+                + ', (SELECT ' + String.join(externalSystemInterfaceFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
                 + ' FROM ' + Schema.ExternalSystem__c.SObjectType;
         System.debug('query=' + query);
         return query;
@@ -116,6 +116,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
 
             fields.add(field.getDescribe().getName().toLowerCase());
         }
+
         if(allFieldsByApiName.containsKey('recordtypeid')) {
             fields.add('recordtype.developername');
         }
