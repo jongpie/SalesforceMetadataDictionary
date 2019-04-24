@@ -25,6 +25,9 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
     public void execute(Database.BatchableContext batchableContext, List<MetadataSObject__c> scope) {
         System.debug('scope=' + scope);
 
+        Map<Id, List<MetadataField__c>> metadataFieldsByMetadataSObjectId           = this.queryChildRecords(scope, Schema.MetadataField__c.SObjectType, Schema.MetadataField__c.MetadataSObject__c);
+        Map<Id, List<MetadataRecordType__c>> metadataRecordTypesByMetadataSObjectId = this.queryChildRecords(scope, Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__c.MetadataSObject__c);
+System.debug('metadataFieldsByMetadataSObjectId=' + metadataFieldsByMetadataSObjectId);
         // Get any existing static resources so we can update them
         Map<String, Id> existingStaticResourceIdsByName = new Map<String, Id>();
         for(StaticResource staticResource : [SELECT Id, Name FROM StaticResource WHERE Name LIKE :STATIC_RESOURCE_PREFIX + '%']) {
@@ -36,9 +39,11 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
             Map<String, Object> cleanedSObjectDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedSObject));
 
             // Cleanup the fields before serialization
-            if(!metadataSObject.MetadataFields__r.isEmpty()) {
+            if(metadataFieldsByMetadataSObjectId.containsKey(metadataSObject.Id)) {
+            //if(!metadataSObject.MetadataFields__r.isEmpty()) {
                 List<MetadataField__c> cleanedFields = new List<MetadataField__c>();
-                for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
+                for(MetadataField__c metadataField : metadataFieldsByMetadataSObjectId.get(metadataSObject.Id)) {
+                //for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
                     MetadataField__c cleanedField = metadataField.clone(false, true, false, false);
                     cleanedField.MetadataSObject__c = null;
 
@@ -49,14 +54,25 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
 
                     cleanedFields.add(cleanedField);
                 }
-                Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
-                fields.put('records', cleanedFields);
+                //Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
+                //fields.put('records', cleanedFields);
+                //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, childFields);
+                Map<String, Object> fieldsDto = new Map<String, Object>();
+                fieldsDto.put('records', cleanedFields);
+                fieldsDto.put('totalSize', cleanedFields.size());
+                fieldsDto.put('done', true);
+                fieldsDto = this.removeUnusedAttributes(fieldsDto);
+
+                cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, fieldsDto);
             }
+System.debug('cleanedSObjectDto fields=' + cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME));
 
             // Cleanup the record types before serialization
-            if(!metadataSObject.MetadataRecordTypes__r.isEmpty()) {
+            if(metadataRecordTypesByMetadataSObjectId.containsKey(metadataSObject.Id)) {
+            //if(!metadataSObject.MetadataRecordTypes__r.isEmpty()) {
                 List<MetadataRecordType__c> cleanedRecordTypes = new List<MetadataRecordType__c>();
-                for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
+                for(MetadataRecordType__c metadataRecordType : metadataRecordTypesByMetadataSObjectId.get(metadataSObject.Id)) {
+                //for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
                     MetadataRecordType__c cleanedRecordType = metadataRecordType.clone(false, true, false, false);
                     cleanedRecordType.MetadataSObject__c = null;
 
@@ -67,9 +83,15 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
 
                     cleanedRecordTypes.add(cleanedRecordType);
                 }
-                Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
-                recordTypes.put('records', cleanedRecordTypes);
+                Map<String, Object> recordTypesDto = new Map<String, Object>();
+                recordTypesDto.put('records', cleanedRecordTypes);
+                recordTypesDto.put('totalSize', cleanedRecordTypes.size());
+                recordTypesDto.put('done', true);
+                recordTypesDto = this.removeUnusedAttributes(recordTypesDto);
+
+                cleanedSObjectDto.put(RECORD_TYPES_CHILD_RELATIONSHIP_NAME, recordTypesDto);
             }
+System.debug('cleanedSObjectDto rec type=' + cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME));
 
             cleanedSObjectDto = this.removeUnusedAttributes(cleanedSObjectDto);
 
@@ -99,8 +121,8 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
         List<String> recordTypeFieldsToQuery = this.getFieldsToQuery(Schema.MetadataRecordType__c.SObjectType);
 
         query = 'SELECT ' + String.join(sobjectFieldsToQuery, ', ')
-                + ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
-                + ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
+                //+ ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
+                //+ ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
                 + ' FROM ' + Schema.MetadataSObject__c.SObjectType;
         System.debug('query=' + query);
         return query;
@@ -117,6 +139,8 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
             fields.add(field.getDescribe().getName().toLowerCase());
         }
 
+        fields.add('Id');
+
         if(allFieldsByApiName.containsKey('recordtypeid')) {
             fields.add('recordtype.developername');
         }
@@ -125,7 +149,43 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
             fields.add('PrimaryMetadataSObject__r.Uuid__c'.toLowerCase());
         }
 
+        if(sobjectType == Schema.MetadataField__c.SObjectType) {
+            fields.add(Schema.MetadataField__c.MetadataSObject__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataSObject__c.Uuid__c.getDescribe().getName());
+        }
+
+        if(sobjectType == Schema.MetadataRecordType__c.SObjectType) {
+            fields.add(Schema.MetadataRecordType__c.MetadataSObject__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataSObject__c.Uuid__c.getDescribe().getName());
+        }
+
         return fields;
+    }
+
+    private Map<Id, List<SObject>> queryChildRecords(List<SObject> parentRecords, Schema.SObjectType childObject, Schema.SObjectField referenceField) {
+        /*for(String f : this.getFieldsToQuery(childObject)) {
+            System.debug(f);
+        }*/
+        for(SObject parentRecord : parentRecords) {system.debug('parent rec id=' + parentRecord.Id);}
+        String referenceFieldName = referenceField.getDescribe().getName();
+        String query = 'SELECT ' + String.join(this.getFieldsToQuery(childObject), ', ')
+            + ' FROM ' + childObject
+            + ' WHERE ' + referenceFieldName + ' IN :parentRecords';
+        //List<SObject> results = Database.query(query);
+System.debug('referenceFieldName=' + referenceFieldName);
+System.debug('parentRecords=' + parentRecords);
+System.debug('child query=' + query);
+        Map<Id, List<SObject>> childRecordsByParentId = new Map<Id, List<SObject>>();
+        for(SObject record : Database.query(query)) {
+            String parentId = (String)record.get(referenceFieldName);
+
+            if(!childRecordsByParentId.containsKey(parentId)) childRecordsByParentId.put(parentId, new List<SObject>());
+
+            List<SObject> childRecords = childRecordsByParentId.get(parentId);
+            childRecords.add(record);
+
+            childRecordsByParentId.put(parentId, childRecords);
+        }
+
+        return childRecordsByParentId;
     }
 
     private static String getChildRelationshipName(Schema.SObjectType parentSObjectType, Schema.SObjectType childSObjectType, Schema.SObjectField lookupField) {
@@ -145,6 +205,7 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
         cleanedSObjectDto.remove(Schema.MetadataField__c.MetadataSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.MetadataRecordType__c.MetadataSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.MetadataSObject__c.PrimaryMetadataSObject__c.getDescribe().getName());
+        cleanedSObjectDto.remove('Id');
         cleanedSObjectDto.remove('RecordTypeId');
 
         String primarySObjectRelationshipName = Schema.MetadataSObject__c.PrimaryMetadataSObject__c.getDescribe().getRelationshipName();
@@ -154,6 +215,24 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
             primarySObjectDto.remove('Id');
 
             cleanedSObjectDto.put(primarySObjectRelationshipName, primarySObjectDto);
+        }
+
+        String metadataSObjectRelationshipNameForField = Schema.MetadataField__c.MetadataSObject__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(metadataSObjectRelationshipNameForField)) {
+            Map<String, Object> parentMetadataSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(metadataSObjectRelationshipNameForField);
+            parentMetadataSObjectDto.remove('attributes');
+            parentMetadataSObjectDto.remove('Id');
+
+            cleanedSObjectDto.put(metadataSObjectRelationshipNameForField, parentMetadataSObjectDto);
+        }
+
+        String metadataSObjectRelationshipNameForRecordType = Schema.MetadataRecordType__c.MetadataSObject__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(metadataSObjectRelationshipNameForRecordType)) {
+            Map<String, Object> parentMetadataSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(metadataSObjectRelationshipNameForRecordType);
+            parentMetadataSObjectDto.remove('attributes');
+            parentMetadataSObjectDto.remove('Id');
+
+            cleanedSObjectDto.put(metadataSObjectRelationshipNameForRecordType, parentMetadataSObjectDto);
         }
 
         if(cleanedSObjectDto.containsKey('RecordType')) {
