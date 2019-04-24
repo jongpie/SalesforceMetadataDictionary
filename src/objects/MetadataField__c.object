@@ -92,15 +92,15 @@ IF(
 )
 +
 IF(
-     IsNillable__c,
+     AND(IsNillable__c, IsCalculated__c = false),
      &apos;&apos;,
      &apos;Required &apos;
 )
 +
 IF(
      IsCalculated__c,
-     &apos;&apos;,
-     &apos;Formula &apos;
+     &apos;Formula &apos;,
+     &apos;&apos;
 )
 +
 CASE(
