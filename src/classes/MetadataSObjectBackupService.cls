@@ -4,18 +4,6 @@
 *****************************************************************************************************************/
 public without sharing class MetadataSObjectBackupService implements Database.AllowsCallouts, Database.Batchable<SObject> {
 
-
-/*
-
-For later importing...
-
-StaticResource sr = [select id, body from StaticResource where name like 'MetadataDictionary001%'];
-String statResBody = sr.body.toString();
-System.debug(statResBody);
-List<MetadataSObject__c> records = (List<MetadataSObject__c>)Json.deserialize(statResBody, List<MetadataSObject__c>.class);
-System.debug(records);
-
-*/
     private static final String STATIC_RESOURCE_PREFIX   = 'MetadataDictionary';
     private static final String STATIC_RESOURCE_ENDPOINT = System.Url.getSalesforceBaseUrl().toExternalForm() + '/services/data/v45.0/sobjects/StaticResource';
 
@@ -92,7 +80,6 @@ System.debug(records);
             staticResource.CacheControl = 'Private';
             staticResource.ContentType  = 'application/json';
             staticResource.Description  = 'Metadata Dictionary: ' + metadataSObject.Name;
-            //staticResource.Name         = this.generateStaticResourceName(metadataSObject);
             staticResource.Name         = STATIC_RESOURCE_PREFIX + '_' + metadataSObject.Uuid__c.replace('-', '_');
 
             Id staticResourceId = existingStaticResourceIdsByName.get(staticResource.Name);
@@ -149,24 +136,6 @@ System.debug(records);
         return relationshipName;
     }
 
-    private String generateStaticResourceName(MetadataSObject__c metadataSObject) {
-        String cleanedSObjectName = metadataSObject.Name
-            .replaceAll('[^a-zA-Z0-9_\\s+]', '')
-            .trim()
-            .replace(' ', '')
-            .replace('__', '_');
-
-        String staticResourceName = STATIC_RESOURCE_PREFIX + '_' + cleanedSObjectName;
-
-        /*if(staticResource.Name.lastIndexOf('_') == (staticResource.Name.length() - 1)) {
-            staticResource.Name = staticResource.Name.left(staticResource.Name.length());
-        }*/
-        return staticResourceName;
-    }
-
-    //private Object removeUnusedAttributes(SObject record) {
-        //Map<String, Object> recordDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(record));
-
     private Map<String, Object> removeUnusedAttributes(Map<String, Object> cleanedSObjectDto) {
         // TODO use this to remove extra details from audit fields, record type, etc
         cleanedSObjectDto.remove('attributes');
@@ -192,7 +161,6 @@ System.debug(records);
             cleanedSObjectDto.put('RecordType', recordTypeDto);
         }
 
-        //record = (SObject)Json.deserialize(Json.serialize(recordDto), SObject.class);
         return cleanedSObjectDto;
     }
 
