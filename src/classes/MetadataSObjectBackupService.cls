@@ -79,7 +79,7 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
             staticResource.Body         = EncodingUtil.base64Encode(requestBlob);//finReq;//Json.serialize(scope);
             staticResource.CacheControl = 'Private';
             staticResource.ContentType  = 'application/json';
-            staticResource.Description  = 'Metadata Dictionary: ' + metadataSObject.Name;
+            staticResource.Description  = 'Metadata Dictionary - SObject - ' + metadataSObject.Name;
             staticResource.Name         = STATIC_RESOURCE_PREFIX + '_' + metadataSObject.Uuid__c.replace('-', '_');
 
             Id staticResourceId = existingStaticResourceIdsByName.get(staticResource.Name);
