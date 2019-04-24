@@ -155,6 +155,15 @@ public without sharing class ExternalSystemBackupService implements Database.All
         //cleanedSObjectDto.remove(Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
 
+        String interfaceRelationshipName = Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(interfaceRelationshipName)) {
+            Map<String, Object> mappedSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(interfaceRelationshipName);
+            mappedSObjectDto.remove('attributes');
+            mappedSObjectDto.remove('Id');
+
+            cleanedSObjectDto.put(interfaceRelationshipName, mappedSObjectDto);
+        }
+
         String mappedSObjectRelationshipName = Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName();
         if(cleanedSObjectDto.containsKey(mappedSObjectRelationshipName)) {
             Map<String, Object> mappedSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(mappedSObjectRelationshipName);
