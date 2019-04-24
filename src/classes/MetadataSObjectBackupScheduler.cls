@@ -17,7 +17,7 @@ public without sharing class MetadataSObjectBackupScheduler implements System.Sc
     }
 
     public static void scheduleHourly(Integer startingMinuteInHour, String jobName) {
-        //System.schedule(jobName, '0 ' + startingMinuteInHour + ' * * * ?', new MetadataSObjectAnalysisBackupScheduler());
+        System.schedule(jobName, '0 ' + startingMinuteInHour + ' * * * ?', new MetadataSObjectBackupScheduler());
     }
 
     public void execute(SchedulableContext sc) {
@@ -27,7 +27,7 @@ public without sharing class MetadataSObjectBackupScheduler implements System.Sc
         if(this.getNumberOfRunningBatchJobs() >= 5) return;
 
         Integer batchSize = Limits.getLimitCallouts();
-        //Database.executebatch(new MetadataSObjectAnalysisBackupService(), batchSize);
+        Database.executebatch(new MetadataSObjectBackupService(), batchSize);
     }
 
     private Integer getNumberOfRunningBatchJobs() {
