@@ -9,12 +9,12 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
 
     private static final Set<Schema.SObjectType> IGNORED_SOBJECT_TYPES = new Set<Schema.SObjectType>{
         // Custom objects used by this app
-        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType, Schema.ExternalSystem__History.SObjectType,
-        Schema.ExternalSystemInterface__c.SObjectType, Schema.ExternalSystemInterface__ChangeEvent.SObjectType, Schema.ExternalSystemInterface__History.SObjectType,
-        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType, Schema.ExternalSystemField__History.SObjectType,
-        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType, Schema.MetadataField__History.SObjectType,
-        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType, Schema.MetadataRecordType__History.SObjectType,
-        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType, Schema.MetadataSObject__History.SObjectType,
+        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType, Schema.ExternalSystem__Feed.SObjectType,Schema.ExternalSystem__History.SObjectType,
+        Schema.ExternalSystemInterface__c.SObjectType, Schema.ExternalSystemInterface__ChangeEvent.SObjectType, Schema.ExternalSystemInterface__Feed.SObjectType,Schema.ExternalSystemInterface__History.SObjectType,
+        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType, Schema.ExternalSystemField__Feed.SObjectType,Schema.ExternalSystemField__History.SObjectType,
+        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType, Schema.MetadataField__Feed.SObjectType,Schema.MetadataField__History.SObjectType,
+        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType, Schema.MetadataRecordType__Feed.SObjectType,Schema.MetadataRecordType__History.SObjectType,
+        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType, Schema.MetadataSObject__Feed.SObjectType,Schema.MetadataSObject__History.SObjectType,
         // Standard objects that aren't currently helpful to document
         Schema.ApexClass.SObjectType, Schema.ApexComponent.SObjectType, Schema.ApexEmailNotification.SObjectType,
         Schema.ApexLog.SObjectType, Schema.ApexPage.SObjectType, Schema.ApexPageInfo.SObjectType,
