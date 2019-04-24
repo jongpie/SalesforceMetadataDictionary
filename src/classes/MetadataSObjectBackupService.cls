@@ -2,7 +2,7 @@
 * This file is part of the Metadata Dictionary project for Salesforce, released under the MIT License.           *
 * See LICENSE file or go to https://github.com/jongpie/SalesforceMetadataDictionary for full license details.    *
 *****************************************************************************************************************/
-public without sharing class MetadataSObjectAnalysisBackupService implements Database.AllowsCallouts, Database.Batchable<SObject> {
+public without sharing class MetadataSObjectBackupService implements Database.AllowsCallouts, Database.Batchable<SObject> {
 
 
 /*
