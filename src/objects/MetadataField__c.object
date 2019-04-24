@@ -92,9 +92,9 @@ IF(
 )
 +
 IF(
-     AND(IsNillable__c, IsCalculated__c = false),
-     &apos;&apos;,
-     &apos;Required &apos;
+     AND(IsNillable__c = false, IsCalculated__c = false, ISPICKVAL(Type__c, &apos;Boolean&apos;) = false),
+     &apos;Required &apos;,
+     &apos;&apos;
 )
 +
 IF(
