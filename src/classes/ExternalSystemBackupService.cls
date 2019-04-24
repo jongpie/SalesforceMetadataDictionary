@@ -124,9 +124,10 @@ public without sharing class ExternalSystemBackupService implements Database.All
             'RecordType.DeveloperName'.toLowerCase()
         });*/
 
-  /*      if(sobjectType == Schema.ExternalSystem__c.SObjectType) {
-            fields.add('PrimaryMetadataSObject__r.Uuid__c'.toLowerCase());
-        }*/
+        if(sobjectType == Schema.ExternalSystemField__c.SObjectType) {
+            fields.add(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystem__c.Uuid__c);
+            fields.add(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystem__c.Uuid__c);
+        }
 
         return fields;
     }
@@ -150,14 +151,23 @@ public without sharing class ExternalSystemBackupService implements Database.All
         //cleanedSObjectDto.remove(Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
 
-        /*String primarySObjectRelationshipName = Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getRelationshipName();
-        if(cleanedSObjectDto.containsKey(primarySObjectRelationshipName)) {
-            Map<String, Object> primarySObjectDto = (Map<String, Object>)cleanedSObjectDto.get(primarySObjectRelationshipName);
-            primarySObjectDto.remove('attributes');
-            primarySObjectDto.remove('Id');
+        String mappedSObjectRelationshipName = Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(mappedSObjectRelationshipName)) {
+            Map<String, Object> mappedSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(mappedSObjectRelationshipName);
+            mappedSObjectDto.remove('attributes');
+            mappedSObjectDto.remove('Id');
 
-            cleanedSObjectDto.put(primarySObjectRelationshipName, primarySObjectDto);
-        }*/
+            cleanedSObjectDto.put(mappedSObjectRelationshipName, mappedSObjectDto);
+        }
+
+        String mappedFieldRelationshipName = Schema.ExternalSystemField__c.MappedField__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(mappedFieldRelationshipName)) {
+            Map<String, Object> mappedFieldDto = (Map<String, Object>)cleanedSObjectDto.get(mappedFieldRelationshipName);
+            mappedFieldDto.remove('attributes');
+            mappedFieldDto.remove('Id');
+
+            cleanedSObjectDto.put(mappedFieldRelationshipName, mappedFieldDto);
+        }
 
 /*        if(cleanedSObjectDto.containsKey(Schema.ExternalSystemField.ExternalSystem__c.getDescribe().getRelationshipName()) || cleanedSObjectDto.containsKey(Schema.ExternalSystemInterface__c.ExternalSystem__c.getDescribe().getRelationshipName())) {
             Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
