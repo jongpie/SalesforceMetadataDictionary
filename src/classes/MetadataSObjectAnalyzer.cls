@@ -244,6 +244,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             .replace('__ChangeEvent', '') // Standard platform events
             .replace('__Feed', '')        // Chatter feed
             .replace('__History', '')     // History object
+            .replace('__Share', '')       // Share object
             .indexOf('__');               // Now we can determine if there is a namespace
 
         return localNameIndex < 0 ? null : fullApiName.substring(0, localNameIndex);
@@ -257,10 +258,12 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         if(parentSObjectDeveloperName.endsWith('__ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__ChangeEvent', '__c');
         if(parentSObjectDeveloperName.endsWith('__Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__Feed', '__c');
         if(parentSObjectDeveloperName.endsWith('__History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__History', '__c');
+        if(parentSObjectDeveloperName.endsWith('__Share')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__Share', '__c');
 
         if(parentSObjectDeveloperName.endsWith('ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('ChangeEvent', '');
         if(parentSObjectDeveloperName.endsWith('Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('Feed', '');
         if(parentSObjectDeveloperName.endsWith('History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('History', '');
+        if(parentSObjectDeveloperName.endsWith('Share')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('Share', '');
 
         return parentSObjectDeveloperName;
     }
