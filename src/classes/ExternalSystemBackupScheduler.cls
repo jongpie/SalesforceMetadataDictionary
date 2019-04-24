@@ -13,7 +13,7 @@ public without sharing class ExternalSystemBackupScheduler implements System.Sch
     public static void scheduleHourly(Integer startingMinuteInHour) {
         String minuteString = String.valueOf(startingMinuteInHour);
         minuteString = minuteString.leftPad(2, '0');
-        scheduleHourly(startingMinuteInHour, 'Metadata SObject Backup: Every Hour at ' + minuteString);
+        scheduleHourly(startingMinuteInHour, 'External System Backup: Every Hour at ' + minuteString);
     }
 
     public static void scheduleHourly(Integer startingMinuteInHour, String jobName) {
