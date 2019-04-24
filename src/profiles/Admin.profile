@@ -6,6 +6,10 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>MetadataSObjectAnalysisBackupScheduler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MetadataSObjectAnalysisBackupService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
