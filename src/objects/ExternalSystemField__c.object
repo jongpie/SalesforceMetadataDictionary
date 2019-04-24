@@ -127,7 +127,8 @@
         <externalId>false</externalId>
         <label>External System</label>
         <referenceTo>ExternalSystem__c</referenceTo>
-        <relationshipName>FieldDependencies</relationshipName>
+        <relationshipLabel>External System Fields</relationshipLabel>
+        <relationshipName>ExternalSystemFields</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>false</reparentableMasterDetail>
         <trackFeedHistory>true</trackFeedHistory>
