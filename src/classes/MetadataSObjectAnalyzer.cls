@@ -117,9 +117,9 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     public Iterable<Schema.SObjectType> start(Database.BatchableContext batchableContext) {
         List<Schema.SObjectType> sobjectTypesToProcess = new List<Schema.SObjectType>();
         for(Schema.SObjectType sobjectType : Schema.getGlobalDescribe().values()) {
-            String sobjectApiName = sobjectType.getDescribe().getName();
+            String sobjectDeveloperName = sobjectType.getDescribe().getName();
 
-            if(this.getIgnoredSObjectApiNames().contains(sobjectApiName)) continue;
+            if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName)) continue;
             //if(IGNORED_SOBJECT_TYPES.contains(sobjectType)) continue;
             else sobjectTypesToProcess.add(sobjectType);
         }
@@ -127,7 +127,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     }
 
     public void execute(Database.BatchableContext batchableContext, List<Schema.SObjectType> scope) {
-        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = this.getExistingSObjectTypesByApiName();
+        Map<String, MetadataSObject__c> existingSObjectTypesByDeveloperName = this.getExistingSObjectTypesByDeveloperName();
 
         List<MetadataSObject__c> metadataSObjects                = new List<MetadataSObject__c>();
         List<MetadataSObject__c> metadataPlatformFeatureSObjects = new List<MetadataSObject__c>();
@@ -137,7 +137,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         for(SObjectType sobjectType : scope) {
             Schema.DescribeSObjectResult sobjectDescribe = sobjectType.getDescribe();
 
-            MetadataSObject__c existingMetadataSObject = existingSObjectTypesByApiName.get(sobjectDescribe.getName());
+            MetadataSObject__c existingMetadataSObject = existingSObjectTypesByDeveloperName.get(sobjectDescribe.getName());
 
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
             if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
@@ -228,8 +228,8 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
 
     public void finish(Database.BatchableContext batchableContext) {}
 
-    private Set<String> getIgnoredSObjectApiNames() {
-        Set<String> ignoredSObjectApiNames = new Set<String>{
+    private Set<String> getIgnoredSObjectDeveloperNames() {
+        Set<String> ignoredSObjectDeveloperNames = new Set<String>{
             'Aggregateresult', 'ApexClass', 'ApexComponent', 'ApexEmailNotification', 'ApexLog', 'ApexPage', 'ApexPageInfo', 'ApexTestQueueItem', 'ApexTestResult',
             'ApexTestResultLimits', 'ApexTestRunResult', 'ApexTestSuite', 'ApexTrigger', 'AppDefinition', 'AppMenuItem', 'AppTabMember', 'AsyncApexJob', 'AuraDefinition',
             'AuraDefinitionBundle', 'AuraDefinitionBundleInfo', 'AuraDefinitionInfo', 'AuthConfig', 'AuthConfigProviders', 'AuthProvider', 'AuthSession',
@@ -253,23 +253,23 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         };
         List<String> suffixes = new List<String>{'ChangeEvent', 'Feed', 'History', 'Share'};
         for(Schema.SObjectType appSObjectType : appSObjectTypes) {
-            String baseSObjectApiName = appSObjectType.getDescribe().getName();
-            ignoredSObjectApiNames.add(baseSObjectApiName);
+            String baseSObjectDeveloperName = appSObjectType.getDescribe().getName();
+            ignoredSObjectDeveloperNames.add(baseSObjectDeveloperName);
 
             for(String suffix : suffixes) {
-                ignoredSObjectApiNames.add(baseSObjectApiName.replace('__c', suffix));
+                ignoredSObjectDeveloperNames.add(baseSObjectDeveloperName.replace('__c', suffix));
             }
         }
 
-        return ignoredSObjectApiNames;
+        return ignoredSObjectDeveloperNames;
     }
 
-    private Map<String, MetadataSObject__c> getExistingSObjectTypesByApiName() {
-        Map<String, MetadataSObject__c> existingSObjectTypesByApiName = new Map<String, MetadataSObject__c>();
+    private Map<String, MetadataSObject__c> getExistingSObjectTypesByDeveloperName() {
+        Map<String, MetadataSObject__c> existingSObjectTypesByDeveloperName = new Map<String, MetadataSObject__c>();
         for(MetadataSObject__c metadataSObject : [SELECT Id, Name, DeveloperName__c, SystemHashCode__c, IsInScope__c FROM MetadataSObject__c]) {
-            existingSObjectTypesByApiName.put(metadataSObject.DeveloperName__c, metadataSObject);
+            existingSObjectTypesByDeveloperName.put(metadataSObject.DeveloperName__c, metadataSObject);
         }
-        return existingSObjectTypesByApiName;
+        return existingSObjectTypesByDeveloperName;
     }
 
     private Id getRecordTypeId(Schema.SObjectType sobjectType, String recordTypeDeveloperName) {
@@ -288,8 +288,8 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return this.getNamespace(recordTypeInfo.getDeveloperName());
     }
 
-    private String getNamespace(String fullApiName) {
-        Integer localNameIndex = fullApiName
+    private String getNamespace(String fullDeveloperName) {
+        Integer localNameIndex = fullDeveloperName
             .replace('__c', '')           // Custom objects & custom settings
             .replace('__e', '')           // Custom platform events
             .replace('__mdt', '')         // Custom metadata types
@@ -299,7 +299,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             .replace('__Share', '')       // Share object
             .indexOf('__');               // Now we can determine if there is a namespace
 
-        return localNameIndex < 0 ? null : fullApiName.substring(0, localNameIndex);
+        return localNameIndex < 0 ? null : fullDeveloperName.substring(0, localNameIndex);
     }
 
 
