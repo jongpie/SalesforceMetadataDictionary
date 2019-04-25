@@ -10,9 +10,9 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     public Iterable<Schema.SObjectType> start(Database.BatchableContext batchableContext) {
         List<Schema.SObjectType> sobjectTypesToProcess = new List<Schema.SObjectType>();
         for(Schema.SObjectType sobjectType : Schema.getGlobalDescribe().values()) {
-            String sobjectDeveloperName = sobjectType.getDescribe().getName();
+            String sobjectDeveloperName = sobjectType.getDescribe().getName().toLowerCase();
 
-            if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName.toLowerCase())) continue;
+            if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName)) continue;
             else sobjectTypesToProcess.add(sobjectType);
         }
         return sobjectTypesToProcess;
@@ -34,6 +34,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
             if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
 
+            // Convert the sobject
             MetadataSObject__c metadataSObject = this.convert(sobjectDescribe);
 
             if(metadataSObject.IsPlatformFeatureObject__c) metadataPlatformFeatureSObjects.add(metadataSObject);
@@ -44,6 +45,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
                 metadataSObject.LastMetadataChangeDate__c = System.now();
             }
 
+            // Convert any record types
             for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
                 if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
 
@@ -51,6 +53,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
                 metadataRecordTypes.add(convertedRecordType);
             }
 
+            // Convert any fields
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
                 MetadataField__c convertedField = this.convert(sobjectDescribe, field.getDescribe());
                 metadataFields.add(convertedField);
@@ -95,7 +98,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             ignoredSObjectDeveloperNames.add(baseSObjectDeveloperName);
 
             for(String suffix : suffixes) {
-                ignoredSObjectDeveloperNames.add(baseSObjectDeveloperName.replace('__c', suffix));
+                ignoredSObjectDeveloperNames.add(baseSObjectDeveloperName.replace('__c', '__' + suffix));
             }
         }
 
@@ -221,26 +224,32 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     }
 
     private String getPrimarySObjectDeveloperName(Schema.DescribeSObjectResult sobjectDescribe) {
-        String primarySObjectSuffix = sobjectDescribe.isCustom() ? '__c' : '';
-        String separator            = sobjectDescribe.isCustom() ? '__' : '';
+        String customSeparator = '__';
 
         List<String> platformFeatureSObjectSuffixes = new List<String>{'ChangeEvent', 'Feed', 'History', 'Share'};
 
-        String parentSObjectDeveloperName;
+        String primarySObjectDeveloperName;
         for(String platformFeatureSObjectSuffix : platformFeatureSObjectSuffixes) {
-            if(!sobjectDescribe.getName().endsWith(separator + platformFeatureSObjectSuffix)) continue;
-
             String currentSObjectDeveloperName = sobjectDescribe.getName();
-            parentSObjectDeveloperName = currentSObjectDeveloperName.replace(separator + platformFeatureSObjectSuffix, separator + primarySObjectSuffix);
+
+            Boolean primaryIsCustom;
+            if(currentSObjectDeveloperName.endsWith(customSeparator + platformFeatureSObjectSuffix)) primaryIsCustom = true;
+            else if(currentSObjectDeveloperName.endsWith(platformFeatureSObjectSuffix)) primaryIsCustom = false;
+            else continue;
+
+            String primarySObjectSuffix = primaryIsCustom ? '__c' : '';
+            String separator = primaryIsCustom ? customSeparator : '';
+
+            primarySObjectDeveloperName = currentSObjectDeveloperName.replace(separator + platformFeatureSObjectSuffix, primarySObjectSuffix);
             break;
         }
 
-        // ActivityHistory is a platform feature without a parent sobject
-        if(sobjectDescribe.getSObjectType() == Schema.ActivityHistory.SObjectType) parentSObjectDeveloperName = null;
+        // ActivityHistory is a platform feature without a primary sobject
+        if(sobjectDescribe.getSObjectType() == Schema.ActivityHistory.SObjectType) primarySObjectDeveloperName = null;
         // OpportunityFieldHistory doesn't follow Salesforce's standard naming convention since OpportunityHistory also exists
-        if(sobjectDescribe.getSObjectType() == Schema.OpportunityFieldHistory.SObjectType) parentSObjectDeveloperName = Schema.Opportunity.SObjectType.getDescribe().getName();
-
-        return parentSObjectDeveloperName;
+        if(sobjectDescribe.getSObjectType() == Schema.OpportunityFieldHistory.SObjectType) primarySObjectDeveloperName = Schema.Opportunity.SObjectType.getDescribe().getName();
+System.debug('primarySObjectDeveloperName=' + primarySObjectDeveloperName);
+        return primarySObjectDeveloperName;
     }
 
     private String getReferenceToValueString(Schema.DescribeFieldResult fieldDescribe) {
