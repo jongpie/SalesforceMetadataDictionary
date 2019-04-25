@@ -87,9 +87,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
         }
     }
 
-    public void finish(Database.BatchableContext batchableContext) {
-
-    }
+    public void finish(Database.BatchableContext batchableContext) {}
 
     private String getQueryString() {
         String query = '';

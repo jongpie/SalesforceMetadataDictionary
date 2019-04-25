@@ -19,15 +19,13 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
     }
 
     public List<MetadataSObject__c> start(Database.BatchableContext batchableContext) {
-        return Database.query(this.getQueryString());
+        return Database.query(this.getMetadataSObjectQueryString());
     }
 
     public void execute(Database.BatchableContext batchableContext, List<MetadataSObject__c> scope) {
-        System.debug('scope=' + scope);
-
         Map<Id, List<MetadataField__c>> metadataFieldsByMetadataSObjectId           = this.queryChildRecords(scope, Schema.MetadataField__c.SObjectType, Schema.MetadataField__c.MetadataSObject__c);
         Map<Id, List<MetadataRecordType__c>> metadataRecordTypesByMetadataSObjectId = this.queryChildRecords(scope, Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__c.MetadataSObject__c);
-System.debug('metadataFieldsByMetadataSObjectId=' + metadataFieldsByMetadataSObjectId);
+
         // Get any existing static resources so we can update them
         Map<String, Id> existingStaticResourceIdsByName = new Map<String, Id>();
         for(StaticResource staticResource : [SELECT Id, Name FROM StaticResource WHERE Name LIKE :STATIC_RESOURCE_PREFIX + '%']) {
@@ -40,10 +38,8 @@ System.debug('metadataFieldsByMetadataSObjectId=' + metadataFieldsByMetadataSObj
 
             // Cleanup the fields before serialization
             if(metadataFieldsByMetadataSObjectId.containsKey(metadataSObject.Id)) {
-            //if(!metadataSObject.MetadataFields__r.isEmpty()) {
                 List<MetadataField__c> cleanedFields = new List<MetadataField__c>();
                 for(MetadataField__c metadataField : metadataFieldsByMetadataSObjectId.get(metadataSObject.Id)) {
-                //for(MetadataField__c metadataField : metadataSObject.MetadataFields__r) {
                     MetadataField__c cleanedField = metadataField.clone(false, true, false, false);
                     cleanedField.MetadataSObject__c = null;
 
@@ -54,9 +50,7 @@ System.debug('metadataFieldsByMetadataSObjectId=' + metadataFieldsByMetadataSObj
 
                     cleanedFields.add(cleanedField);
                 }
-                //Map<String, Object> fields = (Map<String, Object>)cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
-                //fields.put('records', cleanedFields);
-                //cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, childFields);
+
                 Map<String, Object> fieldsDto = new Map<String, Object>();
                 fieldsDto.put('records', cleanedFields);
                 fieldsDto.put('totalSize', cleanedFields.size());
@@ -65,14 +59,11 @@ System.debug('metadataFieldsByMetadataSObjectId=' + metadataFieldsByMetadataSObj
 
                 cleanedSObjectDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, fieldsDto);
             }
-System.debug('cleanedSObjectDto fields=' + cleanedSObjectDto.get(FIELDS_CHILD_RELATIONSHIP_NAME));
 
             // Cleanup the record types before serialization
             if(metadataRecordTypesByMetadataSObjectId.containsKey(metadataSObject.Id)) {
-            //if(!metadataSObject.MetadataRecordTypes__r.isEmpty()) {
                 List<MetadataRecordType__c> cleanedRecordTypes = new List<MetadataRecordType__c>();
                 for(MetadataRecordType__c metadataRecordType : metadataRecordTypesByMetadataSObjectId.get(metadataSObject.Id)) {
-                //for(MetadataRecordType__c metadataRecordType : metadataSObject.MetadataRecordTypes__r) {
                     MetadataRecordType__c cleanedRecordType = metadataRecordType.clone(false, true, false, false);
                     cleanedRecordType.MetadataSObject__c = null;
 
@@ -91,7 +82,6 @@ System.debug('cleanedSObjectDto fields=' + cleanedSObjectDto.get(FIELDS_CHILD_RE
 
                 cleanedSObjectDto.put(RECORD_TYPES_CHILD_RELATIONSHIP_NAME, recordTypesDto);
             }
-System.debug('cleanedSObjectDto rec type=' + cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME));
 
             cleanedSObjectDto = this.removeUnusedAttributes(cleanedSObjectDto);
 
@@ -109,23 +99,12 @@ System.debug('cleanedSObjectDto rec type=' + cleanedSObjectDto.get(RECORD_TYPES_
         }
     }
 
-    public void finish(Database.BatchableContext batchableContext) {
+    public void finish(Database.BatchableContext batchableContext) {}
 
-    }
+    private String getMetadataSObjectQueryString() {
+        List<String> fieldsToQuery = this.getFieldsToQuery(Schema.MetadataSObject__c.SObjectType);
 
-    private String getQueryString() {
-        String query = '';
-
-        List<String> sobjectFieldsToQuery    = this.getFieldsToQuery(Schema.MetadataSObject__c.SObjectType);
-        List<String> fieldFieldsToQuery      = this.getFieldsToQuery(Schema.MetadataField__c.SObjectType);
-        List<String> recordTypeFieldsToQuery = this.getFieldsToQuery(Schema.MetadataRecordType__c.SObjectType);
-
-        query = 'SELECT ' + String.join(sobjectFieldsToQuery, ', ')
-                //+ ', (SELECT ' + String.join(fieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
-                //+ ', (SELECT ' + String.join(recordTypeFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
-                + ' FROM ' + Schema.MetadataSObject__c.SObjectType;
-        System.debug('query=' + query);
-        return query;
+        return 'SELECT ' + String.join(fieldsToQuery, ', ') + ' FROM ' + Schema.MetadataSObject__c.SObjectType;
     }
 
     private List<String> getFieldsToQuery(Schema.SObjectType sobjectType) {
@@ -161,21 +140,15 @@ System.debug('cleanedSObjectDto rec type=' + cleanedSObjectDto.get(RECORD_TYPES_
     }
 
     private Map<Id, List<SObject>> queryChildRecords(List<SObject> parentRecords, Schema.SObjectType childObject, Schema.SObjectField referenceField) {
-        /*for(String f : this.getFieldsToQuery(childObject)) {
-            System.debug(f);
-        }*/
-        for(SObject parentRecord : parentRecords) {system.debug('parent rec id=' + parentRecord.Id);}
-        String referenceFieldName = referenceField.getDescribe().getName();
+        String referenceFieldDeveloperName = referenceField.getDescribe().getName();
+
         String query = 'SELECT ' + String.join(this.getFieldsToQuery(childObject), ', ')
             + ' FROM ' + childObject
-            + ' WHERE ' + referenceFieldName + ' IN :parentRecords';
-        //List<SObject> results = Database.query(query);
-System.debug('referenceFieldName=' + referenceFieldName);
-System.debug('parentRecords=' + parentRecords);
-System.debug('child query=' + query);
+            + ' WHERE ' + referenceFieldDeveloperName + ' IN :parentRecords';
+
         Map<Id, List<SObject>> childRecordsByParentId = new Map<Id, List<SObject>>();
         for(SObject record : Database.query(query)) {
-            String parentId = (String)record.get(referenceFieldName);
+            String parentId = (String)record.get(referenceFieldDeveloperName);
 
             if(!childRecordsByParentId.containsKey(parentId)) childRecordsByParentId.put(parentId, new List<SObject>());
 
@@ -200,7 +173,7 @@ System.debug('child query=' + query);
     }
 
     private Map<String, Object> removeUnusedAttributes(Map<String, Object> cleanedSObjectDto) {
-        // TODO use this to remove extra details from audit fields, record type, etc
+        // TODO need to cleanup/improve
         cleanedSObjectDto.remove('attributes');
         cleanedSObjectDto.remove(Schema.MetadataField__c.MetadataSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.MetadataRecordType__c.MetadataSObject__c.getDescribe().getName());
@@ -253,8 +226,6 @@ System.debug('child query=' + query);
     private HttpResponse createStaticResource(String requestBody, Id staticResourceId) {
         String calculatedEndpoint = STATIC_RESOURCE_ENDPOINT;
         if(staticResourceId != null)  calculatedEndpoint += '/' + staticResourceId + '?_HttpMethod=PATCH';
-        System.debug('calculatedEndpoint=' + calculatedEndpoint);
-        System.debug('requestBody=' + requestBody);
 
         HttpRequest request = new HttpRequest();
         request.setEndpoint(calculatedEndpoint);
