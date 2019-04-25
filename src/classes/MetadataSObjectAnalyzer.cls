@@ -12,7 +12,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         for(Schema.SObjectType sobjectType : Schema.getGlobalDescribe().values()) {
             String sobjectDeveloperName = sobjectType.getDescribe().getName();
 
-            if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName)) continue;
+            if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName.toLowerCase())) continue;
             else sobjectTypesToProcess.add(sobjectType);
         }
         return sobjectTypesToProcess;
