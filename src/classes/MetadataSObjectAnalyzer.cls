@@ -34,35 +34,12 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
             if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
 
-            MetadataSObject__c metadataSObject = new MetadataSObject__c(
-                DeveloperName__c   = sobjectDescribe.getName(),
-                IsCustom__c        = sobjectDescribe.isCustom(),
-                IsCustomSetting__c = sobjectDescribe.isCustomSetting(),
-                Label__c           = sobjectDescribe.getLabel(),
-                LabelPlural__c     = sobjectDescribe.getLabelPlural(),
-                LabelLanguage__c   = UserInfo.getLanguage(),
-                Name               = sobjectDescribe.getName(),
-                Namespace__c       = this.getNamespace(sobjectDescribe),
-                RecordTypeId       = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, ASSET_DEVELOPER_NAME)
-            );
+            MetadataSObject__c metadataSObject = (MetadataSObject__c)this.convert(sobjectDescribe);
 
-            // Link to parent object -- TODO, improve this/move to private method
-            metadataSObject.recalculateFormulas();
-            //List<String> testFeatureObjects = new List<String>{'AccountFeed', 'AccountHistory'};
-            if(metadataSObject.IsPlatformFeatureObject__c == false) {//} && testFeatureObjects.contains(metadataSObject.Name)) {
-                metadataSObjects.add(metadataSObject);
-            } else {
-                String primarySObjectDeveloperName = this.getPrimarySObjectDeveloperName(sobjectType);
+            if(metadataSObject.IsPlatformFeatureObject__c) metadataPlatformFeatureSObjects.add(metadataSObject);
+            else metadataSObjects.add(metadataSObject);
 
-                if(primarySObjectDeveloperName != null) {
-                    metadataSObject.PrimaryMetadataSObject__r = new MetadataSObject__c(DeveloperName__c = primarySObjectDeveloperName);
-                }
-                metadataSObject.RecordTypeId = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, PLATFORM_FEATURE_ASSET_DEVELOPER_NAME);
-                metadataPlatformFeatureSObjects.add(metadataSObject);
-            }
-
-            // TODO move to private method
-            metadataSObject.SystemHashCode__c = System.hashCode(metadataSObject);
+            // TODO move to trigger or process builder/eliminate the query if possible
             if(existingMetadataSObject != null && existingMetadataSObject.SystemHashCode__c != metadataSObject.SystemHashCode__c) {
                 metadataSObject.LastMetadataChangeDate__c = System.now();
             }
@@ -70,48 +47,16 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
                 if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
 
-                metadataRecordTypes.add(new MetadataRecordType__c(
-                    MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectType.getDescribe().getName()),
-                    DeveloperName__c   = sobjectType.getDescribe().getName() + '.' + recordTypeInfo.getDeveloperName(),
-                    IsActive__c        = recordTypeInfo.isActive(),
-                    IsMaster__c        = recordTypeInfo.isMaster(),
-                    Name               = recordTypeInfo.getDeveloperName(),
-                    Namespace__c       = this.getNamespace(recordTypeInfo),
-                    RecordTypeId       = this.getRecordTypeId(Schema.MetadataRecordType__c.SObjectType, ASSET_DEVELOPER_NAME)
-                ));
+                MetadataRecordType__c convertedRecordType = (MetadataRecordType__c)this.convert(sobjectDescribe, recordTypeInfo);
+                metadataRecordTypes.add(convertedRecordType);
             }
 
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
-                Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
-
-                metadataFields.add(new MetadataField__c(
-                    DefaultValue__c         = String.valueOf(fieldDescribe.getDefaultValue()),
-                    Digits__c               = fieldDescribe.getDigits(),
-                    MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
-                    DeveloperName__c        = sobjectDescribe.getName() + '.' + fieldDescribe.getName(),
-                    InlineHelpText__c       = fieldDescribe.getInlineHelpText(),
-                    IsCalculated__c         = fieldDescribe.isCalculated(),
-                    IsCustom__c             = fieldDescribe.isCustom(),
-                    IsExternalId__c         = fieldDescribe.IsExternalId(),
-                    IsNillable__c           = fieldDescribe.isNillable(),
-                    IsPermissionable__c     = fieldDescribe.isPermissionable(),
-                    IsRestrictedDelete__c   = fieldDescribe.isRestrictedDelete(),
-                    IsRestrictedPicklist__c = fieldDescribe.isRestrictedPicklist(),
-                    IsUnique__c             = fieldDescribe.isUnique(),
-                    Label__c                = fieldDescribe.getLabel(),
-                    Length__c               = fieldDescribe.getLength(),
-                    Name                    = fieldDescribe.getName(),
-                    Namespace__c            = this.getNamespace(fieldDescribe),
-                    PicklistValues__c       = this.getPicklistValueString(field),
-                    Precision__c            = fieldDescribe.getPrecision(),
-                    RecordTypeId            = this.getRecordTypeId(Schema.MetadataField__c.SObjectType, ASSET_DEVELOPER_NAME),
-                    ReferenceTo__c          = this.getReferenceToValueString(fieldDescribe),
-                    RelationshipName__c     = fieldDescribe.getRelationshipName(),
-                    Scale__c                = fieldDescribe.getScale(),
-                    Type__c                 = fieldDescribe.getType().name()
-                ));
+                MetadataField__c convertedField = (MetadataField__c)this.convert(sobjectDescribe, field.getDescribe());
+                metadataFields.add(convertedField);
             }
         }
+
         upsert metadataSObjects DeveloperName__c;
         upsert metadataPlatformFeatureSObjects DeveloperName__c;
         upsert metadataRecordTypes DeveloperName__c;
@@ -165,6 +110,82 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return existingSObjectTypesByDeveloperName;
     }
 
+    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe) {
+        MetadataSObject__c metadataSObject = new MetadataSObject__c(
+            DeveloperName__c   = sobjectDescribe.getName(),
+            IsCustom__c        = sobjectDescribe.isCustom(),
+            IsCustomSetting__c = sobjectDescribe.isCustomSetting(),
+            Label__c           = sobjectDescribe.getLabel(),
+            LabelPlural__c     = sobjectDescribe.getLabelPlural(),
+            LabelLanguage__c   = UserInfo.getLanguage(),
+            Name               = sobjectDescribe.getName(),
+            Namespace__c       = this.getNamespace(sobjectDescribe),
+            RecordTypeId       = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, ASSET_DEVELOPER_NAME)
+        );
+        metadataSObject.recalculateFormulas();
+
+        if(metadataSObject.IsPlatformFeatureObject__c) {
+            metadataSObject.RecordTypeId = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, PLATFORM_FEATURE_ASSET_DEVELOPER_NAME);
+
+            String primarySObjectDeveloperName = this.getPrimarySObjectDeveloperName(sobjectDescribe);
+            if(primarySObjectDeveloperName != null) {
+                metadataSObject.PrimaryMetadataSObject__r = new MetadataSObject__c(DeveloperName__c = primarySObjectDeveloperName);
+            }
+        }
+
+        // Last step: calculate a hash code once all other fields have been set
+        metadataSObject.SystemHashCode__c = System.hashCode(metadataSObject);
+
+        return metadataSObject;
+    }
+
+    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.RecordTypeInfo recordTypeInfo) {
+        MetadataRecordType__c metadataRecordType = new MetadataRecordType__c(
+            MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
+            DeveloperName__c   = sobjectDescribe.getName() + '.' + recordTypeInfo.getDeveloperName(),
+            IsActive__c        = recordTypeInfo.isActive(),
+            IsMaster__c        = recordTypeInfo.isMaster(),
+            Name               = recordTypeInfo.getDeveloperName(),
+            Namespace__c       = this.getNamespace(recordTypeInfo),
+            RecordTypeId       = this.getRecordTypeId(Schema.MetadataRecordType__c.SObjectType, ASSET_DEVELOPER_NAME)
+        );
+        metadataRecordType.recalculateFormulas();
+
+        return metadataRecordType;
+    }
+
+    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.DescribeFieldResult fieldDescribe) {
+        MetadataField__c metadataField = new MetadataField__c(
+            DefaultValue__c         = String.valueOf(fieldDescribe.getDefaultValue()),
+            Digits__c               = fieldDescribe.getDigits(),
+            MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
+            DeveloperName__c        = sobjectDescribe.getName() + '.' + fieldDescribe.getName(),
+            InlineHelpText__c       = fieldDescribe.getInlineHelpText(),
+            IsCalculated__c         = fieldDescribe.isCalculated(),
+            IsCustom__c             = fieldDescribe.isCustom(),
+            IsExternalId__c         = fieldDescribe.IsExternalId(),
+            IsNillable__c           = fieldDescribe.isNillable(),
+            IsPermissionable__c     = fieldDescribe.isPermissionable(),
+            IsRestrictedDelete__c   = fieldDescribe.isRestrictedDelete(),
+            IsRestrictedPicklist__c = fieldDescribe.isRestrictedPicklist(),
+            IsUnique__c             = fieldDescribe.isUnique(),
+            Label__c                = fieldDescribe.getLabel(),
+            Length__c               = fieldDescribe.getLength(),
+            Name                    = fieldDescribe.getName(),
+            Namespace__c            = this.getNamespace(fieldDescribe),
+            PicklistValues__c       = this.getPicklistValueString(fieldDescribe),
+            Precision__c            = fieldDescribe.getPrecision(),
+            RecordTypeId            = this.getRecordTypeId(Schema.MetadataField__c.SObjectType, ASSET_DEVELOPER_NAME),
+            ReferenceTo__c          = this.getReferenceToValueString(fieldDescribe),
+            RelationshipName__c     = fieldDescribe.getRelationshipName(),
+            Scale__c                = fieldDescribe.getScale(),
+            Type__c                 = fieldDescribe.getType().name()
+        );
+        metadataField.recalculateFormulas();
+
+        return metadataField;
+    }
+
     private Id getRecordTypeId(Schema.SObjectType sobjectType, String recordTypeDeveloperName) {
         return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get(recordTypeDeveloperName).getRecordTypeId();
     }
@@ -195,24 +216,25 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return localNameIndex < 0 ? null : fullDeveloperName.substring(0, localNameIndex);
     }
 
-    private String getPrimarySObjectDeveloperName(Schema.SObjectType sobjectType) {
-        String separator   = sobjectType.getDescribe().isCustom() ? '__' : '';
-        String replacement = sobjectType.getDescribe().isCustom() ? '__c' : '';
+    private String getPrimarySObjectDeveloperName(Schema.DescribeSObjectResult sobjectDescribe) {
+        String primarySObjectSuffix = sobjectDescribe.isCustom() ? '__c' : '';
+        String separator            = sobjectDescribe.isCustom() ? '__' : '';
 
         List<String> platformFeatureSObjectSuffixes = new List<String>{'ChangeEvent', 'Feed', 'History', 'Share'};
 
         String parentSObjectDeveloperName;
         for(String platformFeatureSObjectSuffix : platformFeatureSObjectSuffixes) {
-            if(!sobjectType.getDescribe().getName().endsWith(separator + platformFeatureSObjectSuffix)) continue;
+            if(!sobjectDescribe.getName().endsWith(separator + platformFeatureSObjectSuffix)) continue;
 
-            String currentSObjectDeveloperName = sobjectType.getDescribe().getName();
-            parentSObjectDeveloperName = currentSObjectDeveloperName.replace(separator + platformFeatureSObjectSuffix, separator + replacement);
+            String currentSObjectDeveloperName = sobjectDescribe.getName();
+            parentSObjectDeveloperName = currentSObjectDeveloperName.replace(separator + platformFeatureSObjectSuffix, separator + primarySObjectSuffix);
+            break;
         }
 
         // ActivityHistory is a platform feature without a parent sobject
-        if(sobjectType == Schema.ActivityHistory.SObjectType) parentSObjectDeveloperName = null;
+        if(sobjectDescribe.getSObjectType() == Schema.ActivityHistory.SObjectType) parentSObjectDeveloperName = null;
         // OpportunityFieldHistory doesn't follow Salesforce's standard naming convention since OpportunityHistory also exists
-        if(sobjectType == Schema.OpportunityFieldHistory.SObjectType) parentSObjectDeveloperName = Schema.Opportunity.SObjectType.getDescribe().getName();
+        if(sobjectDescribe.getSObjectType() == Schema.OpportunityFieldHistory.SObjectType) parentSObjectDeveloperName = Schema.Opportunity.SObjectType.getDescribe().getName();
 
         return parentSObjectDeveloperName;
     }
@@ -225,14 +247,13 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return String.join(values, '\n');
     }
 
-    private String getPicklistValueString(Schema.SObjectField field) {
-        String valueString = String.join(this.getPicklistValues(field), '\n');
-        if(valueString.length() > field.getDescribe().getLength()) return 'Too many values';
+    private String getPicklistValueString(Schema.DescribeFieldResult fieldDescribe) {
+        String valueString = String.join(this.getPicklistValues(fieldDescribe), '\n');
+        if(valueString.length() > fieldDescribe.getLength()) return 'Too many values';
         return valueString;
     }
 
-    private List<String> getPicklistValues(Schema.SObjectField field) {
-        Schema.DescribeFieldResult fieldDescribe = field.getDescribe();
+    private List<String> getPicklistValues(Schema.DescribeFieldResult fieldDescribe) {
         List<String> picklistValues = new List<String>();
 
         if(fieldDescribe.getPickListValues().isEmpty()) return picklistValues;
