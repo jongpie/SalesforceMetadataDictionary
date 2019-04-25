@@ -34,7 +34,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             // Skip if this SObject Type has already been flagged with status = 'Not Used'
             if(existingMetadataSObject != null && existingMetadataSObject.IsInScope__c == false) continue;
 
-            MetadataSObject__c metadataSObject = (MetadataSObject__c)this.convert(sobjectDescribe);
+            MetadataSObject__c metadataSObject = this.convert(sobjectDescribe);
 
             if(metadataSObject.IsPlatformFeatureObject__c) metadataPlatformFeatureSObjects.add(metadataSObject);
             else metadataSObjects.add(metadataSObject);
@@ -47,12 +47,12 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             for(Schema.RecordTypeInfo recordTypeInfo : sobjectDescribe.getRecordTypeInfosByDeveloperName().values()) {
                 if(recordTypeInfo.isMaster()) continue; // TODO for now, don't log master record types. Might change later
 
-                MetadataRecordType__c convertedRecordType = (MetadataRecordType__c)this.convert(sobjectDescribe, recordTypeInfo);
+                MetadataRecordType__c convertedRecordType = this.convert(sobjectDescribe, recordTypeInfo);
                 metadataRecordTypes.add(convertedRecordType);
             }
 
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
-                MetadataField__c convertedField = (MetadataField__c)this.convert(sobjectDescribe, field.getDescribe());
+                MetadataField__c convertedField = this.convert(sobjectDescribe, field.getDescribe());
                 metadataFields.add(convertedField);
             }
         }
@@ -68,7 +68,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     private Set<String> getIgnoredSObjectDeveloperNames() {
         // These need to be tracked as strings instead of SObjectType because the objects may not exist in all orgs, but if they do exist, we want to ignore them
         Set<String> ignoredSObjectDeveloperNames = new Set<String>{
-            'Aggregateresult', 'ApexClass', 'ApexComponent', 'ApexEmailNotification', 'ApexLog', 'ApexPage', 'ApexPageInfo', 'ApexTestQueueItem', 'ApexTestResult',
+            'AggregateResult', 'ApexClass', 'ApexComponent', 'ApexEmailNotification', 'ApexLog', 'ApexPage', 'ApexPageInfo', 'ApexTestQueueItem', 'ApexTestResult',
             'ApexTestResultLimits', 'ApexTestRunResult', 'ApexTestSuite', 'ApexTrigger', 'AppDefinition', 'AppMenuItem', 'AppTabMember', 'AsyncApexJob', 'AuraDefinition',
             'AuraDefinitionBundle', 'AuraDefinitionBundleInfo', 'AuraDefinitionInfo', 'AuthConfig', 'AuthConfigProviders', 'AuthProvider', 'AuthSession',
             'BackgroundOperation', 'BackgroundOperationResult', 'BatchApexErrorEvent', 'BrandingSet', 'BrandingSetProperty', 'BrandTemplate', 'BusinessProcess',
@@ -99,7 +99,13 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             }
         }
 
-        return ignoredSObjectDeveloperNames;
+        // Convert everything to lowercase to make sure all comparisons are accurate
+        Set<String> ignoredSObjectDeveloperNamesInLowercase = new Set<String>();
+        for(String ignoredSObjectDeveloperName : ignoredSObjectDeveloperNames) {
+            ignoredSObjectDeveloperNamesInLowercase.add(ignoredSObjectDeveloperName.toLowerCase());
+        }
+
+        return ignoredSObjectDeveloperNamesInLowercase;
     }
 
     private Map<String, MetadataSObject__c> getExistingSObjectTypesByDeveloperName() {
@@ -110,14 +116,14 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return existingSObjectTypesByDeveloperName;
     }
 
-    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe) {
+    private MetadataSObject__c convert(Schema.DescribeSObjectResult sobjectDescribe) {
         MetadataSObject__c metadataSObject = new MetadataSObject__c(
             DeveloperName__c   = sobjectDescribe.getName(),
             IsCustom__c        = sobjectDescribe.isCustom(),
             IsCustomSetting__c = sobjectDescribe.isCustomSetting(),
             Label__c           = sobjectDescribe.getLabel(),
-            LabelPlural__c     = sobjectDescribe.getLabelPlural(),
             LabelLanguage__c   = UserInfo.getLanguage(),
+            LabelPlural__c     = sobjectDescribe.getLabelPlural(),
             Name               = sobjectDescribe.getName(),
             Namespace__c       = this.getNamespace(sobjectDescribe),
             RecordTypeId       = this.getRecordTypeId(Schema.MetadataSObject__c.SObjectType, ASSET_DEVELOPER_NAME)
@@ -139,27 +145,25 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return metadataSObject;
     }
 
-    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.RecordTypeInfo recordTypeInfo) {
+    private MetadataRecordType__c convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.RecordTypeInfo recordTypeInfo) {
         MetadataRecordType__c metadataRecordType = new MetadataRecordType__c(
-            MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
             DeveloperName__c   = sobjectDescribe.getName() + '.' + recordTypeInfo.getDeveloperName(),
             IsActive__c        = recordTypeInfo.isActive(),
             IsMaster__c        = recordTypeInfo.isMaster(),
+            MetadataSObject__r = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
             Name               = recordTypeInfo.getDeveloperName(),
             Namespace__c       = this.getNamespace(recordTypeInfo),
             RecordTypeId       = this.getRecordTypeId(Schema.MetadataRecordType__c.SObjectType, ASSET_DEVELOPER_NAME)
         );
-        metadataRecordType.recalculateFormulas();
 
         return metadataRecordType;
     }
 
-    private SObject convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.DescribeFieldResult fieldDescribe) {
+    private MetadataField__c convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.DescribeFieldResult fieldDescribe) {
         MetadataField__c metadataField = new MetadataField__c(
             DefaultValue__c         = String.valueOf(fieldDescribe.getDefaultValue()),
-            Digits__c               = fieldDescribe.getDigits(),
-            MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
             DeveloperName__c        = sobjectDescribe.getName() + '.' + fieldDescribe.getName(),
+            Digits__c               = fieldDescribe.getDigits(),
             InlineHelpText__c       = fieldDescribe.getInlineHelpText(),
             IsCalculated__c         = fieldDescribe.isCalculated(),
             IsCustom__c             = fieldDescribe.isCustom(),
@@ -171,6 +175,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             IsUnique__c             = fieldDescribe.isUnique(),
             Label__c                = fieldDescribe.getLabel(),
             Length__c               = fieldDescribe.getLength(),
+            MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
             Name                    = fieldDescribe.getName(),
             Namespace__c            = this.getNamespace(fieldDescribe),
             PicklistValues__c       = this.getPicklistValueString(fieldDescribe),
@@ -181,7 +186,6 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             Scale__c                = fieldDescribe.getScale(),
             Type__c                 = fieldDescribe.getType().name()
         );
-        metadataField.recalculateFormulas();
 
         return metadataField;
     }
