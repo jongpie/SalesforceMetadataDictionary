@@ -119,6 +119,17 @@ CASE(
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>BusinessDefinition__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Definition</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>CalculatedFormula__c</fullName>
         <description>System generated.</description>
         <externalId>false</externalId>

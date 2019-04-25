@@ -105,6 +105,17 @@ IF(
         <unique>false</unique>
     </fields>
     <fields>
+        <fullName>BusinessDefinition__c</fullName>
+        <externalId>false</externalId>
+        <label>Business Definition</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
+    </fields>
+    <fields>
         <fullName>DesignNotes__c</fullName>
         <externalId>false</externalId>
         <label>Design Notes</label>
@@ -599,9 +610,10 @@ IF(
         <filters>
             <field>IsClosed__c</field>
             <operation>equals</operation>
-            <value>0</value>
+            <value>1</value>
         </filters>
         <label>All Closed</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllCustomObjects</fullName>
