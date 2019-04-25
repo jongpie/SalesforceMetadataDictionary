@@ -355,17 +355,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataField__c.UploadId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MetadataField__c.Uuid__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataField__c.WasCreatedThisWeek__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -426,11 +416,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MetadataRecordType__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataRecordType__c.UploadId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -591,11 +576,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>MetadataSObject__c.TotalRecordTypes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataSObject__c.UploadId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

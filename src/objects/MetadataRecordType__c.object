@@ -264,20 +264,6 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
