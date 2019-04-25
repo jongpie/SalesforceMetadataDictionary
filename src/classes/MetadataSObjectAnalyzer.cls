@@ -7,120 +7,12 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     private static final String ASSET_DEVELOPER_NAME                  = 'Asset';
     private static final String PLATFORM_FEATURE_ASSET_DEVELOPER_NAME = 'PlatformFeatureAsset';
 
-    private static final Set<Schema.SObjectType> IGNORED_SOBJECT_TYPES = new Set<Schema.SObjectType>{
-        // Custom objects used by this app
-        Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystem__ChangeEvent.SObjectType, Schema.ExternalSystem__Feed.SObjectType,Schema.ExternalSystem__History.SObjectType,
-        Schema.ExternalSystemInterface__c.SObjectType, Schema.ExternalSystemInterface__ChangeEvent.SObjectType, Schema.ExternalSystemInterface__Feed.SObjectType,Schema.ExternalSystemInterface__History.SObjectType,
-        Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__ChangeEvent.SObjectType, Schema.ExternalSystemField__Feed.SObjectType,Schema.ExternalSystemField__History.SObjectType,
-        Schema.MetadataField__c.SObjectType, Schema.MetadataField__ChangeEvent.SObjectType, Schema.MetadataField__Feed.SObjectType,Schema.MetadataField__History.SObjectType,
-        Schema.MetadataRecordType__c.SObjectType, Schema.MetadataRecordType__ChangeEvent.SObjectType, Schema.MetadataRecordType__Feed.SObjectType,Schema.MetadataRecordType__History.SObjectType,
-        Schema.MetadataSObject__c.SObjectType, Schema.MetadataSObject__ChangeEvent.SObjectType, Schema.MetadataSObject__Feed.SObjectType,Schema.MetadataSObject__History.SObjectType,
-        // Standard objects that aren't currently helpful to document
-        Schema.ApexClass.SObjectType, Schema.ApexComponent.SObjectType, Schema.ApexEmailNotification.SObjectType,
-        Schema.ApexLog.SObjectType, Schema.ApexPage.SObjectType, Schema.ApexPageInfo.SObjectType,
-        Schema.ApexTestQueueItem.SObjectType, Schema.ApexTestResult.SObjectType, Schema.ApexTestResultLimits.SObjectType,
-        Schema.ApexTestRunResult.SObjectType, Schema.ApexTestSuite.SObjectType, Schema.ApexTrigger.SObjectType,
-        Schema.AuraDefinition.SObjectType, Schema.AuraDefinitionBundle.SObjectType,
-        Schema.AuraDefinitionBundleInfo.SObjectType, Schema.AuraDefinitionInfo.SObjectType,
-        Schema.BatchApexErrorEvent.SObjectType,
-
-
-        Schema.Aggregateresult.SObjectType,
-        Schema.AppDefinition.SObjectType,
-        Schema.AppMenuItem.SObjectType,
-        Schema.AppTabMember.SObjectType,
-        Schema.AsyncApexJob.SObjectType,
-        Schema.AuthConfig.SObjectType,
-        Schema.AuthProvider.SObjectType,
-        Schema.AuthConfigProviders.SObjectType,
-        Schema.AuthSession.SObjectType,
-        Schema.BackgroundOperation.SObjectType,
-        //Schema.BackgroundOperationResult.SObjectType,
-        Schema.BrandingSet.SObjectType,
-        Schema.BrandingSetProperty.SObjectType,
-        Schema.BrandTemplate.SObjectType,
-        Schema.BusinessProcess.SObjectType,
-        Schema.ClientBrowser.SObjectType,
-        Schema.ColorDefinition.SObjectType,
-        //Schema.ConferenceNumber.SObjectType,
-        Schema.CorsWhitelistEntry.SObjectType,
-        Schema.CronJobDetail.SObjectType,
-        Schema.CronTrigger.SObjectType,
-        Schema.CspTrustedSite.SObjectType,
-        Schema.CustomBrand.SObjectType,
-        Schema.CustomBrandAsset.SObjectType,
-        Schema.CustomObjectUserLicenseMetrics.SObjectType,
-        Schema.Dashboard.SObjectType,
-        Schema.DashboardComponent.SObjectType,
-        Schema.DashboardComponentFeed.SObjectType,
-        Schema.DashboardFeed.SObjectType,
-        Schema.DataAssessmentFieldMetric.SObjectType,
-        Schema.DataAssessmentMetric.SObjectType,
-        Schema.DataAssessmentValueMetric.SObjectType,
-        Schema.DataStatistics.SObjectType,
-        Schema.DataType.SObjectType,
-        Schema.Domain.SObjectType,
-        Schema.DomainSite.SObjectType,
-        Schema.IconDefinition.SObjectType,
-        Schema.FlexQueueItem.SObjectType,
-        Schema.FlowRecordRelation.SObjectType,
-        Schema.FlowStageRelation.SObjectType,
-    /*Schema.ForecastingAdjustment.SObjectType,
-    Schema.ForecastingDisplayedFamily.SObjectType,
-    Schema.ForecastingFact.SObjectType,
-    Schema.ForecastingItem.SObjectType,
-    Schema.ForecastingOwnerAdjustment.SObjectType,
-    Schema.ForecastingQuota.SObjectType,
-    Schema.ForecastingShare.SObjectType,
-    Schema.ForecastingType.SObjectType,
-    Schema.ForecastingUserPreference.SObjectType,*/
-    Schema.ForecastShare.SObjectType,
-        Schema.IdpEventLog.SObjectType,
-        Schema.InstalledMobileApp.SObjectType,
-        Schema.LightningExperienceTheme.SObjectType,
-        Schema.ListEmail.SObjectType,
-        Schema.ListEmailChangeEvent.SObjectType,
-        Schema.ListEmailRecipientSource.SObjectType,
-        Schema.ListEmailShare.SObjectType,
-        //Schema.ListView.SObjectType,
-        //Schema.ListViewChart.SObjectType,
-        Schema.ListViewChartInstance.SObjectType,
-        Schema.LoginGeo.SObjectType,
-        Schema.LoginHistory.SObjectType,
-        Schema.LoginIp.SObjectType,
-        Schema.Macro.SObjectType,
-        Schema.MacroHistory.SObjectType,
-        Schema.MacroInstruction.SObjectType,
-        Schema.MacroShare.SObjectType,
-        Schema.NamedCredential.SObjectType,
-        //Schema.NavigationLinkSet.SObjectType,
-        //Schema.NavigationMenuItem.SObjectType
-        Schema.OauthToken.SObjectType,
-        Schema.OnboardingMetrics.SObjectType,
-        Schema.PackageLicense.SObjectType,
-        Schema.PermissionSetTabSetting.SObjectType,
-        Schema.PlatformAction.SObjectType,
-        Schema.PlatformCachePartition.SObjectType,
-        Schema.PlatformCachePartitionType.SObjectType,
-        //Schema.PresenceConfigDeclineReason.SObjectType,
-        //Schema.PresenceDeclineReason.SObjectType,
-        Schema.ProcessInstance.SObjectType,
-        Schema.ProcessInstanceHistory.SObjectType,
-        Schema.ProcessInstanceNode.SObjectType,
-        Schema.ProcessInstanceStep.SObjectType,
-        Schema.ProcessInstanceWorkItem.SObjectType,
-        Schema.ProcessNode.SObjectType,
-        Schema.Publisher.SObjectType,
-        Schema.PushTopic.SObjectType
-    };
-
     public Iterable<Schema.SObjectType> start(Database.BatchableContext batchableContext) {
         List<Schema.SObjectType> sobjectTypesToProcess = new List<Schema.SObjectType>();
         for(Schema.SObjectType sobjectType : Schema.getGlobalDescribe().values()) {
             String sobjectDeveloperName = sobjectType.getDescribe().getName();
 
             if(this.getIgnoredSObjectDeveloperNames().contains(sobjectDeveloperName)) continue;
-            //if(IGNORED_SOBJECT_TYPES.contains(sobjectType)) continue;
             else sobjectTypesToProcess.add(sobjectType);
         }
         return sobjectTypesToProcess;
@@ -160,7 +52,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             if(metadataSObject.IsPlatformFeatureObject__c == false) {//} && testFeatureObjects.contains(metadataSObject.Name)) {
                 metadataSObjects.add(metadataSObject);
             } else {
-                String primarySObjectDeveloperName = this.getPrimarySObjectDeveloperName(metadataSObject, sobjectType);
+                String primarySObjectDeveloperName = this.getPrimarySObjectDeveloperName(sobjectType);
 
                 if(primarySObjectDeveloperName != null) {
                     metadataSObject.PrimaryMetadataSObject__r = new MetadataSObject__c(DeveloperName__c = primarySObjectDeveloperName);
@@ -229,6 +121,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     public void finish(Database.BatchableContext batchableContext) {}
 
     private Set<String> getIgnoredSObjectDeveloperNames() {
+        // These need to be tracked as strings instead of SObjectType because the objects may not exist in all orgs, but if they do exist, we want to ignore them
         Set<String> ignoredSObjectDeveloperNames = new Set<String>{
             'Aggregateresult', 'ApexClass', 'ApexComponent', 'ApexEmailNotification', 'ApexLog', 'ApexPage', 'ApexPageInfo', 'ApexTestQueueItem', 'ApexTestResult',
             'ApexTestResultLimits', 'ApexTestRunResult', 'ApexTestSuite', 'ApexTrigger', 'AppDefinition', 'AppMenuItem', 'AppTabMember', 'AsyncApexJob', 'AuraDefinition',
@@ -302,20 +195,19 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return localNameIndex < 0 ? null : fullDeveloperName.substring(0, localNameIndex);
     }
 
+    private String getPrimarySObjectDeveloperName(Schema.SObjectType sobjectType) {
+        String separator   = sobjectType.getDescribe().isCustom() ? '__' : '';
+        String replacement = sobjectType.getDescribe().isCustom() ? '__c' : '';
 
-    private String getPrimarySObjectDeveloperName(MetadataSObject__c metadataSObject, Schema.SObjectType sobjectType) {
-        String parentSObjectDeveloperName = sobjectType.getDescribe().getName();
+        List<String> platformFeatureSObjectSuffixes = new List<String>{'ChangeEvent', 'Feed', 'History', 'Share'};
 
-        // TODO make this less awful
-        if(parentSObjectDeveloperName.endsWith('__ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__ChangeEvent', '__c');
-        if(parentSObjectDeveloperName.endsWith('__Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__Feed', '__c');
-        if(parentSObjectDeveloperName.endsWith('__History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__History', '__c');
-        if(parentSObjectDeveloperName.endsWith('__Share')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('__Share', '__c');
+        String parentSObjectDeveloperName;
+        for(String platformFeatureSObjectSuffix : platformFeatureSObjectSuffixes) {
+            if(!sobjectType.getDescribe().getName().endsWith(separator + platformFeatureSObjectSuffix)) continue;
 
-        if(parentSObjectDeveloperName.endsWith('ChangeEvent')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('ChangeEvent', '');
-        if(parentSObjectDeveloperName.endsWith('Feed')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('Feed', '');
-        if(parentSObjectDeveloperName.endsWith('History')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('History', '');
-        if(parentSObjectDeveloperName.endsWith('Share')) parentSObjectDeveloperName = parentSObjectDeveloperName.replace('Share', '');
+            String currentSObjectDeveloperName = sobjectType.getDescribe().getName();
+            parentSObjectDeveloperName = currentSObjectDeveloperName.replace(separator + platformFeatureSObjectSuffix, separator + replacement);
+        }
 
         // ActivityHistory is a platform feature without a parent sobject
         if(sobjectType == Schema.ActivityHistory.SObjectType) parentSObjectDeveloperName = null;
