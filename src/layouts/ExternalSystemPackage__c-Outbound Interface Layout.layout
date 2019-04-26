@@ -42,7 +42,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ExternalSystemInterfaceNotes__c</field>
+                <field>ExternalSystemPackageNotes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -129,7 +129,7 @@
         <fields>DataType__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
-        <relatedList>ExternalSystemField__c.ExternalSystemInterface__c</relatedList>
+        <relatedList>ExternalSystemField__c.ExternalSystemPackage__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

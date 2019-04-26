@@ -8,7 +8,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
     private static final String STATIC_RESOURCE_ENDPOINT = System.Url.getSalesforceBaseUrl().toExternalForm() + '/services/data/v45.0/sobjects/StaticResource';
 
     private static final String FIELDS_CHILD_RELATIONSHIP_NAME       = getChildRelationshipName(Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__c.ExternalSystem__c);
-    private static final String RECORD_TYPES_CHILD_RELATIONSHIP_NAME = getChildRelationshipName(Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystemInterface__c.SObjectType, Schema.ExternalSystemInterface__c.ExternalSystem__c);
+    private static final String RECORD_TYPES_CHILD_RELATIONSHIP_NAME = getChildRelationshipName(Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystemPackage__c.SObjectType, Schema.ExternalSystemPackage__c.ExternalSystem__c);
 
     private class StaticResourceTemplate {
         private String Body         {get; set;}
@@ -54,21 +54,21 @@ public without sharing class ExternalSystemBackupService implements Database.All
             }
 
             // Cleanup the record types before serialization
-            if(!externalSystem.ExternalSystemInterfaces__r.isEmpty()) {
-                List<ExternalSystemInterface__c> cleanedExternalSystemInterfaces = new List<ExternalSystemInterface__c>();
-                for(ExternalSystemInterface__c externalSystemInterface : externalSystem.ExternalSystemInterfaces__r) {
-                    ExternalSystemInterface__c cleanedExternalSystemInterface = externalSystemInterface.clone(false, true, false, false);
-                    cleanedExternalSystemInterface.ExternalSystem__c = null;
+            if(!externalSystem.ExternalSystemPackages__r.isEmpty()) {
+                List<ExternalSystemPackage__c> cleanedExternalSystemPackages = new List<ExternalSystemPackage__c>();
+                for(ExternalSystemPackage__c externalSystemPackage : externalSystem.ExternalSystemPackages__r) {
+                    ExternalSystemPackage__c cleanedExternalSystemPackage = externalSystemPackage.clone(false, true, false, false);
+                    cleanedExternalSystemPackage.ExternalSystem__c = null;
 
-                    Map<String, Object> cleanedExternalSystemInterfaceDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedExternalSystemInterface));
-                    cleanedExternalSystemInterfaceDto = this.removeUnusedAttributes(cleanedExternalSystemInterfaceDto);
+                    Map<String, Object> cleanedExternalSystemPackageDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedExternalSystemPackage));
+                    cleanedExternalSystemPackageDto = this.removeUnusedAttributes(cleanedExternalSystemPackageDto);
 
-                    cleanedExternalSystemInterface = (Schema.ExternalSystemInterface__c)Json.deserialize(Json.serialize(cleanedExternalSystemInterfaceDto), ExternalSystemInterface__c.class);
+                    cleanedExternalSystemPackage = (Schema.ExternalSystemPackage__c)Json.deserialize(Json.serialize(cleanedExternalSystemPackageDto), ExternalSystemPackage__c.class);
 
-                    cleanedExternalSystemInterfaces.add(cleanedExternalSystemInterface);
+                    cleanedExternalSystemPackages.add(cleanedExternalSystemPackage);
                 }
                 Map<String, Object> recordTypes = (Map<String, Object>)cleanedSObjectDto.get(RECORD_TYPES_CHILD_RELATIONSHIP_NAME);
-                recordTypes.put('records', cleanedExternalSystemInterfaces);
+                recordTypes.put('records', cleanedExternalSystemPackages);
             }
 
             cleanedSObjectDto = this.removeUnusedAttributes(cleanedSObjectDto);
@@ -94,11 +94,11 @@ public without sharing class ExternalSystemBackupService implements Database.All
 
         List<String> externalSystemFieldsToQuery    = this.getFieldsToQuery(Schema.ExternalSystem__c.SObjectType);
         List<String> externalSystemFieldFieldsToQuery      = this.getFieldsToQuery(Schema.ExternalSystemField__c.SObjectType);
-        List<String> externalSystemInterfaceFieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystemInterface__c.SObjectType);
+        List<String> externalSystemPackageFieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystemPackage__c.SObjectType);
 
         query = 'SELECT ' + String.join(externalSystemFieldsToQuery, ', ')
                 + ', (SELECT ' + String.join(externalSystemFieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
-                + ', (SELECT ' + String.join(externalSystemInterfaceFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
+                + ', (SELECT ' + String.join(externalSystemPackageFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
                 + ' FROM ' + Schema.ExternalSystem__c.SObjectType;
         System.debug('query=' + query);
         return query;
@@ -123,7 +123,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
         });*/
 
         if(sobjectType == Schema.ExternalSystemField__c.SObjectType) {
-            fields.add(Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystemInterface__c.Uuid__c);
+            fields.add(Schema.ExternalSystemField__c.ExternalSystemPackage__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystemPackage__c.Uuid__c);
             fields.add(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataField__c.Uuid__c);
             fields.add(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName() + '.' + Schema.MetadataSObject__c.Uuid__c);
         }
@@ -146,20 +146,20 @@ public without sharing class ExternalSystemBackupService implements Database.All
         // TODO use this to remove extra details from audit fields, record type, etc
         cleanedSObjectDto.remove('attributes');
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystem__c.getDescribe().getName());
-        cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystemPackage__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getName());
-        cleanedSObjectDto.remove(Schema.ExternalSystemInterface__c.ExternalSystem__c.getDescribe().getName());
+        cleanedSObjectDto.remove(Schema.ExternalSystemPackage__c.ExternalSystem__c.getDescribe().getName());
         //cleanedSObjectDto.remove(Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
 
-        String interfaceRelationshipName = Schema.ExternalSystemField__c.ExternalSystemInterface__c.getDescribe().getRelationshipName();
-        if(cleanedSObjectDto.containsKey(interfaceRelationshipName)) {
-            Map<String, Object> mappedSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(interfaceRelationshipName);
+        String PackageRelationshipName = Schema.ExternalSystemField__c.ExternalSystemPackage__c.getDescribe().getRelationshipName();
+        if(cleanedSObjectDto.containsKey(PackageRelationshipName)) {
+            Map<String, Object> mappedSObjectDto = (Map<String, Object>)cleanedSObjectDto.get(PackageRelationshipName);
             mappedSObjectDto.remove('attributes');
             mappedSObjectDto.remove('Id');
 
-            cleanedSObjectDto.put(interfaceRelationshipName, mappedSObjectDto);
+            cleanedSObjectDto.put(PackageRelationshipName, mappedSObjectDto);
         }
 
         String mappedSObjectRelationshipName = Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getRelationshipName();
@@ -180,7 +180,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
             cleanedSObjectDto.put(mappedFieldRelationshipName, mappedFieldDto);
         }
 
-/*        if(cleanedSObjectDto.containsKey(Schema.ExternalSystemField.ExternalSystem__c.getDescribe().getRelationshipName()) || cleanedSObjectDto.containsKey(Schema.ExternalSystemInterface__c.ExternalSystem__c.getDescribe().getRelationshipName())) {
+/*        if(cleanedSObjectDto.containsKey(Schema.ExternalSystemField.ExternalSystem__c.getDescribe().getRelationshipName()) || cleanedSObjectDto.containsKey(Schema.ExternalSystemPackage__c.ExternalSystem__c.getDescribe().getRelationshipName())) {
             Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
             recordTypeDto.remove('attributes');
             recordTypeDto.remove('Id');

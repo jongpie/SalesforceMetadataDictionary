@@ -39,7 +39,7 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>ExternalSystemInterfaceRecordPage</content>
+        <content>ExternalSystemPackageRecordPage</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -47,12 +47,12 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <compactLayouts>
-        <fullName>ExternalSystemInterfaceCompactLayout</fullName>
+        <fullName>ExternalSystemPackageCompactLayout</fullName>
         <fields>Name</fields>
         <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
-        <label>External System Interface Compact Layout</label>
+        <label>External System Package Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
@@ -109,9 +109,9 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>ExternalSystemInterfaceNotes__c</fullName>
+        <fullName>ExternalSystemPackageNotes__c</fullName>
         <externalId>false</externalId>
-        <label>External System Interface Notes</label>
+        <label>External System Package Notes</label>
         <length>131072</length>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -124,8 +124,8 @@
         <externalId>false</externalId>
         <label>External System</label>
         <referenceTo>ExternalSystem__c</referenceTo>
-        <relationshipLabel>External System Interfaces</relationshipLabel>
-        <relationshipName>ExternalSystemInterfaces</relationshipName>
+        <relationshipLabel>External System Packages</relationshipLabel>
+        <relationshipName>ExternalSystemPackages</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>true</reparentableMasterDetail>
         <trackFeedHistory>true</trackFeedHistory>
@@ -197,7 +197,22 @@
         <valueSet>
             <restricted>true</restricted>
             <valueSetDefinition>
-                <sorted>false</sorted>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Bulk API</fullName>
+                    <default>false</default>
+                    <label>Bulk API</label>
+                </value>
+                <value>
+                    <fullName>FTP</fullName>
+                    <default>false</default>
+                    <label>FTP</label>
+                </value>
+                <value>
+                    <fullName>Manual Load</fullName>
+                    <default>false</default>
+                    <label>Manual Load</label>
+                </value>
                 <value>
                     <fullName>REST API</fullName>
                     <default>false</default>
@@ -238,7 +253,7 @@
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <label>External System Interface</label>
+    <label>External System Package</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
@@ -253,19 +268,18 @@
         <label>All</label>
     </listViews>
     <nameField>
-        <label>Interface Name</label>
+        <label>Package Name</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>External System Interfaces</pluralLabel>
+    <pluralLabel>External System Packages</pluralLabel>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
-        <fullName>Inbound</fullName>
+        <fullName>DataMigration</fullName>
         <active>true</active>
-        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
-        <label>Inbound</label>
+        <label>Data Migration</label>
         <picklistValues>
             <picklist>DataFormat__c</picklist>
             <values>
@@ -314,6 +328,14 @@
         </picklistValues>
         <picklistValues>
             <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>Bulk API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>REST API</fullName>
                 <default>false</default>
@@ -352,10 +374,10 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Outbound</fullName>
+        <fullName>InboundInterface</fullName>
         <active>true</active>
-        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
-        <label>Outbound</label>
+        <compactLayoutAssignment>ExternalSystemPackageCompactLayout</compactLayoutAssignment>
+        <label>Inbound Interface</label>
         <picklistValues>
             <picklist>DataFormat__c</picklist>
             <values>
@@ -404,6 +426,108 @@
         </picklistValues>
         <picklistValues>
             <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>OutboundInterface</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>ExternalSystemPackageCompactLayout</compactLayoutAssignment>
+        <label>Outbound Interface</label>
+        <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Frequency__c</picklist>
+            <values>
+                <fullName>Daily</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hourly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Real Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>FTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>REST API</fullName>
                 <default>false</default>

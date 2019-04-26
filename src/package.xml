@@ -14,7 +14,7 @@
     <types>
         <members>ExternalSystem</members>
         <members>ExternalSystemField</members>
-        <members>ExternalSystemInterface</members>
+        <members>ExternalSystemPackage</members>
         <members>MetadataField</members>
         <members>MetadataRecordType</members>
         <members>MetadataSObject</members>
@@ -26,7 +26,7 @@
     </types>
     <types>
         <members>ExternalSystemField__c</members>
-        <members>ExternalSystemInterface__c</members>
+        <members>ExternalSystemPackage__c</members>
         <members>ExternalSystem__c</members>
         <members>MetadataField__c</members>
         <members>MetadataRecordType__c</members>
@@ -35,7 +35,7 @@
     </types>
     <types>
         <members>ExternalSystemField__c</members>
-        <members>ExternalSystemInterface__c</members>
+        <members>ExternalSystemPackage__c</members>
         <members>ExternalSystem__c</members>
         <members>MetadataField__c</members>
         <members>MetadataRecordType__c</members>
@@ -44,7 +44,7 @@
     </types>
     <types>
         <members>ExternalSystemFieldRecordPage</members>
-        <members>ExternalSystemInterfaceRecordPage</members>
+        <members>ExternalSystemPackageRecordPage</members>
         <members>ExternalSystemRecordPage</members>
         <members>MetadataFieldRecordPage</members>
         <members>MetadataRecordTypeRecordPage</members>
@@ -64,8 +64,9 @@
     <types>
         <members>ExternalSystemField__c-Data Migration Field Layout</members>
         <members>ExternalSystemField__c-Interface Field Layout</members>
-        <members>ExternalSystemInterface__c-Inbound Interface Layout</members>
-        <members>ExternalSystemInterface__c-Outbound Interface Layout</members>
+        <members>ExternalSystemPackage__c-Data Migration Layout</members>
+        <members>ExternalSystemPackage__c-Inbound Interface Layout</members>
+        <members>ExternalSystemPackage__c-Outbound Interface Layout</members>
         <members>ExternalSystem__c-External System Layout</members>
         <members>MetadataField__c-Asset</members>
         <members>MetadataField__c-Blueprint</members>

@@ -106,7 +106,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             'WaveAutoInstallRequest', 'WaveCompatibilityCheckItem', 'WebLink'
         };
         List<Schema.SObjectType> appSObjectTypes = new List<Schema.SObjectType>{
-            Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemInterface__c.SObjectType,
+            Schema.ExternalSystem__c.SObjectType, Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemPackage__c.SObjectType,
             Schema.MetadataField__c.SObjectType, Schema.MetadataRecordType__c.SObjectType, Schema.MetadataSObject__c.SObjectType
         };
         List<String> suffixes = new List<String>{'ChangeEvent', 'Feed', 'History', 'Share'};

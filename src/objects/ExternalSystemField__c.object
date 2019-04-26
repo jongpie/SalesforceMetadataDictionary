@@ -60,7 +60,7 @@
         <fields>Name</fields>
         <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
-        <fields>ExternalSystemInterface__c</fields>
+        <fields>ExternalSystemPackage__c</fields>
         <fields>Status__c</fields>
         <fields>Source__c</fields>
         <label>Interface Field Compact Layout</label>
@@ -109,33 +109,42 @@
         <visibleLines>5</visibleLines>
     </fields>
     <fields>
-        <fullName>ExternalSystemInterface__c</fullName>
-        <deleteConstraint>Restrict</deleteConstraint>
+        <fullName>ExternalSystemPackage__c</fullName>
         <externalId>false</externalId>
-        <label>Interface</label>
-        <referenceTo>ExternalSystemInterface__c</referenceTo>
+        <label>External System Package</label>
+        <lookupFilter>
+            <active>true</active>
+            <filterItems>
+                <field>ExternalSystemPackage__c.ExternalSystem__c</field>
+                <operation>equals</operation>
+                <valueField>$Source.ExternalSystem__c</valueField>
+            </filterItems>
+            <isOptional>false</isOptional>
+        </lookupFilter>
+        <referenceTo>ExternalSystemPackage__c</referenceTo>
         <relationshipLabel>External System Fields</relationshipLabel>
         <relationshipName>ExternalSystemFields</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
+        <type>MasterDetail</type>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
         <fullName>ExternalSystem__c</fullName>
+        <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
         <label>External System</label>
         <referenceTo>ExternalSystem__c</referenceTo>
         <relationshipLabel>External System Fields</relationshipLabel>
         <relationshipName>ExternalSystemFields</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
+        <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>MasterDetail</type>
-        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+        <type>Lookup</type>
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>
@@ -422,7 +431,7 @@ SourceField__c</formula>
         <fullName>AllInScopeInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
-        <columns>ExternalSystemInterface__c</columns>
+        <columns>ExternalSystemPackage__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
         <columns>Status__c</columns>
@@ -446,7 +455,7 @@ SourceField__c</formula>
         <fullName>AllInterfaceFields</fullName>
         <columns>NAME</columns>
         <columns>ExternalSystem__c</columns>
-        <columns>ExternalSystemInterface__c</columns>
+        <columns>ExternalSystemPackage__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
         <columns>Status__c</columns>

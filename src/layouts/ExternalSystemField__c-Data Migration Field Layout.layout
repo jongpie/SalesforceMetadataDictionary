@@ -12,11 +12,15 @@
                 <field>ExternalSystem__c</field>
             </layoutItems>
             <layoutItems>
-                <behavior>Edit</behavior>
-                <field>SourceLibrary__c</field>
+                <behavior>Required</behavior>
+                <field>ExternalSystemPackage__c</field>
             </layoutItems>
         </layoutColumns>
         <layoutColumns>
+            <layoutItems>
+                <behavior>Edit</behavior>
+                <field>SourceLibrary__c</field>
+            </layoutItems>
             <layoutItems>
                 <behavior>Edit</behavior>
                 <field>SourceEntity__c</field>
