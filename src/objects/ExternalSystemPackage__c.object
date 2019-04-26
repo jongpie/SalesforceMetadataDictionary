@@ -186,6 +186,32 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>IsClosed__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    TEXT(Status__c) == &apos;Not Used&apos;,
+    TEXT(Status__c) == &apos;Closed&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Closed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Done&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In Scope</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Protocol__c</fullName>
         <externalId>false</externalId>
         <label>Protocol</label>
@@ -266,6 +292,106 @@
         <columns>DataFormat__c</columns>
         <filterScope>Everything</filterScope>
         <label>All</label>
+    </listViews>
+    <listViews>
+        <fullName>AllDataMigration</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.DataMigration</value>
+        </filters>
+        <label>All Data Migration</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScope</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeDataMigrations</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.DataMigration</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope Data Migrations</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeInterfaces</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.InboundInterface,ExternalSystemPackage__c.OutboundInterface</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope Interfaces</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInterfaces</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.InboundInterface,ExternalSystemPackage__c.OutboundInterface</value>
+        </filters>
+        <label>All Interfaces</label>
     </listViews>
     <nameField>
         <label>Package Name</label>
