@@ -29,7 +29,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemField__c.ExternalSystemInterface__c</field>
+        <field>ExternalSystemField__c.ExternalSystem__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -104,32 +104,32 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.DataFormat__c</field>
+        <field>ExternalSystemPackage__c.DataFormat__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
+        <field>ExternalSystemPackage__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.ExternalSystemInterfaceNotes__c</field>
+        <field>ExternalSystemPackage__c.ExternalSystemPackageNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Frequency__c</field>
+        <field>ExternalSystemPackage__c.Frequency__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Protocol__c</field>
+        <field>ExternalSystemPackage__c.Protocol__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Uuid__c</field>
+        <field>ExternalSystemPackage__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -574,7 +574,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>ExternalSystemInterface__c</object>
+        <object>ExternalSystemPackage__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -622,11 +622,15 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
-        <recordType>ExternalSystemInterface__c.Inbound</recordType>
+        <recordType>ExternalSystemPackage__c.DataMigration</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
-        <recordType>ExternalSystemInterface__c.Outbound</recordType>
+        <recordType>ExternalSystemPackage__c.InboundInterface</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <recordType>ExternalSystemPackage__c.OutboundInterface</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -646,7 +650,7 @@
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
-        <tab>ExternalSystemInterface__c</tab>
+        <tab>ExternalSystemPackage__c</tab>
         <visibility>Visible</visibility>
     </tabSettings>
     <tabSettings>
