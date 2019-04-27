@@ -907,6 +907,10 @@ CASE(
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -1048,6 +1052,10 @@ CASE(
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

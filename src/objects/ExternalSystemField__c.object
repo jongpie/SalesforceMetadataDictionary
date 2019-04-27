@@ -522,6 +522,10 @@ SourceField__c</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -552,6 +556,10 @@ SourceField__c</formula>
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

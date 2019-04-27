@@ -742,6 +742,10 @@ IF(
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -790,6 +794,10 @@ IF(
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -833,6 +841,10 @@ IF(
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

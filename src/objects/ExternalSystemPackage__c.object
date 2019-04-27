@@ -478,6 +478,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -569,6 +573,10 @@
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -667,6 +675,10 @@
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>
