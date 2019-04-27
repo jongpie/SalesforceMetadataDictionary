@@ -317,8 +317,8 @@
             <label>Previously Met - Prev</label>
         </rules>
     </decisions>
-    <interviewLabel>MetadataExternalSystemFieldProcessor-1_InterviewLabel</interviewLabel>
-    <label>Metadata External System Field Processor</label>
+    <interviewLabel>ExternalSystemFieldProcessor-1_InterviewLabel</interviewLabel>
+    <label>External System Field Processor</label>
     <processMetadataValues>
         <name>ObjectType</name>
         <value>
@@ -511,7 +511,7 @@
         <object>ExternalSystemField__c</object>
     </recordUpdates>
     <startElementReference>myVariable_waitStartTimeAssignment</startElementReference>
-    <status>Active</status>
+    <status>Draft</status>
     <variables>
         <name>myVariable_current</name>
         <dataType>SObject</dataType>

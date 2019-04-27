@@ -53,7 +53,7 @@
         <name>FlexiPage</name>
     </types>
     <types>
-        <members>MetadataExternalSystemFieldProcessor</members>
+        <members>ExternalSystemFieldProcessor</members>
         <members>MetadataSObjectProcessor</members>
         <name>Flow</name>
     </types>
