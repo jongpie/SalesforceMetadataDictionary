@@ -230,6 +230,11 @@
                     <label>Bulk API</label>
                 </value>
                 <value>
+                    <fullName>Composite API</fullName>
+                    <default>false</default>
+                    <label>Composite API</label>
+                </value>
+                <value>
                     <fullName>FTP</fullName>
                     <default>false</default>
                     <label>FTP</label>
@@ -459,6 +464,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>Composite API</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>Manual Load</fullName>
                 <default>false</default>
             </values>
@@ -556,6 +565,10 @@
         </picklistValues>
         <picklistValues>
             <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>Composite API</fullName>
+                <default>false</default>
+            </values>
             <values>
                 <fullName>Manual Load</fullName>
                 <default>false</default>
