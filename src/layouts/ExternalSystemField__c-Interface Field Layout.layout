@@ -9,10 +9,6 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Required</behavior>
-                <field>ExternalSystem__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Required</behavior>
                 <field>ExternalSystemPackage__c</field>
             </layoutItems>
         </layoutColumns>

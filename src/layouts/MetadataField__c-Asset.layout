@@ -187,7 +187,6 @@
     </platformActionList>
     <relatedLists>
         <fields>NAME</fields>
-        <fields>ExternalSystem__c</fields>
         <fields>RECORDTYPE</fields>
         <fields>Source__c</fields>
         <fields>ExternalSystemFieldNotes__c</fields>

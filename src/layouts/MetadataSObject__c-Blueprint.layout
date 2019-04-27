@@ -150,7 +150,6 @@
     <relatedLists>
         <fields>NAME</fields>
         <fields>RECORDTYPE</fields>
-        <fields>ExternalSystem__c</fields>
         <fields>Source__c</fields>
         <fields>DataType__c</fields>
         <fields>MappedField__c</fields>

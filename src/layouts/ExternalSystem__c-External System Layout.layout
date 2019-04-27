@@ -96,16 +96,6 @@
         <fields>Frequency__c</fields>
         <relatedList>ExternalSystemPackage__c.ExternalSystem__c</relatedList>
     </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>RECORDTYPE</fields>
-        <fields>ExternalSystemPackage__c</fields>
-        <fields>Source__c</fields>
-        <fields>Status__c</fields>
-        <fields>MappedSObject__c</fields>
-        <fields>MappedField__c</fields>
-        <relatedList>ExternalSystemField__c.ExternalSystem__c</relatedList>
-    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>

@@ -55,11 +55,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemField__c.ExternalSystem__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>ExternalSystemField__c.IsClosed__c</field>
         <readable>true</readable>
     </fieldPermissions>
