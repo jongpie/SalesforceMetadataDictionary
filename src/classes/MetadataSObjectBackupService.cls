@@ -163,7 +163,7 @@ public without sharing class MetadataSObjectBackupService implements Database.Al
 
     private static String getChildRelationshipName(Schema.SObjectType parentSObjectType, Schema.SObjectType childSObjectType, Schema.SObjectField lookupField) {
         String relationshipName;
-        for(Schema.ChildRelationship cr : Schema.MetadataSObject__c.SObjectType.getDescribe().getChildRelationships()) {
+        for(Schema.ChildRelationship cr : parentSObjectType.getDescribe().getChildRelationships()) {
             if(cr.getChildSObject() != childSObjectType) continue;
             if(cr.getField() != lookupField) continue;
 
