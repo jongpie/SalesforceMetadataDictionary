@@ -568,7 +568,7 @@
             <label>Previously Met - Prev</label>
         </rules>
     </decisions>
-    <interviewLabel>MetadataSObjectProcessor-9_InterviewLabel</interviewLabel>
+    <interviewLabel>MetadataSObjectProcessor-11_InterviewLabel</interviewLabel>
     <label>Metadata SObject Processor</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -1097,7 +1097,7 @@
             <field>IsPermissionable__c</field>
             <operator>EqualTo</operator>
             <value>
-                <booleanValue>true</booleanValue>
+                <booleanValue>false</booleanValue>
             </value>
         </filters>
         <filters>
