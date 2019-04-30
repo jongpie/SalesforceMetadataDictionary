@@ -126,7 +126,7 @@
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Is Closed</label>

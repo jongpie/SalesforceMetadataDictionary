@@ -191,7 +191,7 @@ IF(
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
