@@ -204,11 +204,6 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataField__c.BusinessDefinition__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
         <editable>false</editable>
         <field>MetadataField__c.CalculatedFormula__c</field>
         <readable>true</readable>
@@ -370,11 +365,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataRecordType__c.BusinessDefinition__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MetadataRecordType__c.DesignNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -431,11 +421,6 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>MetadataSObject__c.AssetSummary__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataSObject__c.BusinessDefinition__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>

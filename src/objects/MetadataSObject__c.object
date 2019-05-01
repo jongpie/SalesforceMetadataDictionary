@@ -105,17 +105,6 @@ IF(
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>BusinessDefinition__c</fullName>
-        <externalId>false</externalId>
-        <label>Business Definition</label>
-        <length>131072</length>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>5</visibleLines>
-    </fields>
-    <fields>
         <fullName>DesignNotes__c</fullName>
         <externalId>false</externalId>
         <label>Design Notes</label>

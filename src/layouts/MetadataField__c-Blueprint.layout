@@ -89,10 +89,6 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>BusinessDefinition__c</field>
-            </layoutItems>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>DesignNotes__c</field>
             </layoutItems>
         </layoutColumns>
