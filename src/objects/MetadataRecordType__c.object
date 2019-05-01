@@ -136,7 +136,7 @@
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
@@ -160,7 +160,7 @@
         <externalId>false</externalId>
         <formula>OR(
     IsClosed__c = false,
-    TEXT(Status__c) = &apos;Approved&apos;
+    TEXT(Status__c) = &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Is In Scope</label>
@@ -253,20 +253,6 @@
         </valueSet>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
@@ -352,6 +338,10 @@
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -390,6 +380,10 @@
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="UTF-8"?>
-<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata">
+<CustomObject xmlns="http://soap.sforce.com/2006/04/metadata" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance">
     <actionOverrides>
         <actionName>Accept</actionName>
         <type>Default</type>
@@ -49,7 +49,6 @@
     <compactLayouts>
         <fullName>DataMigrationFieldCompactLayout</fullName>
         <fields>Name</fields>
-        <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
         <fields>DataCleanupRequired__c</fields>
@@ -58,9 +57,8 @@
     <compactLayouts>
         <fullName>InterfaceFieldCompactLayout</fullName>
         <fields>Name</fields>
-        <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
-        <fields>ExternalSystemInterface__c</fields>
+        <fields>ExternalSystemPackage__c</fields>
         <fields>Status__c</fields>
         <fields>Source__c</fields>
         <label>Interface Field Compact Layout</label>
@@ -109,39 +107,26 @@
         <visibleLines>5</visibleLines>
     </fields>
     <fields>
-        <fullName>ExternalSystemInterface__c</fullName>
-        <deleteConstraint>Restrict</deleteConstraint>
+        <fullName>ExternalSystemPackage__c</fullName>
         <externalId>false</externalId>
-        <label>Interface</label>
-        <referenceTo>ExternalSystemInterface__c</referenceTo>
+        <label>External System Package</label>
+        <referenceTo>ExternalSystemPackage__c</referenceTo>
         <relationshipLabel>External System Fields</relationshipLabel>
         <relationshipName>ExternalSystemFields</relationshipName>
-        <required>false</required>
+        <relationshipOrder>0</relationshipOrder>
+        <reparentableMasterDetail>true</reparentableMasterDetail>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
-        <type>Lookup</type>
-    </fields>
-    <fields>
-        <fullName>ExternalSystem__c</fullName>
-        <externalId>false</externalId>
-        <label>External System</label>
-        <referenceTo>ExternalSystem__c</referenceTo>
-        <relationshipName>FieldDependencies</relationshipName>
-        <relationshipOrder>0</relationshipOrder>
-        <reparentableMasterDetail>false</reparentableMasterDetail>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
-        <writeRequiresMasterRead>true</writeRequiresMasterRead>
+        <writeRequiresMasterRead>false</writeRequiresMasterRead>
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Is Closed</label>
@@ -354,7 +339,6 @@ SourceField__c</formula>
         <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>RECORDTYPE</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>Status__c</columns>
         <columns>MappedSObject__c</columns>
@@ -365,7 +349,6 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllDataMigrationFields</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
         <columns>MappedSObject__c</columns>
@@ -382,7 +365,6 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllInScope</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>Status__c</columns>
         <columns>Source__c</columns>
@@ -399,7 +381,6 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllInScopeDataMigrationFields</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>DataType__c</columns>
         <columns>MappedSObject__c</columns>
         <columns>MappedField__c</columns>
@@ -420,8 +401,7 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllInScopeInterfaceFields</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
-        <columns>ExternalSystemInterface__c</columns>
+        <columns>ExternalSystemPackage__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
         <columns>Status__c</columns>
@@ -444,8 +424,7 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllInterfaceFields</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
-        <columns>ExternalSystemInterface__c</columns>
+        <columns>ExternalSystemPackage__c</columns>
         <columns>Source__c</columns>
         <columns>DataType__c</columns>
         <columns>Status__c</columns>
@@ -463,7 +442,6 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllMapped</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
         <columns>Status__c</columns>
@@ -478,7 +456,6 @@ SourceField__c</formula>
     <listViews>
         <fullName>AllOpen</fullName>
         <columns>NAME</columns>
-        <columns>ExternalSystem__c</columns>
         <columns>Source__c</columns>
         <columns>MappedField__c</columns>
         <columns>Status__c</columns>
@@ -509,6 +486,10 @@ SourceField__c</formula>
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -545,6 +526,10 @@ SourceField__c</formula>
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -567,32 +552,32 @@ SourceField__c</formula>
         </picklistValues>
     </recordTypes>
     <searchLayouts>
-        <customTabListAdditionalFields>ExternalSystem__c</customTabListAdditionalFields>
+        <customTabListAdditionalFields xsi:nil="true"/>
         <customTabListAdditionalFields>RECORDTYPE</customTabListAdditionalFields>
         <customTabListAdditionalFields>Source__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>Status__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>MappedSObject__c</customTabListAdditionalFields>
         <customTabListAdditionalFields>MappedField__c</customTabListAdditionalFields>
-        <lookupDialogsAdditionalFields>ExternalSystem__c</lookupDialogsAdditionalFields>
+        <lookupDialogsAdditionalFields xsi:nil="true"/>
         <lookupDialogsAdditionalFields>RECORDTYPE</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Source__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>Status__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>MappedSObject__c</lookupDialogsAdditionalFields>
         <lookupDialogsAdditionalFields>MappedField__c</lookupDialogsAdditionalFields>
-        <lookupPhoneDialogsAdditionalFields>ExternalSystem__c</lookupPhoneDialogsAdditionalFields>
+        <lookupPhoneDialogsAdditionalFields xsi:nil="true"/>
         <lookupPhoneDialogsAdditionalFields>RECORDTYPE</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>Source__c</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>Status__c</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>MappedSObject__c</lookupPhoneDialogsAdditionalFields>
         <lookupPhoneDialogsAdditionalFields>MappedField__c</lookupPhoneDialogsAdditionalFields>
         <searchFilterFields>NAME</searchFilterFields>
-        <searchFilterFields>ExternalSystem__c</searchFilterFields>
+        <searchFilterFields xsi:nil="true"/>
         <searchFilterFields>RECORDTYPE</searchFilterFields>
         <searchFilterFields>Source__c</searchFilterFields>
         <searchFilterFields>Status__c</searchFilterFields>
         <searchFilterFields>MappedSObject__c</searchFilterFields>
         <searchFilterFields>MappedField__c</searchFilterFields>
-        <searchResultsAdditionalFields>ExternalSystem__c</searchResultsAdditionalFields>
+        <searchResultsAdditionalFields xsi:nil="true"/>
         <searchResultsAdditionalFields>RECORDTYPE</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Source__c</searchResultsAdditionalFields>
         <searchResultsAdditionalFields>Status__c</searchResultsAdditionalFields>

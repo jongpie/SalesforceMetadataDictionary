@@ -94,18 +94,7 @@
         <fields>Status__c</fields>
         <fields>EstimatedNumberOfRecords__c</fields>
         <fields>Frequency__c</fields>
-        <relatedList>ExternalSystemInterface__c.ExternalSystem__c</relatedList>
-    </relatedLists>
-    <relatedLists>
-        <fields>NAME</fields>
-        <fields>RECORDTYPE</fields>
-        <fields>Source__c</fields>
-        <fields>MappedSObject__c</fields>
-        <fields>MappedField__c</fields>
-        <fields>Status__c</fields>
-        <fields>CREATEDBY_USER</fields>
-        <fields>CREATED_DATE</fields>
-        <relatedList>ExternalSystemField__c.ExternalSystem__c</relatedList>
+        <relatedList>ExternalSystemPackage__c.ExternalSystem__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>

@@ -180,7 +180,7 @@ IF(
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
@@ -516,21 +516,6 @@ IF(
         <type>Summary</type>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
@@ -545,7 +530,7 @@ IF(
     </fields>
     <label>SObject</label>
     <listViews>
-        <fullName>All1</fullName>
+        <fullName>All</fullName>
         <columns>NAME</columns>
         <columns>RECORDTYPE</columns>
         <columns>Status__c</columns>
@@ -599,9 +584,10 @@ IF(
         <filters>
             <field>IsClosed__c</field>
             <operation>equals</operation>
-            <value>0</value>
+            <value>1</value>
         </filters>
         <label>All Closed</label>
+        <language>en_US</language>
     </listViews>
     <listViews>
         <fullName>AllCustomObjects</fullName>
@@ -745,6 +731,10 @@ IF(
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -793,6 +783,10 @@ IF(
                 <default>false</default>
             </values>
             <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>In Design</fullName>
                 <default>false</default>
             </values>
@@ -836,6 +830,10 @@ IF(
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

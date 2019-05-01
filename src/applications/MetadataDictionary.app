@@ -13,7 +13,7 @@
     <tabs>MetadataRecordType__c</tabs>
     <tabs>MetadataField__c</tabs>
     <tabs>ExternalSystem__c</tabs>
-    <tabs>ExternalSystemInterface__c</tabs>
+    <tabs>ExternalSystemPackage__c</tabs>
     <tabs>ExternalSystemField__c</tabs>
     <tabs>standard-Dashboard</tabs>
     <tabs>standard-report</tabs>

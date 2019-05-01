@@ -92,15 +92,15 @@ IF(
 )
 +
 IF(
-     IsNillable__c,
-     &apos;&apos;,
-     &apos;Required &apos;
+     AND(IsNillable__c = false, IsCalculated__c = false, ISPICKVAL(Type__c, &apos;Boolean&apos;) = false),
+     &apos;Required &apos;,
+     &apos;&apos;
 )
 +
 IF(
      IsCalculated__c,
-     &apos;&apos;,
-     &apos;Formula &apos;
+     &apos;Formula &apos;,
+     &apos;&apos;
 )
 +
 CASE(
@@ -227,7 +227,7 @@ CASE(
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
-    TEXT(Status__c) == &apos;Closed&apos;
+    TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <inlineHelpText>System generated.</inlineHelpText>
@@ -265,7 +265,7 @@ CASE(
         <externalId>false</externalId>
         <formula>OR(
     IsClosed__c = false,
-    TEXT(Status__c) = &apos;Approved&apos;
+    TEXT(Status__c) = &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Is In Scope</label>
@@ -786,21 +786,6 @@ CASE(
         </valueSet>
     </fields>
     <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
-    </fields>
-    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
@@ -812,16 +797,6 @@ CASE(
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
-    </fields>
-    <fields>
-        <fullName>WasCreatedThisWeek__c</fullName>
-        <externalId>false</externalId>
-        <formula>DATEVALUE(CreatedDate) &gt;= (TODAY()  - 7)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Was Created This Week</label>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Checkbox</type>
     </fields>
     <label>Field</label>
     <listViews>
@@ -886,11 +861,6 @@ CASE(
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>
         <filters>
-            <field>WasCreatedThisWeek__c</field>
-            <operation>equals</operation>
-            <value>1</value>
-        </filters>
-        <filters>
             <field>IsInScope__c</field>
             <operation>equals</operation>
             <value>1</value>
@@ -923,6 +893,10 @@ CASE(
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -1067,6 +1041,10 @@ CASE(
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

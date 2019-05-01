@@ -1,8 +1,8 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <PathAssistant xmlns="http://soap.sforce.com/2006/04/metadata">
     <active>true</active>
-    <entityName>ExternalSystemInterface__c</entityName>
+    <entityName>ExternalSystemPackage__c</entityName>
     <fieldName>Status__c</fieldName>
-    <masterLabel>External System Inferface Inbound</masterLabel>
-    <recordTypeName>Inbound</recordTypeName>
+    <masterLabel>External System Package Data Migration</masterLabel>
+    <recordTypeName>DataMigration</recordTypeName>
 </PathAssistant>

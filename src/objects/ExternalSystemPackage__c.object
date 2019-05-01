@@ -39,7 +39,7 @@
     <actionOverrides>
         <actionName>View</actionName>
         <comment>Action override created by Lightning App Builder during activation.</comment>
-        <content>ExternalSystemInterfaceRecordPage</content>
+        <content>ExternalSystemPackageRecordPage</content>
         <formFactor>Large</formFactor>
         <skipRecordTypeSelect>false</skipRecordTypeSelect>
         <type>Flexipage</type>
@@ -47,17 +47,17 @@
     <allowInChatterGroups>false</allowInChatterGroups>
     <compactLayoutAssignment>SYSTEM</compactLayoutAssignment>
     <compactLayouts>
-        <fullName>ExternalSystemInterfaceCompactLayout</fullName>
+        <fullName>ExternalSystemPackageCompactLayout</fullName>
         <fields>Name</fields>
         <fields>ExternalSystem__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
-        <label>External System Interface Compact Layout</label>
+        <label>External System Package Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
-    <enableFeeds>false</enableFeeds>
+    <enableFeeds>true</enableFeeds>
     <enableHistory>true</enableHistory>
     <enableLicensing>false</enableLicensing>
     <enableReports>true</enableReports>
@@ -69,6 +69,7 @@
         <externalId>false</externalId>
         <label>Data Format</label>
         <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -101,16 +102,18 @@
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>ExternalSystemInterfaceNotes__c</fullName>
+        <fullName>ExternalSystemPackageNotes__c</fullName>
         <externalId>false</externalId>
-        <label>External System Interface Notes</label>
+        <label>External System Package Notes</label>
         <length>131072</length>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
@@ -121,10 +124,11 @@
         <externalId>false</externalId>
         <label>External System</label>
         <referenceTo>ExternalSystem__c</referenceTo>
-        <relationshipLabel>External System Interfaces</relationshipLabel>
-        <relationshipName>ExternalSystemInterfaces</relationshipName>
+        <relationshipLabel>External System Packages</relationshipLabel>
+        <relationshipName>ExternalSystemPackages</relationshipName>
         <relationshipOrder>0</relationshipOrder>
         <reparentableMasterDetail>true</reparentableMasterDetail>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
@@ -135,6 +139,7 @@
         <externalId>false</externalId>
         <label>Frequency</label>
         <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -181,17 +186,64 @@
         </valueSet>
     </fields>
     <fields>
+        <fullName>IsClosed__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    TEXT(Status__c) == &apos;Not Used&apos;,
+    TEXT(Status__c) == &apos;Done&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is Closed</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
+        <fullName>IsInScope__c</fullName>
+        <externalId>false</externalId>
+        <formula>OR(
+    IsClosed__c = false,
+    TEXT(Status__c) = &apos;Done&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Is In Scope</label>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Checkbox</type>
+    </fields>
+    <fields>
         <fullName>Protocol__c</fullName>
         <externalId>false</externalId>
         <label>Protocol</label>
         <required>false</required>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
         <valueSet>
             <restricted>true</restricted>
             <valueSetDefinition>
-                <sorted>false</sorted>
+                <sorted>true</sorted>
+                <value>
+                    <fullName>Bulk API</fullName>
+                    <default>false</default>
+                    <label>Bulk API</label>
+                </value>
+                <value>
+                    <fullName>Composite API</fullName>
+                    <default>false</default>
+                    <label>Composite API</label>
+                </value>
+                <value>
+                    <fullName>FTP</fullName>
+                    <default>false</default>
+                    <label>FTP</label>
+                </value>
+                <value>
+                    <fullName>Manual Load</fullName>
+                    <default>false</default>
+                    <label>Manual Load</label>
+                </value>
                 <value>
                     <fullName>REST API</fullName>
                     <default>false</default>
@@ -210,6 +262,7 @@
         <externalId>false</externalId>
         <label>Status</label>
         <required>true</required>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Picklist</type>
@@ -225,12 +278,13 @@
         <label>UUID</label>
         <length>36</length>
         <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <label>External System Interface</label>
+    <label>External System Package</label>
     <listViews>
         <fullName>All</fullName>
         <columns>NAME</columns>
@@ -244,18 +298,119 @@
         <filterScope>Everything</filterScope>
         <label>All</label>
     </listViews>
+    <listViews>
+        <fullName>AllDataMigration</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.DataMigration</value>
+        </filters>
+        <label>All Data Migration</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScope</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeDataMigrations</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.DataMigration</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope Data Migrations</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInScopeInterfaces</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.InboundInterface,ExternalSystemPackage__c.OutboundInterface</value>
+        </filters>
+        <filters>
+            <field>IsInScope__c</field>
+            <operation>equals</operation>
+            <value>1</value>
+        </filters>
+        <label>All In Scope Interfaces</label>
+    </listViews>
+    <listViews>
+        <fullName>AllInterfaces</fullName>
+        <columns>NAME</columns>
+        <columns>ExternalSystem__c</columns>
+        <columns>RECORDTYPE</columns>
+        <columns>Status__c</columns>
+        <columns>Frequency__c</columns>
+        <columns>EstimatedNumberOfRecords__c</columns>
+        <columns>Protocol__c</columns>
+        <columns>DataFormat__c</columns>
+        <filterScope>Everything</filterScope>
+        <filters>
+            <field>RECORDTYPE</field>
+            <operation>equals</operation>
+            <value>ExternalSystemPackage__c.InboundInterface,ExternalSystemPackage__c.OutboundInterface</value>
+        </filters>
+        <label>All Interfaces</label>
+    </listViews>
     <nameField>
-        <label>Interface Name</label>
+        <label>Package Name</label>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <type>Text</type>
     </nameField>
-    <pluralLabel>External System Interfaces</pluralLabel>
+    <pluralLabel>External System Packages</pluralLabel>
+    <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
     <recordTypeTrackHistory>false</recordTypeTrackHistory>
     <recordTypes>
-        <fullName>Inbound</fullName>
+        <fullName>DataMigration</fullName>
         <active>true</active>
-        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
-        <label>Inbound</label>
+        <label>Data Migration</label>
         <picklistValues>
             <picklist>DataFormat__c</picklist>
             <values>
@@ -305,6 +460,18 @@
         <picklistValues>
             <picklist>Protocol__c</picklist>
             <values>
+                <fullName>Bulk API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Composite API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>REST API</fullName>
                 <default>false</default>
             </values>
@@ -317,6 +484,10 @@
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>
@@ -342,10 +513,10 @@
         </picklistValues>
     </recordTypes>
     <recordTypes>
-        <fullName>Outbound</fullName>
+        <fullName>InboundInterface</fullName>
         <active>true</active>
-        <compactLayoutAssignment>ExternalSystemInterfaceCompactLayout</compactLayoutAssignment>
-        <label>Outbound</label>
+        <compactLayoutAssignment>ExternalSystemPackageCompactLayout</compactLayoutAssignment>
+        <label>Inbound Interface</label>
         <picklistValues>
             <picklist>DataFormat__c</picklist>
             <values>
@@ -395,6 +566,14 @@
         <picklistValues>
             <picklist>Protocol__c</picklist>
             <values>
+                <fullName>Composite API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
+            <values>
                 <fullName>REST API</fullName>
                 <default>false</default>
             </values>
@@ -407,6 +586,112 @@
             <picklist>Status__c</picklist>
             <values>
                 <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Design</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Review</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>New</fullName>
+                <default>true</default>
+            </values>
+            <values>
+                <fullName>Not Used</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Hold</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+    </recordTypes>
+    <recordTypes>
+        <fullName>OutboundInterface</fullName>
+        <active>true</active>
+        <compactLayoutAssignment>ExternalSystemPackageCompactLayout</compactLayoutAssignment>
+        <label>Outbound Interface</label>
+        <picklistValues>
+            <picklist>DataFormat__c</picklist>
+            <values>
+                <fullName>Flat File</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>JSON</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>XML</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Frequency__c</picklist>
+            <values>
+                <fullName>Daily</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Hourly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Monthly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>On Demand</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Real Time</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Weekly</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Yearly</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Protocol__c</picklist>
+            <values>
+                <fullName>FTP</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>Manual Load</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>REST API</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>SOAP API</fullName>
+                <default>false</default>
+            </values>
+        </picklistValues>
+        <picklistValues>
+            <picklist>Status__c</picklist>
+            <values>
+                <fullName>Done</fullName>
+                <default>false</default>
+            </values>
+            <values>
+                <fullName>In Analysis</fullName>
                 <default>false</default>
             </values>
             <values>

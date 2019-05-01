@@ -6,11 +6,27 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
+        <apexClass>ExternalSystemBackupScheduler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>ExternalSystemBackupService</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
         <apexClass>MetadataSObjectAnalysisScheduler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
         <apexClass>MetadataSObjectAnalyzer</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MetadataSObjectBackupScheduler</apexClass>
+        <enabled>true</enabled>
+    </classAccesses>
+    <classAccesses>
+        <apexClass>MetadataSObjectBackupService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
@@ -35,11 +51,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>ExternalSystemField__c.ExternalSystemFieldNotes__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>ExternalSystemField__c.ExternalSystemInterface__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -114,32 +125,42 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.DataFormat__c</field>
+        <field>ExternalSystemPackage__c.DataFormat__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.EstimatedNumberOfRecords__c</field>
+        <field>ExternalSystemPackage__c.EstimatedNumberOfRecords__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.ExternalSystemInterfaceNotes__c</field>
+        <field>ExternalSystemPackage__c.ExternalSystemPackageNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Frequency__c</field>
+        <field>ExternalSystemPackage__c.Frequency__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemPackage__c.IsClosed__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemPackage__c.IsInScope__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Protocol__c</field>
+        <field>ExternalSystemPackage__c.Protocol__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>ExternalSystemInterface__c.Uuid__c</field>
+        <field>ExternalSystemPackage__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -334,17 +355,7 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataField__c.UploadId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MetadataField__c.Uuid__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
-        <field>MetadataField__c.WasCreatedThisWeek__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -400,11 +411,6 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MetadataRecordType__c.Status__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
-        <field>MetadataRecordType__c.UploadId__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -564,11 +570,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataSObject__c.UploadId__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MetadataSObject__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -584,15 +585,19 @@
         <recordType>ExternalSystemField__c.InterfaceField</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
+        <layout>ExternalSystemPackage__c-Data Migration Layout</layout>
+        <recordType>ExternalSystemPackage__c.DataMigration</recordType>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>ExternalSystemInterface__c-Inbound Interface Layout</layout>
-        <recordType>ExternalSystemInterface__c.Inbound</recordType>
+        <layout>ExternalSystemPackage__c-Inbound Interface Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
-        <layout>ExternalSystemInterface__c-Outbound Interface Layout</layout>
-        <recordType>ExternalSystemInterface__c.Outbound</recordType>
+        <layout>ExternalSystemPackage__c-Inbound Interface Layout</layout>
+        <recordType>ExternalSystemPackage__c.InboundInterface</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>ExternalSystemPackage__c-Outbound Interface Layout</layout>
+        <recordType>ExternalSystemPackage__c.OutboundInterface</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>ExternalSystem__c-External System Layout</layout>
@@ -649,7 +654,7 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
-        <object>ExternalSystemInterface__c</object>
+        <object>ExternalSystemPackage__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -699,13 +704,18 @@
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>ExternalSystemPackage__c.DataMigration</recordType>
+        <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
         <default>true</default>
-        <recordType>ExternalSystemInterface__c.Inbound</recordType>
+        <recordType>ExternalSystemPackage__c.InboundInterface</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>ExternalSystemInterface__c.Outbound</recordType>
+        <recordType>ExternalSystemPackage__c.OutboundInterface</recordType>
         <visible>true</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
@@ -748,7 +758,7 @@
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>
-        <tab>ExternalSystemInterface__c</tab>
+        <tab>ExternalSystemPackage__c</tab>
         <visibility>DefaultOn</visibility>
     </tabVisibilities>
     <tabVisibilities>

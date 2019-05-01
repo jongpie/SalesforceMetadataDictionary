@@ -42,7 +42,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>ExternalSystemInterfaceNotes__c</field>
+                <field>ExternalSystemPackageNotes__c</field>
             </layoutItems>
         </layoutColumns>
         <style>OneColumn</style>
@@ -74,15 +74,10 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Edit</behavior>
-                <field>Frequency__c</field>
-            </layoutItems>
-        </layoutColumns>
-        <layoutColumns>
-            <layoutItems>
-                <behavior>Edit</behavior>
                 <field>EstimatedNumberOfRecords__c</field>
             </layoutItems>
         </layoutColumns>
+        <layoutColumns/>
         <style>TwoColumnsLeftToRight</style>
     </layoutSections>
     <layoutSections>
@@ -129,7 +124,7 @@
         <fields>DataType__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
-        <relatedList>ExternalSystemField__c.ExternalSystemInterface__c</relatedList>
+        <relatedList>ExternalSystemField__c.ExternalSystemPackage__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
@@ -137,7 +132,7 @@
     <showRunAssignmentRulesCheckbox>false</showRunAssignmentRulesCheckbox>
     <showSubmitAndAttachButton>false</showSubmitAndAttachButton>
     <summaryLayout>
-        <masterLabel>00h1v000005GhFj</masterLabel>
+        <masterLabel>00h1v000005Gixc</masterLabel>
         <sizeX>4</sizeX>
         <sizeY>0</sizeY>
         <summaryLayoutStyle>Default</summaryLayoutStyle>

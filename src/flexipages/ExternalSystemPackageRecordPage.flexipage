@@ -85,8 +85,8 @@
         <name>main</name>
         <type>Region</type>
     </flexiPageRegions>
-    <masterLabel>External System Interface Record Page</masterLabel>
-    <sobjectType>ExternalSystemInterface__c</sobjectType>
+    <masterLabel>External System Package Record Page</masterLabel>
+    <sobjectType>ExternalSystemPackage__c</sobjectType>
     <template>
         <name>flexipage:recordHomeSingleColTemplateDesktop</name>
     </template>
