@@ -19,16 +19,16 @@ public without sharing class ExternalSystemBackupService implements Database.All
     }
 
     public List<ExternalSystem__c> start(Database.BatchableContext batchableContext) {
-        return Database.query(this.getQueryString());
+        return Database.query(this.getExternalSystemQueryString());
     }
 
     public void execute(Database.BatchableContext batchableContext, List<ExternalSystem__c> scope) {
         Map<Id, List<ExternalSystemPackage__c>> externalSystemPackagesBySystemId = this.queryChildRecords(scope, Schema.ExternalSystemPackage__c.SObjectType, Schema.ExternalSystemPackage__c.ExternalSystem__c);
+
         List<ExternalSystemPackage__c> externalSystemPackages = new List<ExternalSystemPackage__c>();
         for(List<ExternalSystemPackage__c> packages : externalSystemPackagesBySystemId.values()) {
             externalSystemPackages.addAll(packages);
         }
-        //TODO populate list of packages
         Map<Id, List<ExternalSystemField__c>> externalSystemFieldsByPackageId    = this.queryChildRecords(externalSystemPackages, Schema.ExternalSystemField__c.SObjectType, Schema.ExternalSystemField__c.ExternalSystemPackage__c);
 
         // Get any existing static resources so we can update them
@@ -41,26 +41,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
             ExternalSystem__c cleanedExternalSystem = externalSystem.clone(false, true, false, false);
             Map<String, Object> cleanedExternalSystemDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedExternalSystem));//(Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedExternalSystem));
 
-            // Cleanup the fields before serialization
-            //if(!externalSystem.ExternalSystemFields__r.isEmpty()) {
-            //    List<ExternalSystemField__c> cleanedFields = new List<ExternalSystemField__c>();
-            //    //for(ExternalSystemField__c metadataField : externalSystem.ExternalSystemFields__r) {
-            //    //    ExternalSystemField__c cleanedField = metadataField.clone(false, true, false, false);
-            //    //    cleanedField.ExternalSystemPackage__c = null;
-
-            //    //    Map<String, Object> cleanedFieldDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedField));
-            //    //    cleanedFieldDto = this.removeUnusedAttributes(cleanedFieldDto);
-
-            //    //    cleanedField = (Schema.ExternalSystemField__c)Json.deserialize(Json.serialize(cleanedFieldDto), ExternalSystemField__c.class);
-
-            //    //    cleanedFields.add(cleanedField);
-            //    //}
-            //    Map<String, Object> fields = (Map<String, Object>)cleanedExternalSystemDto.get(FIELDS_CHILD_RELATIONSHIP_NAME);
-            //    fields.put('records', cleanedFields);
-            //}
-
-            // Cleanup the record types before serialization
-            //if(!externalSystem.ExternalSystemPackages__r.isEmpty()) {
+            // Cleanup the packages before serialization
             if(externalSystemPackagesBySystemId.containsKey(externalSystem.Id)) {
                 List<ExternalSystemPackage__c> cleanedExternalSystemPackages = new List<ExternalSystemPackage__c>();
 
@@ -70,6 +51,7 @@ public without sharing class ExternalSystemBackupService implements Database.All
 
                     Map<String, Object> cleanedExternalSystemPackageDto = (Map<String, Object>)Json.deserializeUntyped(Json.serialize(cleanedExternalSystemPackage));
 
+                    // Cleanup the fields before serialization
                     if(externalSystemFieldsByPackageId.containsKey(externalSystemPackage.Id)) {
                         List<ExternalSystemField__c> cleanedExternalSystemFields = new List<ExternalSystemField__c>();
 
@@ -92,10 +74,8 @@ public without sharing class ExternalSystemBackupService implements Database.All
                         fieldsDto.put('totalSize', cleanedExternalSystemFields.size());
                         fieldsDto.put('done', true);
                         fieldsDto = this.removeUnusedAttributes(fieldsDto);
-System.debug('FIELDS_CHILD_RELATIONSHIP_NAME=' + FIELDS_CHILD_RELATIONSHIP_NAME);
+
                         cleanedExternalSystemPackageDto.put(FIELDS_CHILD_RELATIONSHIP_NAME, fieldsDto);
-System.debug('cleanedExternalSystemPackageDto=');
-System.debug(cleanedExternalSystemPackageDto);
                     }
 
 
@@ -133,19 +113,10 @@ System.debug(cleanedExternalSystemPackageDto);
 
     public void finish(Database.BatchableContext batchableContext) {}
 
-    private String getQueryString() {
-        String query = '';
+    private String getExternalSystemQueryString() {
+        List<String> fieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystem__c.SObjectType);
 
-        List<String> externalSystemFieldsToQuery    = this.getFieldsToQuery(Schema.ExternalSystem__c.SObjectType);
-        //List<String> externalSystemFieldFieldsToQuery      = this.getFieldsToQuery(Schema.ExternalSystemField__c.SObjectType);
-        //List<String> externalSystemPackageFieldsToQuery = this.getFieldsToQuery(Schema.ExternalSystemPackage__c.SObjectType);
-
-        query = 'SELECT ' + String.join(externalSystemFieldsToQuery, ', ')
-                //+ ', (SELECT ' + String.join(externalSystemFieldFieldsToQuery, ', ') + ' FROM ' + FIELDS_CHILD_RELATIONSHIP_NAME + ')'
-                //+ ', (SELECT ' + String.join(externalSystemPackageFieldsToQuery, ', ') + ' FROM ' + RECORD_TYPES_CHILD_RELATIONSHIP_NAME + ')'
-                + ' FROM ' + Schema.ExternalSystem__c.SObjectType;
-        System.debug('query=' + query);
-        return query;
+        return 'SELECT ' + String.join(fieldsToQuery, ', ') + ' FROM ' + Schema.ExternalSystem__c.SObjectType;
     }
 
     private List<String> getFieldsToQuery(Schema.SObjectType sobjectType) {
@@ -164,9 +135,6 @@ System.debug(cleanedExternalSystemPackageDto);
         if(allFieldsByApiName.containsKey('recordtypeid')) {
             fields.add('recordtype.developername');
         }
-        /*fields.addAll(new List<String>{
-            'RecordType.DeveloperName'.toLowerCase()
-        });*/
 
         if(sobjectType == Schema.ExternalSystemPackage__c.SObjectType) {
             fields.add(Schema.ExternalSystemPackage__c.ExternalSystem__c.getDescribe().getRelationshipName() + '.' + Schema.ExternalSystem__c.Uuid__c);
@@ -215,13 +183,12 @@ System.debug(cleanedExternalSystemPackageDto);
     }
 
     private Map<String, Object> removeUnusedAttributes(Map<String, Object> cleanedSObjectDto) {
-        // TODO use this to remove extra details from audit fields, record type, etc
+        // TODO need to cleanup/improve
         cleanedSObjectDto.remove('attributes');
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.ExternalSystemPackage__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedField__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemField__c.MappedSObject__c.getDescribe().getName());
         cleanedSObjectDto.remove(Schema.ExternalSystemPackage__c.ExternalSystem__c.getDescribe().getName());
-        //cleanedSObjectDto.remove(Schema.ExternalSystem__c.PrimaryExternalSystem__c.getDescribe().getName());
         cleanedSObjectDto.remove('RecordTypeId');
 
         String packageRelationshipName = Schema.ExternalSystemField__c.ExternalSystemPackage__c.getDescribe().getRelationshipName();
@@ -259,14 +226,6 @@ System.debug(cleanedExternalSystemPackageDto);
 
             cleanedSObjectDto.put(mappedFieldRelationshipName, mappedFieldDto);
         }
-
-/*        if(cleanedSObjectDto.containsKey(Schema.ExternalSystemField.ExternalSystem__c.getDescribe().getRelationshipName()) || cleanedSObjectDto.containsKey(Schema.ExternalSystemPackage__c.ExternalSystem__c.getDescribe().getRelationshipName())) {
-            Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
-            recordTypeDto.remove('attributes');
-            recordTypeDto.remove('Id');
-
-            cleanedSObjectDto.put('RecordType', recordTypeDto);
-        }*/
 
         if(cleanedSObjectDto.containsKey('RecordType')) {
             Map<String, Object> recordTypeDto = (Map<String, Object>)cleanedSObjectDto.get('RecordType');
