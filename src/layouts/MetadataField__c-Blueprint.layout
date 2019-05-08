@@ -133,8 +133,18 @@
     </platformActionList>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>Label__c</fields>
+        <fields>RECORDTYPE</fields>
+        <fields>Status__c</fields>
+        <fields>IsActive__c</fields>
+        <fields>IsDefaultValue__c</fields>
+        <relatedList>MetadataPicklistEntry__c.MetadataField__c</relatedList>
+    </relatedLists>
+    <relatedLists>
+        <fields>NAME</fields>
         <fields>RECORDTYPE</fields>
         <fields>Source__c</fields>
+        <fields>Status__c</fields>
         <fields>ExternalSystemFieldNotes__c</fields>
         <fields>MappingNotes__c</fields>
         <relatedList>ExternalSystemField__c.MappedField__c</relatedList>
