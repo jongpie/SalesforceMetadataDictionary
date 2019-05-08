@@ -320,11 +320,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
-        <field>MetadataField__c.PicklistValues__c</field>
-        <readable>true</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>true</editable>
         <field>MetadataField__c.Precision__c</field>
         <readable>true</readable>
     </fieldPermissions>
