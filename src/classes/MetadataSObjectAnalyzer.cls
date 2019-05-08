@@ -23,8 +23,9 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
 
         List<MetadataSObject__c> metadataSObjects                = new List<MetadataSObject__c>();
         List<MetadataSObject__c> metadataPlatformFeatureSObjects = new List<MetadataSObject__c>();
-        List<MetadataField__c> metadataFields                    = new List<MetadataField__c>();
         List<MetadataRecordType__c> metadataRecordTypes          = new List<MetadataRecordType__c>();
+        List<MetadataField__c> metadataFields                    = new List<MetadataField__c>();
+        List<MetadataPicklistEntry__c> metadataPicklistEntries   = new List<MetadataPicklistEntry__c>();
 
         for(SObjectType sobjectType : scope) {
             Schema.DescribeSObjectResult sobjectDescribe = sobjectType.getDescribe();
@@ -57,6 +58,11 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             for(SObjectField field : sobjectDescribe.fields.getMap().values()) {
                 MetadataField__c convertedField = this.convert(sobjectDescribe, field.getDescribe());
                 metadataFields.add(convertedField);
+
+                for(Schema.PicklistEntry picklistEntry : field.getDescribe().getPicklistValues()) {
+                    MetadataPicklistEntry__c convertedPicklistEntry = this.convert(sobjectDescribe, field.getDescribe(), picklistEntry);
+                    metadataPicklistEntries.add(convertedPicklistEntry);
+                }
             }
         }
 
@@ -64,6 +70,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         upsert metadataPlatformFeatureSObjects DeveloperName__c;
         upsert metadataRecordTypes DeveloperName__c;
         upsert metadataFields DeveloperName__c;
+        upsert metadataPicklistEntries DeveloperName__c;
     }
 
     public void finish(Database.BatchableContext batchableContext) {}
@@ -210,6 +217,23 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
         return metadataField;
     }
 
+    private MetadataPicklistEntry__c convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.DescribeFieldResult fieldDescribe, Schema.PicklistEntry picklistEntry) {
+        String fieldDeveloperName = sobjectDescribe.getName() + '.' + fieldDescribe.getName();
+        String picklistEntryDeveloperName = fieldDeveloperName + '.' + picklistEntry.getValue();
+
+        MetadataPicklistEntry__c metadataPicklistEntry = new MetadataPicklistEntry__c(
+            DeveloperName__c  = picklistEntryDeveloperName,
+            IsActive__c       = picklistEntry.IsActive(),
+            IsDefaultValue__c = picklistEntry.isDefaultValue(),
+            Label__c          = picklistEntry.getLabel(),
+            MetadataField__r  = new MetadataField__c(DeveloperName__c = fieldDeveloperName),
+            Name              = picklistEntry.getValue(),
+            RecordTypeId      = this.getRecordTypeId(Schema.MetadataPicklistEntry__c.SObjectType, ASSET_DEVELOPER_NAME)
+        );
+
+        return metadataPicklistEntry;
+    }
+
     private Id getRecordTypeId(Schema.SObjectType sobjectType, String recordTypeDeveloperName) {
         return sobjectType.getDescribe().getRecordTypeInfosByDeveloperName().get(recordTypeDeveloperName).getRecordTypeId();
     }
@@ -275,23 +299,6 @@ System.debug('primarySObjectDeveloperName=' + primarySObjectDeveloperName);
             values.add(sobjectType.getDescribe().getName());
         }
         return String.join(values, '\n');
-    }
-
-    private String getPicklistValueString(Schema.DescribeFieldResult fieldDescribe) {
-        String valueString = String.join(this.getPicklistValues(fieldDescribe), '\n');
-        if(valueString.length() > fieldDescribe.getLength()) return 'Too many values';
-        return valueString;
-    }
-
-    private List<String> getPicklistValues(Schema.DescribeFieldResult fieldDescribe) {
-        List<String> picklistValues = new List<String>();
-
-        if(fieldDescribe.getPickListValues().isEmpty()) return picklistValues;
-
-        for(Schema.PicklistEntry picklistEntry : fieldDescribe.getPickListValues()) {
-            picklistValues.add(picklistEntry.getValue());
-        }
-        return picklistValues;
     }
 
 }
