@@ -15,7 +15,9 @@
         <members>ExternalSystem</members>
         <members>ExternalSystemField</members>
         <members>ExternalSystemPackage</members>
+        <members>ExternalSystemPicklistEntry</members>
         <members>MetadataField</members>
+        <members>MetadataPicklistEntry</members>
         <members>MetadataRecordType</members>
         <members>MetadataSObject</members>
         <name>ApexTrigger</name>
@@ -27,8 +29,10 @@
     <types>
         <members>ExternalSystemField__c</members>
         <members>ExternalSystemPackage__c</members>
+        <members>ExternalSystemPicklistEntry__c</members>
         <members>ExternalSystem__c</members>
         <members>MetadataField__c</members>
+        <members>MetadataPicklistEntry__c</members>
         <members>MetadataRecordType__c</members>
         <members>MetadataSObject__c</members>
         <name>CustomObject</name>
@@ -45,8 +49,10 @@
     <types>
         <members>ExternalSystemFieldRecordPage</members>
         <members>ExternalSystemPackageRecordPage</members>
+        <members>ExternalSystemPicklistEntryRecordPage</members>
         <members>ExternalSystemRecordPage</members>
         <members>MetadataFieldRecordPage</members>
+        <members>MetadataPicklistEntryRecordPage</members>
         <members>MetadataRecordTypeRecordPage</members>
         <members>MetadataSObjectRecordPage</members>
         <members>Metadata_Dictionary_UtilityBar</members>
@@ -67,9 +73,12 @@
         <members>ExternalSystemPackage__c-Data Migration Layout</members>
         <members>ExternalSystemPackage__c-Inbound Interface Layout</members>
         <members>ExternalSystemPackage__c-Outbound Interface Layout</members>
+        <members>ExternalSystemPicklistEntry__c-External System Picklist Entry Layout</members>
         <members>ExternalSystem__c-External System Layout</members>
         <members>MetadataField__c-Asset</members>
         <members>MetadataField__c-Blueprint</members>
+        <members>MetadataPicklistEntry__c-Asset Picklist Entry Layout</members>
+        <members>MetadataPicklistEntry__c-Blueprint Picklist Entry Layout</members>
         <members>MetadataRecordType__c-Asset</members>
         <members>MetadataRecordType__c-Blueprint</members>
         <members>MetadataSObject__c-Asset</members>
