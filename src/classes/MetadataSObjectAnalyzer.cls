@@ -205,7 +205,6 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
             MetadataSObject__r      = new MetadataSObject__c(DeveloperName__c = sobjectDescribe.getName()),
             Name                    = fieldDescribe.getName(),
             Namespace__c            = this.getNamespace(fieldDescribe),
-            PicklistValues__c       = this.getPicklistValueString(fieldDescribe),
             Precision__c            = fieldDescribe.getPrecision(),
             RecordTypeId            = this.getRecordTypeId(Schema.MetadataField__c.SObjectType, ASSET_DEVELOPER_NAME),
             ReferenceTo__c          = this.getReferenceToValueString(fieldDescribe),

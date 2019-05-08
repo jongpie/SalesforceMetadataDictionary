@@ -443,19 +443,6 @@ CASE(
         </valueSet>
     </fields>
     <fields>
-        <fullName>PicklistValues__c</fullName>
-        <description>System generated</description>
-        <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
-        <label>Picklist Values</label>
-        <length>131072</length>
-        <trackFeedHistory>true</trackFeedHistory>
-        <trackHistory>true</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>LongTextArea</type>
-        <visibleLines>5</visibleLines>
-    </fields>
-    <fields>
         <fullName>Precision__c</fullName>
         <description>System generated. For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</description>
         <externalId>false</externalId>
