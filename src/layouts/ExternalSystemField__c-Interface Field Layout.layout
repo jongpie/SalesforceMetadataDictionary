@@ -141,6 +141,8 @@
     </platformActionList>
     <relatedLists>
         <fields>NAME</fields>
+        <fields>ExternalPicklistLabel__c</fields>
+        <fields>Status__c</fields>
         <fields>MappedPicklistEntry__c</fields>
         <relatedList>ExternalSystemPicklistEntry__c.ExternalSystemField__c</relatedList>
     </relatedLists>

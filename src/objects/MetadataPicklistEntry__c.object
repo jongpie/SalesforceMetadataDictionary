@@ -181,7 +181,6 @@
         <type>Text</type>
         <unique>true</unique>
     </fields>
-    <gender>Feminine</gender>
     <label>Picklist Entry</label>
     <nameField>
         <label>Picklist Value</label>
