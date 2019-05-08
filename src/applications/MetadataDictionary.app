@@ -4,6 +4,7 @@
         <headerColor>#0ECA24</headerColor>
         <shouldOverrideOrgTheme>true</shouldOverrideOrgTheme>
     </brand>
+    <description>Plan, manage and document metadata changes for your Salesforce org.</description>
     <formFactors>Large</formFactors>
     <isNavAutoTempTabsDisabled>true</isNavAutoTempTabsDisabled>
     <isNavPersonalizationDisabled>true</isNavPersonalizationDisabled>
