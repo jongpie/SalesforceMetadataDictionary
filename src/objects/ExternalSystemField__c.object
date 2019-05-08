@@ -52,6 +52,8 @@
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
         <fields>DataCleanupRequired__c</fields>
+        <fields>MappedSObject__c</fields>
+        <fields>MappedField__c</fields>
         <label>Data Migration Field Compact Layout</label>
     </compactLayouts>
     <compactLayouts>
@@ -61,6 +63,8 @@
         <fields>ExternalSystemPackage__c</fields>
         <fields>Status__c</fields>
         <fields>Source__c</fields>
+        <fields>MappedSObject__c</fields>
+        <fields>MappedField__c</fields>
         <label>Interface Field Compact Layout</label>
     </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
@@ -207,7 +211,7 @@
         <fullName>MappedSObject__c</fullName>
         <deleteConstraint>Restrict</deleteConstraint>
         <externalId>false</externalId>
-        <label>Mapped Object</label>
+        <label>Mapped SObject</label>
         <lookupFilter>
             <active>true</active>
             <filterItems>

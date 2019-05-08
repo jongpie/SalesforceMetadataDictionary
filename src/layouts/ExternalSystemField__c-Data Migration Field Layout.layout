@@ -151,6 +151,11 @@
             <sortOrder>0</sortOrder>
         </platformActionListItems>
     </platformActionList>
+    <relatedLists>
+        <fields>NAME</fields>
+        <fields>MappedPicklistEntry__c</fields>
+        <relatedList>ExternalSystemPicklistEntry__c.ExternalSystemField__c</relatedList>
+    </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
     <showHighlightsPanel>false</showHighlightsPanel>
     <showInteractionLogPanel>false</showInteractionLogPanel>
