@@ -165,6 +165,41 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>true</editable>
+        <field>ExternalSystemPicklistEntry__c.ExternalPicklistLabel__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemPicklistEntry__c.IsClosed__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemPicklistEntry__c.IsInScope__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemPicklistEntry__c.MappedField__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemPicklistEntry__c.MappedPicklistEntry__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemPicklistEntry__c.MappedSObject__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>ExternalSystemPicklistEntry__c.Uuid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
         <field>ExternalSystem__c.ExternalSystemNotes__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -351,6 +386,41 @@
     <fieldPermissions>
         <editable>true</editable>
         <field>MetadataField__c.Uuid__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>MetadataPicklistEntry__c.DeveloperName__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>MetadataPicklistEntry__c.IsActive__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataPicklistEntry__c.IsClosed__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>MetadataPicklistEntry__c.IsDefaultValue__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataPicklistEntry__c.IsInScope__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>MetadataPicklistEntry__c.Label__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>true</editable>
+        <field>MetadataPicklistEntry__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -595,6 +665,9 @@
         <recordType>ExternalSystemPackage__c.OutboundInterface</recordType>
     </layoutAssignments>
     <layoutAssignments>
+        <layout>ExternalSystemPicklistEntry__c-External System Picklist Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
         <layout>ExternalSystem__c-External System Layout</layout>
     </layoutAssignments>
     <layoutAssignments>
@@ -607,6 +680,17 @@
     <layoutAssignments>
         <layout>MetadataField__c-Blueprint</layout>
         <recordType>MetadataField__c.Blueprint</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataPicklistEntry__c-Asset Picklist Entry Layout</layout>
+        <recordType>MetadataPicklistEntry__c.Asset</recordType>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataPicklistEntry__c-Blueprint Picklist Entry Layout</layout>
+    </layoutAssignments>
+    <layoutAssignments>
+        <layout>MetadataPicklistEntry__c-Blueprint Picklist Entry Layout</layout>
+        <recordType>MetadataPicklistEntry__c.Blueprint</recordType>
     </layoutAssignments>
     <layoutAssignments>
         <layout>MetadataRecordType__c-Asset</layout>
@@ -658,6 +742,15 @@
         <allowEdit>true</allowEdit>
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
+        <object>ExternalSystemPicklistEntry__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
         <object>ExternalSystem__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
@@ -668,6 +761,15 @@
         <allowRead>true</allowRead>
         <modifyAllRecords>true</modifyAllRecords>
         <object>MetadataField__c</object>
+        <viewAllRecords>true</viewAllRecords>
+    </objectPermissions>
+    <objectPermissions>
+        <allowCreate>true</allowCreate>
+        <allowDelete>true</allowDelete>
+        <allowEdit>true</allowEdit>
+        <allowRead>true</allowRead>
+        <modifyAllRecords>true</modifyAllRecords>
+        <object>MetadataPicklistEntry__c</object>
         <viewAllRecords>true</viewAllRecords>
     </objectPermissions>
     <objectPermissions>
@@ -716,7 +818,7 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>MetadataField__c.Asset</recordType>
-        <visible>true</visible>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
@@ -725,8 +827,18 @@
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>false</default>
-        <recordType>MetadataRecordType__c.Asset</recordType>
+        <recordType>MetadataPicklistEntry__c.Asset</recordType>
+        <visible>false</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>true</default>
+        <recordType>MetadataPicklistEntry__c.Blueprint</recordType>
         <visible>true</visible>
+    </recordTypeVisibilities>
+    <recordTypeVisibilities>
+        <default>false</default>
+        <recordType>MetadataRecordType__c.Asset</recordType>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
@@ -736,7 +848,7 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>MetadataSObject__c.Asset</recordType>
-        <visible>true</visible>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <recordTypeVisibilities>
         <default>true</default>
@@ -746,7 +858,7 @@
     <recordTypeVisibilities>
         <default>false</default>
         <recordType>MetadataSObject__c.PlatformFeatureAsset</recordType>
-        <visible>true</visible>
+        <visible>false</visible>
     </recordTypeVisibilities>
     <tabVisibilities>
         <tab>ExternalSystemField__c</tab>
