@@ -3,6 +3,6 @@
     <active>true</active>
     <entityName>MetadataPicklistEntry__c</entityName>
     <fieldName>Status__c</fieldName>
-    <masterLabel>Metadata Picklist Value Asset</masterLabel>
+    <masterLabel>Metadata Picklist Entry Asset</masterLabel>
     <recordTypeName>Asset</recordTypeName>
 </PathAssistant>
