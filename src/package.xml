@@ -93,6 +93,7 @@
     <types>
         <members>MetadataDictionaryAdmin</members>
         <members>MetadataDictionaryExternalSystemManager</members>
+        <members>MetadataDictionaryViewAll</members>
         <name>PermissionSet</name>
     </types>
     <types>
