@@ -472,11 +472,10 @@ SourceField__c</formula>
         <label>All Open</label>
     </listViews>
     <nameField>
-        <displayFormat>ExtField-{00000}</displayFormat>
-        <label>External Field Number</label>
+        <label>External Field Name</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>
-        <type>AutoNumber</type>
+        <type>Text</type>
     </nameField>
     <pluralLabel>External System Fields</pluralLabel>
     <recordTypeTrackFeedHistory>false</recordTypeTrackFeedHistory>
