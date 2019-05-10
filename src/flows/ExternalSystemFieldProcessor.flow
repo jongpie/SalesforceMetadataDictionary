@@ -35,6 +35,37 @@
             <name>myRule_1</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
+                <leftValueReference>formula_myRule_1</leftValueReference>
+                <operator>EqualTo</operator>
+                <rightValue>
+                    <booleanValue>true</booleanValue>
+                </rightValue>
+            </conditions>
+            <connector>
+                <targetReference>myRule_1_A1</targetReference>
+            </connector>
+            <label>Sync Values to Picklist Entries</label>
+        </rules>
+    </decisions>
+    <decisions>
+        <processMetadataValues>
+            <name>index</name>
+            <value>
+                <numberValue>1.0</numberValue>
+            </value>
+        </processMetadataValues>
+        <name>myDecision2</name>
+        <label>myDecision2</label>
+        <locationX>50</locationX>
+        <locationY>0</locationY>
+        <defaultConnector>
+            <targetReference>myDecision4</targetReference>
+        </defaultConnector>
+        <defaultConnectorLabel>default</defaultConnectorLabel>
+        <rules>
+            <name>myRule_3</name>
+            <conditionLogic>and</conditionLogic>
+            <conditions>
                 <processMetadataValues>
                     <name>inputDataType</name>
                     <value>
@@ -75,7 +106,7 @@
                 <processMetadataValues>
                     <name>leftHandSideReferenceTo</name>
                     <value>
-                        <stringValue>Nebula__MetadataSObject__c</stringValue>
+                        <stringValue>MetadataSObject__c</stringValue>
                     </value>
                 </processMetadataValues>
                 <processMetadataValues>
@@ -100,7 +131,7 @@
                 <operator>NotEqualTo</operator>
             </conditions>
             <connector>
-                <targetReference>myRule_1_pmetdec</targetReference>
+                <targetReference>myRule_3_pmetdec</targetReference>
             </connector>
             <label>Mapped SObject Is Set for Record w/ Status = &apos;New&apos;</label>
         </rules>
@@ -109,16 +140,16 @@
         <processMetadataValues>
             <name>index</name>
             <value>
-                <numberValue>1.0</numberValue>
+                <numberValue>2.0</numberValue>
             </value>
         </processMetadataValues>
-        <name>myDecision2</name>
-        <label>myDecision2</label>
+        <name>myDecision4</name>
+        <label>myDecision4</label>
         <locationX>50</locationX>
         <locationY>0</locationY>
         <defaultConnectorLabel>default</defaultConnectorLabel>
         <rules>
-            <name>myRule_3</name>
+            <name>myRule_5</name>
             <conditionLogic>(1 OR 2) AND 3</conditionLogic>
             <conditions>
                 <processMetadataValues>
@@ -192,7 +223,7 @@
                 <processMetadataValues>
                     <name>leftHandSideReferenceTo</name>
                     <value>
-                        <stringValue>Nebula__MetadataField__c</stringValue>
+                        <stringValue>MetadataField__c</stringValue>
                     </value>
                 </processMetadataValues>
                 <processMetadataValues>
@@ -217,22 +248,22 @@
                 <operator>NotEqualTo</operator>
             </conditions>
             <connector>
-                <targetReference>myRule_3_A1</targetReference>
+                <targetReference>myRule_5_A1</targetReference>
             </connector>
             <label>Mapped SObject Is Set for Record w/ Status = &apos;New&apos; or &apos;In Analysis&apos;</label>
         </rules>
     </decisions>
     <decisions>
-        <name>myRule_1_pmetdec</name>
+        <name>myRule_3_pmetdec</name>
         <label>Previously Met Decision</label>
-        <locationX>100</locationX>
+        <locationX>300</locationX>
         <locationY>100</locationY>
         <defaultConnector>
-            <targetReference>myRule_1_A1</targetReference>
+            <targetReference>myRule_3_A1</targetReference>
         </defaultConnector>
         <defaultConnectorLabel>Not Previously Met</defaultConnectorLabel>
         <rules>
-            <name>myRule_1_pmetnullrule</name>
+            <name>myRule_3_pmetnullrule</name>
             <conditionLogic>or</conditionLogic>
             <conditions>
                 <leftValueReference>myVariable_old</leftValueReference>
@@ -242,12 +273,12 @@
                 </rightValue>
             </conditions>
             <connector>
-                <targetReference>myRule_1_A1</targetReference>
+                <targetReference>myRule_3_A1</targetReference>
             </connector>
             <label>Previously Met - Null</label>
         </rules>
         <rules>
-            <name>myRule_1_pmetrule</name>
+            <name>myRule_3_pmetrule</name>
             <conditionLogic>and</conditionLogic>
             <conditions>
                 <processMetadataValues>
@@ -290,7 +321,7 @@
                 <processMetadataValues>
                     <name>leftHandSideReferenceTo</name>
                     <value>
-                        <stringValue>Nebula__MetadataSObject__c</stringValue>
+                        <stringValue>MetadataSObject__c</stringValue>
                     </value>
                 </processMetadataValues>
                 <processMetadataValues>
@@ -317,7 +348,12 @@
             <label>Previously Met - Prev</label>
         </rules>
     </decisions>
-    <interviewLabel>ExternalSystemFieldProcessor-1_InterviewLabel</interviewLabel>
+    <formulas>
+        <name>formula_myRule_1</name>
+        <dataType>Boolean</dataType>
+        <expression>true</expression>
+    </formulas>
+    <interviewLabel>ExternalSystemFieldProcessor-4_InterviewLabel</interviewLabel>
     <label>External System Field Processor</label>
     <processMetadataValues>
         <name>ObjectType</name>
@@ -363,6 +399,122 @@
         <processMetadataValues>
             <name>isChildRelationship</name>
             <value>
+                <booleanValue>true</booleanValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>reference</name>
+            <value>
+                <stringValue>[ExternalSystemField__c].ExternalPicklistEntries__r</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>referenceTargetField</name>
+        </processMetadataValues>
+        <name>myRule_1_A1</name>
+        <label>Set Mapped SObject &amp; Field</label>
+        <locationX>100</locationX>
+        <locationY>200</locationY>
+        <filters>
+            <processMetadataValues>
+                <name>implicit</name>
+                <value>
+                    <booleanValue>true</booleanValue>
+                </value>
+            </processMetadataValues>
+            <field>ExternalSystemField__c</field>
+            <operator>EqualTo</operator>
+            <value>
+                <elementReference>myVariable_current.Id</elementReference>
+            </value>
+        </filters>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Mapped Field</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue>MetadataField__c</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>MappedField__c</field>
+            <value>
+                <elementReference>myVariable_current.MappedField__c</elementReference>
+            </value>
+        </inputAssignments>
+        <inputAssignments>
+            <processMetadataValues>
+                <name>dataType</name>
+                <value>
+                    <stringValue>ID</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>isRequired</name>
+                <value>
+                    <booleanValue>false</booleanValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideLabel</name>
+                <value>
+                    <stringValue>Mapped SObject</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>leftHandSideReferenceTo</name>
+                <value>
+                    <stringValue>MetadataSObject__c</stringValue>
+                </value>
+            </processMetadataValues>
+            <processMetadataValues>
+                <name>rightHandSideType</name>
+                <value>
+                    <stringValue>Reference</stringValue>
+                </value>
+            </processMetadataValues>
+            <field>MappedSObject__c</field>
+            <value>
+                <elementReference>myVariable_current.MappedSObject__c</elementReference>
+            </value>
+        </inputAssignments>
+        <object>ExternalSystemPicklistEntry__c</object>
+    </recordUpdates>
+    <recordUpdates>
+        <processMetadataValues>
+            <name>evaluationType</name>
+            <value>
+                <stringValue>always</stringValue>
+            </value>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>extraTypeInfo</name>
+        </processMetadataValues>
+        <processMetadataValues>
+            <name>isChildRelationship</name>
+            <value>
                 <booleanValue>false</booleanValue>
             </value>
         </processMetadataValues>
@@ -375,9 +527,9 @@
         <processMetadataValues>
             <name>referenceTargetField</name>
         </processMetadataValues>
-        <name>myRule_1_A1</name>
+        <name>myRule_3_A1</name>
         <label>Set Status to &apos;In Analysis&apos;</label>
-        <locationX>100</locationX>
+        <locationX>300</locationX>
         <locationY>200</locationY>
         <filters>
             <processMetadataValues>
@@ -449,15 +601,15 @@
         <processMetadataValues>
             <name>reference</name>
             <value>
-                <stringValue>[Nebula__ExternalSystemField__c]</stringValue>
+                <stringValue>[ExternalSystemField__c]</stringValue>
             </value>
         </processMetadataValues>
         <processMetadataValues>
             <name>referenceTargetField</name>
         </processMetadataValues>
-        <name>myRule_3_A1</name>
+        <name>myRule_5_A1</name>
         <label>Set Status to &apos;In Design&apos;</label>
-        <locationX>300</locationX>
+        <locationX>500</locationX>
         <locationY>200</locationY>
         <filters>
             <processMetadataValues>
