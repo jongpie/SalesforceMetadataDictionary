@@ -191,7 +191,7 @@ CASE(
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>true</trackFeedHistory>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>
@@ -255,7 +255,7 @@ CASE(
         <externalId>false</externalId>
         <inlineHelpText>Returns true if the field is used as an external ID, false otherwise.</inlineHelpText>
         <label>Is External ID</label>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -316,7 +316,7 @@ CASE(
         <externalId>false</externalId>
         <inlineHelpText>System generated. Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</inlineHelpText>
         <label>Is Restricted Delete</label>
-        <trackFeedHistory>true</trackFeedHistory>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -328,7 +328,7 @@ CASE(
         <externalId>false</externalId>
         <inlineHelpText>System generated. Returns true if the field is a restricted picklist, false otherwise.</inlineHelpText>
         <label>Is Restricted Picklist</label>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
@@ -365,7 +365,7 @@ CASE(
         <label>Label</label>
         <length>255</length>
         <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Text</type>
@@ -451,7 +451,7 @@ CASE(
         <precision>18</precision>
         <required>false</required>
         <scale>0</scale>
-        <trackFeedHistory>true</trackFeedHistory>
+        <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Number</type>

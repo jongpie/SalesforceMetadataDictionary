@@ -150,7 +150,7 @@
         <defaultValue>true</defaultValue>
         <externalId>false</externalId>
         <label>Is Custom</label>
-        <trackFeedHistory>false</trackFeedHistory>
+        <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
         <type>Checkbox</type>
