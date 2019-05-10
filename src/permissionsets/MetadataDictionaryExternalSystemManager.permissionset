@@ -5,11 +5,11 @@
         <visible>true</visible>
     </applicationVisibilities>
     <classAccesses>
-        <apexClass>MetadataSObjectAnalysisScheduler</apexClass>
+        <apexClass>ExternalSystemBackupScheduler</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <classAccesses>
-        <apexClass>MetadataSObjectAnalyzer</apexClass>
+        <apexClass>ExternalSystemBackupService</apexClass>
         <enabled>true</enabled>
     </classAccesses>
     <fieldPermissions>
