@@ -52,7 +52,7 @@
         <fields>MetadataSObject__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
-        <fields>AssetSummary__c</fields>
+        <fields>Summary__c</fields>
         <fields>DeveloperName__c</fields>
         <label>Asset Compact Layout</label>
     </compactLayouts>
@@ -74,24 +74,6 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <fields>
-        <fullName>AssetSummary__c</fullName>
-        <externalId>false</externalId>
-        <formula>IF(
-    IsManaged__c,
-    &apos;Managed &apos;,
-    &apos;&apos;
-)
-+
-&apos;Custom Record Type&apos;</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Asset Summary</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <fields>
         <fullName>DesignNotes__c</fullName>
         <externalId>false</externalId>
@@ -251,6 +233,24 @@
             <restricted>true</restricted>
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Summary__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    IsManaged__c,
+    &apos;Managed &apos;,
+    &apos;&apos;
+)
++
+&apos;Custom Record Type&apos;</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Record Type Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Uuid__c</fullName>

@@ -52,7 +52,7 @@
         <fields>MetadataSObject__c</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
-        <fields>AssetSummary__c</fields>
+        <fields>Summary__c</fields>
         <fields>DeveloperName__c</fields>
         <fields>Label__c</fields>
         <label>Asset Compact Layout</label>
@@ -76,48 +76,6 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <fields>
-        <fullName>AssetSummary__c</fullName>
-        <externalId>false</externalId>
-        <formula>IF(
-    IsManaged__c,
-    &apos;Managed &apos;,
-    &apos;&apos;
-)
-+
-IF(
-    IsCustom__c,
-    &apos;Custom Field: &apos;,
-    &apos;Standard Field: &apos;
-)
-+
-IF(
-     AND(IsNillable__c = false, IsCalculated__c = false, ISPICKVAL(Type__c, &apos;Boolean&apos;) = false),
-     &apos;Required &apos;,
-     &apos;&apos;
-)
-+
-IF(
-     IsCalculated__c,
-     &apos;Formula &apos;,
-     &apos;&apos;
-)
-+
-CASE(
-    TEXT(Type__c),
-    &apos;Double&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Precision__c) + &apos;, &apos; + TEXT(Scale__c) + &apos;)&apos;,
-    &apos;Integer&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Digits__c) + &apos;)&apos;,
-    &apos;String&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Length__c) + &apos;)&apos;,
-    TEXT(Type__c)
-)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <label>Asset Summary</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <fields>
         <fullName>CalculatedFormula__c</fullName>
         <description>System generated.</description>
@@ -287,7 +245,7 @@ CASE(
     </fields>
     <fields>
         <fullName>IsNillable__c</fullName>
-        <defaultValue>false</defaultValue>
+        <defaultValue>true</defaultValue>
         <description>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</description>
         <externalId>false</externalId>
         <inlineHelpText>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</inlineHelpText>
@@ -510,6 +468,49 @@ CASE(
             <restricted>true</restricted>
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Summary__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    IsManaged__c,
+    &apos;Managed &apos;,
+    &apos;&apos;
+)
++
+IF(
+    IsCustom__c,
+    &apos;Custom &apos; + RecordType.Name + &apos; Field: &apos;,
+    &apos;Standard &apos; + RecordType.Name + &apos; Field: &apos;
+)
++
+IF(
+     AND(IsNillable__c = false, IsCalculated__c = false, ISPICKVAL(Type__c, &apos;Boolean&apos;) = false),
+     &apos;Required &apos;,
+     &apos;Optional &apos;
+)
++
+IF(
+     IsCalculated__c,
+     &apos;Formula &apos;,
+     &apos;&apos;
+)
++
+CASE(
+    TEXT(Type__c),
+    &apos;Double&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Precision__c) + &apos;, &apos; + TEXT(Scale__c) + &apos;)&apos;,
+    &apos;Integer&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Digits__c) + &apos;)&apos;,
+    &apos;String&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Length__c) + &apos;)&apos;,
+    &apos;TextArea&apos;, TEXT(Type__c) + &apos; (&apos; + TEXT(Length__c) + &apos;)&apos;,
+    TEXT(Type__c)
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Field Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>Type__c</fullName>
@@ -773,6 +774,21 @@ CASE(
         </valueSet>
     </fields>
     <fields>
+        <fullName>UploadId__c</fullName>
+        <caseSensitive>false</caseSensitive>
+        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
+        <externalId>true</externalId>
+        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
+        <label>Upload ID</label>
+        <length>255</length>
+        <required>false</required>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>true</unique>
+    </fields>
+    <fields>
         <fullName>Uuid__c</fullName>
         <caseSensitive>false</caseSensitive>
         <externalId>true</externalId>
@@ -784,6 +800,17 @@ CASE(
         <trackTrending>false</trackTrending>
         <type>Text</type>
         <unique>true</unique>
+    </fields>
+    <fields>
+        <fullName>ValidationRules__c</fullName>
+        <externalId>false</externalId>
+        <label>Validation Rules</label>
+        <length>131072</length>
+        <trackFeedHistory>false</trackFeedHistory>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>LongTextArea</type>
+        <visibleLines>5</visibleLines>
     </fields>
     <label>Field</label>
     <listViews>
@@ -821,7 +848,7 @@ CASE(
         <columns>MetadataSObject__c</columns>
         <columns>RECORDTYPE</columns>
         <columns>DeveloperName__c</columns>
-        <columns>AssetSummary__c</columns>
+        <columns>Summary__c</columns>
         <columns>Status__c</columns>
         <columns>CREATED_DATE</columns>
         <filterScope>Everything</filterScope>

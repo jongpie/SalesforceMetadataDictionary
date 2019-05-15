@@ -54,7 +54,7 @@
         <layoutColumns>
             <layoutItems>
                 <behavior>Readonly</behavior>
-                <field>AssetSummary__c</field>
+                <field>Summary__c</field>
             </layoutItems>
             <layoutItems>
                 <behavior>Readonly</behavior>

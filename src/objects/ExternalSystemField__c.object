@@ -255,7 +255,7 @@
         <formula>IF(
     MappedField__c == null,
     &apos;&apos;,
-    MappedField__r.AssetSummary__c
+    MappedField__r.Summary__c
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Mapped Field Summary</label>
@@ -317,7 +317,7 @@
         <formula>IF(
     MappedStagingField__c == null,
     &apos;&apos;,
-    MappedStagingField__r.AssetSummary__c
+    MappedStagingField__r.Summary__c
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
         <label>Mapped Staging Field Summary</label>
@@ -425,9 +425,9 @@
         <unique>false</unique>
     </fields>
     <fields>
-        <fullName>SourceAnalysisReviewNotes__c</fullName>
+        <fullName>SourceAnalysisNotes__c</fullName>
         <externalId>false</externalId>
-        <label>Source Analysis Review Notes</label>
+        <label>Source Analysis Notes</label>
         <length>32768</length>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -585,21 +585,6 @@ SourceField__c</formula>
         <trackTrending>false</trackTrending>
         <type>LongTextArea</type>
         <visibleLines>5</visibleLines>
-    </fields>
-    <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
     </fields>
     <fields>
         <fullName>Uuid__c</fullName>

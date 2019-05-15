@@ -50,7 +50,7 @@
         <fullName>AssetCompactLayout</fullName>
         <fields>Name</fields>
         <fields>RecordTypeId</fields>
-        <fields>AssetSummary__c</fields>
+        <fields>Summary__c</fields>
         <fields>Label__c</fields>
         <fields>Status__c</fields>
         <fields>InScopeSummary__c</fields>
@@ -74,36 +74,6 @@
     <enableSearch>true</enableSearch>
     <enableSharing>true</enableSharing>
     <enableStreamingApi>true</enableStreamingApi>
-    <fields>
-        <fullName>AssetSummary__c</fullName>
-        <description>System generated.</description>
-        <externalId>false</externalId>
-        <formula>/* TODO this is ugly */
-IF(
-    IsManaged__c,
-    &apos;Managed &apos;,
-    &apos;&apos;
-)
-+
-IF(
-    IsChangeEvent__c, &apos;Change Event&apos;,
-    IF(IsPlatformEvent__c, &apos;Platform Event&apos;,  
-    IF(IsChatterFeedObject__c, &apos;Chatter Feed&apos;,
-    IF(IsHistoryObject__c, &apos;Field History Tracking&apos;,
-    IF(IsShareObject__c, &apos;Sharing Rules&apos;,
-    IF(IsCustom__c, &apos;Custom Object&apos;,
-    &apos;Standard Object&apos;
-)))))
-)</formula>
-        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
-        <label>Asset Summary</label>
-        <required>false</required>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>false</unique>
-    </fields>
     <fields>
         <fullName>DesignNotes__c</fullName>
         <externalId>false</externalId>
@@ -403,6 +373,26 @@ IF(
         <type>Lookup</type>
     </fields>
     <fields>
+        <fullName>ScopeSummary__c</fullName>
+        <externalId>false</externalId>
+        <formula>IF(
+    IsInScope__c == false,
+    &apos;Object Out of Scope&apos;,
+    &apos;Record Types: &apos; + TEXT(TotalInScopeRecordTypes__c) + &apos; out of &apos; + TEXT(TotalRecordTypes__c) + &apos; in scope&apos;
+        + &apos; (&apos; + TEXT(TotalOpenRecordTypes__c) + &apos; open)&apos;
+        + BR()
+        + &apos;Fields: &apos; + TEXT(TotalInScopeFields__c) + &apos; out of &apos; + TEXT(TotalFields__c) + &apos; in scope&apos;
+        + &apos; (&apos; + TEXT(TotalOpenFields__c) + &apos; open)&apos;
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>Scope Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
         <fullName>Status__c</fullName>
         <externalId>false</externalId>
         <label>Status</label>
@@ -415,6 +405,34 @@ IF(
             <restricted>true</restricted>
             <valueSetName>MetadataStatus</valueSetName>
         </valueSet>
+    </fields>
+    <fields>
+        <fullName>Summary__c</fullName>
+        <externalId>false</externalId>
+        <formula>/* TODO this is ugly */
+IF(
+    IsManaged__c,
+    &apos;Managed &apos;,
+    &apos;&apos;
+)
++
+IF(
+    IsChangeEvent__c, &apos;Change Event&apos;,
+    IF(IsPlatformEvent__c, &apos;Platform Event&apos;,  
+    IF(IsChatterFeedObject__c, &apos;Chatter Feed&apos;,
+    IF(IsHistoryObject__c, &apos;Field History Tracking&apos;,
+    IF(IsShareObject__c, &apos;Sharing Rules&apos;,
+    IF(IsCustom__c, &apos;Custom Object&apos;,
+    &apos;Standard Object&apos;
+)))))
+)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>SObject Summary</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>SystemHashCode__c</fullName>
@@ -646,7 +664,7 @@ IF(
         <fullName>AllPlatformFeatureAssets</fullName>
         <columns>NAME</columns>
         <columns>PrimaryMetadataSObject__c</columns>
-        <columns>AssetSummary__c</columns>
+        <columns>Summary__c</columns>
         <columns>Label__c</columns>
         <columns>Status__c</columns>
         <columns>TotalFields__c</columns>
