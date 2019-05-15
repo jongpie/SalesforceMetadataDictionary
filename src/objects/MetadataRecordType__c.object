@@ -88,9 +88,8 @@
     <fields>
         <fullName>DeveloperName__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>true</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Developer Name</label>
         <length>255</length>
         <required>false</required>
@@ -103,9 +102,8 @@
     <fields>
         <fullName>IsActive__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Active</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>true</trackHistory>
@@ -114,14 +112,13 @@
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>
-        <description>System generated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
     TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Closed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -130,6 +127,7 @@
     <fields>
         <fullName>IsCustom__c</fullName>
         <defaultValue>true</defaultValue>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <label>Is Custom</label>
         <trackFeedHistory>true</trackFeedHistory>
@@ -139,6 +137,7 @@
     </fields>
     <fields>
         <fullName>IsInScope__c</fullName>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>OR(
     IsClosed__c = false,
@@ -152,11 +151,10 @@
     </fields>
     <fields>
         <fullName>IsManaged__c</fullName>
-        <description>System generated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>TEXT(Namespace__c) != null</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Managed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -165,9 +163,8 @@
     <fields>
         <fullName>IsMaster__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Master</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -176,6 +173,7 @@
     </fields>
     <fields>
         <fullName>MetadataSObject__c</fullName>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <label>SObject</label>
         <lookupFilter>
@@ -200,9 +198,8 @@
     </fields>
     <fields>
         <fullName>Namespace__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Namespace</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>

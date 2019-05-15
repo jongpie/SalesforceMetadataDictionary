@@ -459,11 +459,6 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
-        <field>MetadataField__c.UploadId__c</field>
-        <readable>false</readable>
-    </fieldPermissions>
-    <fieldPermissions>
-        <editable>false</editable>
         <field>MetadataField__c.Uuid__c</field>
         <readable>true</readable>
     </fieldPermissions>

@@ -88,9 +88,8 @@
     <fields>
         <fullName>DeveloperName__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>true</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Developer Name</label>
         <length>255</length>
         <required>false</required>
@@ -126,7 +125,6 @@
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 11) == &apos;ChangeEvent&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Change Event</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -138,7 +136,6 @@
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 4) == &apos;Feed&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Chatter Feed Object</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -153,7 +150,6 @@
     TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Closed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -161,11 +157,10 @@
     </fields>
     <fields>
         <fullName>IsCustomMetadata__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 5) == &apos;__mdt&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom Metadata</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -174,9 +169,8 @@
     <fields>
         <fullName>IsCustomSetting__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom Setting</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -186,9 +180,8 @@
     <fields>
         <fullName>IsCustom__c</fullName>
         <defaultValue>true</defaultValue>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -201,7 +194,6 @@
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 7) == &apos;History&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is History Object</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -226,7 +218,6 @@
         <externalId>false</externalId>
         <formula>TEXT(Namespace__c) != null</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Managed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -234,11 +225,10 @@
     </fields>
     <fields>
         <fullName>IsPlatformEvent__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 3) == &apos;__e&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Platform Event</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -246,7 +236,7 @@
     </fields>
     <fields>
         <fullName>IsPlatformFeatureObject__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>OR(
     IsChangeEvent__c,    
@@ -255,7 +245,6 @@
     IsShareObject__c
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Platform Feature Object</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -267,7 +256,6 @@
         <externalId>false</externalId>
         <formula>RIGHT(DeveloperName__c, 5) == &apos;Share&apos;</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Share Object</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -275,9 +263,8 @@
     </fields>
     <fields>
         <fullName>LabelLanguage__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Label Language</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
@@ -297,9 +284,8 @@
     </fields>
     <fields>
         <fullName>LabelPlural__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Label Plural</label>
         <length>255</length>
         <required>false</required>
@@ -313,7 +299,6 @@
         <fullName>Label__c</fullName>
         <description>System generated.</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Label</label>
         <length>255</length>
         <required>false</required>
@@ -336,9 +321,8 @@
     </fields>
     <fields>
         <fullName>Namespace__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Namespace</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -361,7 +345,6 @@
         <deleteConstraint>SetNull</deleteConstraint>
         <description>System generated.</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Primary SObject</label>
         <referenceTo>MetadataSObject__c</referenceTo>
         <relationshipLabel>Platform Feature SObjects</relationshipLabel>
@@ -438,7 +421,6 @@ IF(
         <fullName>SystemHashCode__c</fullName>
         <description>System generated.</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>System Hash Code</label>
         <precision>18</precision>
         <required>false</required>
@@ -451,9 +433,8 @@ IF(
     </fields>
     <fields>
         <fullName>TotalFields__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Total Fields</label>
         <summaryForeignKey>MetadataField__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>
@@ -525,7 +506,6 @@ IF(
         <fullName>TotalRecordTypes__c</fullName>
         <description>System generated.</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Total Record Types</label>
         <summaryForeignKey>MetadataRecordType__c.MetadataSObject__c</summaryForeignKey>
         <summaryOperation>count</summaryOperation>

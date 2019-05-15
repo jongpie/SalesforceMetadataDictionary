@@ -78,9 +78,8 @@
     <enableStreamingApi>true</enableStreamingApi>
     <fields>
         <fullName>CalculatedFormula__c</fullName>
-        <description>System generated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Calculated Formula</label>
         <length>131072</length>
         <trackFeedHistory>false</trackFeedHistory>
@@ -91,9 +90,9 @@
     </fields>
     <fields>
         <fullName>DefaultValueFormula__c</fullName>
-        <description>System generated. Returns the default value specified for this field if a formula is not used.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns the default value specified for this field if a formula is not used.</inlineHelpText>
+        <inlineHelpText>Returns the default value specified for this field if a formula is not used.</inlineHelpText>
         <label>Default Value Formula</label>
         <length>131072</length>
         <trackFeedHistory>false</trackFeedHistory>
@@ -104,9 +103,9 @@
     </fields>
     <fields>
         <fullName>DefaultValue__c</fullName>
-        <description>System generated. Returns the default value for this field.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns the default value for this field.</inlineHelpText>
+        <inlineHelpText>Returns the default value for this field.</inlineHelpText>
         <label>Default Value</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -128,9 +127,8 @@
     <fields>
         <fullName>DeveloperName__c</fullName>
         <caseSensitive>false</caseSensitive>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>true</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Developer Name</label>
         <length>255</length>
         <required>false</required>
@@ -142,9 +140,9 @@
     </fields>
     <fields>
         <fullName>Digits__c</fullName>
-        <description>System generated. Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.</inlineHelpText>
+        <inlineHelpText>Returns the maximum number of digits specified for the field. This method is only valid with Integer fields.</inlineHelpText>
         <label>Digits</label>
         <precision>18</precision>
         <required>false</required>
@@ -157,9 +155,8 @@
     </fields>
     <fields>
         <fullName>InlineHelpText__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Inline Help Text</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
@@ -170,7 +167,7 @@
     <fields>
         <fullName>IsCalculated__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>Indicates if this is a formula field.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <inlineHelpText>Indicates if this is a formula field.</inlineHelpText>
         <label>Is Formula Field</label>
@@ -181,14 +178,13 @@
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>
-        <description>System generated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>OR(
     TEXT(Status__c) == &apos;Not Used&apos;,
     TEXT(Status__c) == &apos;Done&apos;
 )</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Closed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -197,9 +193,8 @@
     <fields>
         <fullName>IsCustom__c</fullName>
         <defaultValue>true</defaultValue>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Is Custom</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -209,7 +204,7 @@
     <fields>
         <fullName>IsExternalId__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>Returns true if the field is used as an external ID, false otherwise.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <inlineHelpText>Returns true if the field is used as an external ID, false otherwise.</inlineHelpText>
         <label>Is External ID</label>
@@ -233,11 +228,10 @@
     </fields>
     <fields>
         <fullName>IsManaged__c</fullName>
-        <description>System generated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <formula>TEXT(Namespace__c) != null</formula>
         <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
-        <inlineHelpText>System generated.</inlineHelpText>
         <label>Is Managed</label>
         <trackHistory>false</trackHistory>
         <trackTrending>false</trackTrending>
@@ -246,9 +240,9 @@
     <fields>
         <fullName>IsNillable__c</fullName>
         <defaultValue>true</defaultValue>
-        <description>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if the field is nillable, false otherwise. A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</inlineHelpText>
+        <inlineHelpText>Returns true if the field is nillable, false otherwise.  A nillable field can have empty content. A non-nillable field must have a value for the object to be created or saved.</inlineHelpText>
         <label>Is Nillable</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -258,9 +252,9 @@
     <fields>
         <fullName>IsPermissionable__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated. Returns true if field permissions can be specified for the field, false otherwise.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if field permissions can be specified for the field, false otherwise.</inlineHelpText>
+        <inlineHelpText>Returns true if field permissions can be specified for the field, false otherwise.</inlineHelpText>
         <label>Is Permissionable</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -270,9 +264,9 @@
     <fields>
         <fullName>IsRestrictedDelete__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated. Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</inlineHelpText>
+        <inlineHelpText>Returns true if the parent object can&apos;t be deleted because it is referenced by a child object, false otherwise.</inlineHelpText>
         <label>Is Restricted Delete</label>
         <trackFeedHistory>false</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -282,9 +276,9 @@
     <fields>
         <fullName>IsRestrictedPicklist__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated. Returns true if the field is a restricted picklist, false otherwise.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if the field is a restricted picklist, false otherwise.</inlineHelpText>
+        <inlineHelpText>Returns true if the field is a restricted picklist, false otherwise.</inlineHelpText>
         <label>Is Restricted Picklist</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -294,9 +288,9 @@
     <fields>
         <fullName>IsUnique__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated. Returns true if the value for the field must be unique, false otherwise.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if the value for the field must be unique, false otherwise.</inlineHelpText>
+        <inlineHelpText>Returns true if the value for the field must be unique, false otherwise.</inlineHelpText>
         <label>Is Unique</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -306,9 +300,9 @@
     <fields>
         <fullName>IsWriteRequiresMasterRead__c</fullName>
         <defaultValue>false</defaultValue>
-        <description>System generated. Returns true if writing to the detail object requires read sharing instead of read/write sharing of the parent.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns true if writing to the detail object requires read sharing instead of read/write sharing of the parent.</inlineHelpText>
+        <inlineHelpText>Returns true if writing to the detail object requires read sharing instead of read/write sharing of the parent.</inlineHelpText>
         <label>Is Write Requires Master Read</label>
         <trackFeedHistory>true</trackFeedHistory>
         <trackHistory>false</trackHistory>
@@ -317,9 +311,9 @@
     </fields>
     <fields>
         <fullName>Label__c</fullName>
-        <description>System generated. Returns the text label that is displayed next to the field in the Salesforce user interface. This label can be localized.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns the text label that is displayed next to the field in the Salesforce user interface. This label can be localized.</inlineHelpText>
+        <inlineHelpText>Returns the text label that is displayed next to the field in the Salesforce user interface. This label can be localized.</inlineHelpText>
         <label>Label</label>
         <length>255</length>
         <required>false</required>
@@ -331,6 +325,7 @@
     </fields>
     <fields>
         <fullName>LastMetadataChangeDate__c</fullName>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <label>Last Metadata Change Date</label>
         <required>false</required>
@@ -341,9 +336,8 @@
     </fields>
     <fields>
         <fullName>Length__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Length</label>
         <precision>18</precision>
         <required>false</required>
@@ -356,6 +350,7 @@
     </fields>
     <fields>
         <fullName>MetadataSObject__c</fullName>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
         <label>SObject</label>
         <lookupFilter>
@@ -380,9 +375,8 @@
     </fields>
     <fields>
         <fullName>Namespace__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Namespace</label>
         <required>false</required>
         <trackFeedHistory>false</trackFeedHistory>
@@ -402,9 +396,9 @@
     </fields>
     <fields>
         <fullName>Precision__c</fullName>
-        <description>System generated. For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</inlineHelpText>
+        <inlineHelpText>For fields of type Double, returns the maximum number of digits that can be stored, including all numbers to the left and to the right of the decimal point (but excluding the decimal point character).</inlineHelpText>
         <label>Precision</label>
         <precision>18</precision>
         <required>false</required>
@@ -417,9 +411,9 @@
     </fields>
     <fields>
         <fullName>ReferenceTo__c</fullName>
-        <description>System generated. Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</inlineHelpText>
+        <inlineHelpText>Returns a list of Schema.sObjectType objects for the parent objects of this field. If the isNamePointing method returns true, there is more than one entry in the list, otherwise there is only one.</inlineHelpText>
         <label>Reference To</label>
         <length>131072</length>
         <trackFeedHistory>true</trackFeedHistory>
@@ -430,9 +424,9 @@
     </fields>
     <fields>
         <fullName>RelationshipName__c</fullName>
-        <description>System generated. Returns the name of the relationship.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. Returns the name of the relationship.</inlineHelpText>
+        <inlineHelpText>Returns the name of the relationship.</inlineHelpText>
         <label>Relationship Name</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
@@ -442,9 +436,9 @@
     </fields>
     <fields>
         <fullName>Scale__c</fullName>
-        <description>System generated. For fields of type Double, returns the number of digits to the right of the decimal point. Any extra digits to the right of the decimal point are truncated.</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated. For fields of type Double, returns the number of digits to the right of the decimal point. Any extra digits to the right of the decimal point are truncated.</inlineHelpText>
+        <inlineHelpText>For fields of type Double, returns the number of digits to the right of the decimal point. Any extra digits to the right of the decimal point are truncated.</inlineHelpText>
         <label>Scale</label>
         <precision>18</precision>
         <required>false</required>
@@ -514,9 +508,8 @@ CASE(
     </fields>
     <fields>
         <fullName>Type__c</fullName>
-        <description>System generated</description>
+        <description>Metadata Dictionary field</description>
         <externalId>false</externalId>
-        <inlineHelpText>System generated</inlineHelpText>
         <label>Type</label>
         <required>false</required>
         <trackFeedHistory>true</trackFeedHistory>
@@ -772,21 +765,6 @@ CASE(
                 <valueName>URL</valueName>
             </valueSettings>
         </valueSet>
-    </fields>
-    <fields>
-        <fullName>UploadId__c</fullName>
-        <caseSensitive>false</caseSensitive>
-        <description>A unique, external ID - you can use this to store any value you want for upserting records.</description>
-        <externalId>true</externalId>
-        <inlineHelpText>A unique, external ID - you can use this to store any value you want for upserting records.</inlineHelpText>
-        <label>Upload ID</label>
-        <length>255</length>
-        <required>false</required>
-        <trackFeedHistory>false</trackFeedHistory>
-        <trackHistory>false</trackHistory>
-        <trackTrending>false</trackTrending>
-        <type>Text</type>
-        <unique>true</unique>
     </fields>
     <fields>
         <fullName>Uuid__c</fullName>
