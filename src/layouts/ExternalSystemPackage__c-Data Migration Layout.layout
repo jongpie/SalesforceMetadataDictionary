@@ -116,14 +116,25 @@
             <actionType>StandardButton</actionType>
             <sortOrder>0</sortOrder>
         </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Clone</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>1</sortOrder>
+        </platformActionListItems>
+        <platformActionListItems>
+            <actionName>Delete</actionName>
+            <actionType>StandardButton</actionType>
+            <sortOrder>2</sortOrder>
+        </platformActionListItems>
     </platformActionList>
     <relatedLists>
         <fields>NAME</fields>
         <fields>Status__c</fields>
         <fields>Source__c</fields>
-        <fields>DataType__c</fields>
+        <fields>Summary__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
+        <fields>MappedFieldSummary__c</fields>
         <relatedList>ExternalSystemField__c.ExternalSystemPackage__c</relatedList>
     </relatedLists>
     <showEmailCheckbox>false</showEmailCheckbox>
