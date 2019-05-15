@@ -64,6 +64,16 @@
         <fields>InScopeSummary__c</fields>
         <label>Blueprint Compact Layout</label>
     </compactLayouts>
+    <compactLayouts>
+        <fullName>PlatformFeatureCompactLayout</fullName>
+        <fields>Name</fields>
+        <fields>RecordTypeId</fields>
+        <fields>Summary__c</fields>
+        <fields>Label__c</fields>
+        <fields>Status__c</fields>
+        <fields>InScopeSummary__c</fields>
+        <label>Platform Feature Compact Layout</label>
+    </compactLayouts>
     <deploymentStatus>Deployed</deploymentStatus>
     <enableActivities>false</enableActivities>
     <enableBulkApi>true</enableBulkApi>
@@ -809,6 +819,7 @@ IF(
     <recordTypes>
         <fullName>PlatformFeatureAsset</fullName>
         <active>true</active>
+        <compactLayoutAssignment>PlatformFeatureCompactLayout</compactLayoutAssignment>
         <label>Platform Feature</label>
         <picklistValues>
             <picklist>LabelLanguage__c</picklist>
