@@ -50,6 +50,8 @@
         <fullName>CompactLayout</fullName>
         <fields>Name</fields>
         <fields>ExternalSystemField__c</fields>
+        <fields>IsInUse__c</fields>
+        <fields>Status__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
         <fields>MappedPicklistEntry__c</fields>
@@ -90,6 +92,30 @@
         <trackTrending>false</trackTrending>
         <type>MasterDetail</type>
         <writeRequiresMasterRead>false</writeRequiresMasterRead>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemLink__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(ExternalSystemField__r.ExternalSystemPackage__r.ExternalSystem__c, ExternalSystemField__r.ExternalSystemPackage__r.ExternalSystem__r.Name)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>External System</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
+    </fields>
+    <fields>
+        <fullName>ExternalSystemPackageLink__c</fullName>
+        <externalId>false</externalId>
+        <formula>HYPERLINK(ExternalSystemField__r.ExternalSystemPackage__c, ExternalSystemField__r.ExternalSystemPackage__r.Name)</formula>
+        <formulaTreatBlanksAs>BlankAsZero</formulaTreatBlanksAs>
+        <label>External System Package</label>
+        <required>false</required>
+        <trackHistory>false</trackHistory>
+        <trackTrending>false</trackTrending>
+        <type>Text</type>
+        <unique>false</unique>
     </fields>
     <fields>
         <fullName>IsClosed__c</fullName>

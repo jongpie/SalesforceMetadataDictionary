@@ -239,6 +239,16 @@
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
+        <field>ExternalSystemPicklistEntry__c.ExternalSystemLink__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>ExternalSystemPicklistEntry__c.ExternalSystemPackageLink__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
         <field>ExternalSystemPicklistEntry__c.IsClosed__c</field>
         <readable>true</readable>
     </fieldPermissions>
@@ -463,9 +473,9 @@
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
-        <editable>false</editable>
+        <editable>true</editable>
         <field>MetadataField__c.ValidationRules__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>
@@ -495,6 +505,11 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>MetadataPicklistEntry__c.Label__c</field>
+        <readable>true</readable>
+    </fieldPermissions>
+    <fieldPermissions>
+        <editable>false</editable>
+        <field>MetadataPicklistEntry__c.MetadataSObjectLink__c</field>
         <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
@@ -670,7 +685,7 @@
     <fieldPermissions>
         <editable>false</editable>
         <field>MetadataSObject__c.ScopeSummary__c</field>
-        <readable>false</readable>
+        <readable>true</readable>
     </fieldPermissions>
     <fieldPermissions>
         <editable>false</editable>

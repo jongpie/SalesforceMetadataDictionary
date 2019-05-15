@@ -51,6 +51,7 @@
         <fields>Name</fields>
         <fields>RecordTypeId</fields>
         <fields>Status__c</fields>
+        <fields>Summary__c</fields>
         <fields>DataCleanupRequired__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>
@@ -63,6 +64,7 @@
         <fields>RecordTypeId</fields>
         <fields>ExternalSystemPackage__c</fields>
         <fields>Status__c</fields>
+        <fields>Summary__c</fields>
         <fields>Source__c</fields>
         <fields>MappedSObject__c</fields>
         <fields>MappedField__c</fields>

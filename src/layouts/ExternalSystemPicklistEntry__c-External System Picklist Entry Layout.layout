@@ -19,6 +19,14 @@
                 <behavior>Edit</behavior>
                 <field>ExternalPicklistLabel__c</field>
             </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ExternalSystemPackageLink__c</field>
+            </layoutItems>
+            <layoutItems>
+                <behavior>Readonly</behavior>
+                <field>ExternalSystemLink__c</field>
+            </layoutItems>
         </layoutColumns>
         <layoutColumns>
             <layoutItems>
