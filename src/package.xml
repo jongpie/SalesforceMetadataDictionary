@@ -96,9 +96,5 @@
         <members>MetadataDictionaryViewAll</members>
         <name>PermissionSet</name>
     </types>
-    <types>
-        <members>Admin</members>
-        <name>Profile</name>
-    </types>
     <version>45.0</version>
 </Package>
