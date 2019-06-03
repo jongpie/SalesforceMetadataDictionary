@@ -191,6 +191,7 @@ public class MetadataSObjectAnalyzer implements Database.Batchable<Schema.SObjec
     private MetadataField__c convert(Schema.DescribeSObjectResult sobjectDescribe, Schema.DescribeFieldResult fieldDescribe) {
         MetadataField__c metadataField = new MetadataField__c(
             DefaultValue__c         = String.valueOf(fieldDescribe.getDefaultValue()),
+            DefaultValueFormula__c  = fieldDescribe.getDefaultValueFormula(),
             DeveloperName__c        = sobjectDescribe.getName() + '.' + fieldDescribe.getName(),
             Digits__c               = fieldDescribe.getDigits(),
             InlineHelpText__c       = fieldDescribe.getInlineHelpText(),
